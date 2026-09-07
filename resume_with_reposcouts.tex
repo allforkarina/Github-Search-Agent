@@ -1,0 +1,357 @@
+% !TeX program = xelatex
+\documentclass[10pt,a4paper]{article}
+
+\usepackage{fix-cm}
+
+\usepackage[
+  a4paper,
+  top=0.38in,
+  bottom=0.38in,
+  left=0.52in,
+  right=0.52in
+]{geometry}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\setmainfont{Tinos}[Ligatures=TeX,Numbers=Lining]
+\IfFontExistsTF{Noto Serif CJK SC}
+  {\setCJKmainfont{Noto Serif CJK SC}}
+  {\setCJKmainfont{FandolSong}}
+
+\xeCJKsetup{
+  CJKmath=true,
+  CheckSingle=true
+}
+
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage[
+  protrusion=true,
+  expansion=false,
+  nopatch=footnote
+]{microtype}
+
+\usepackage{needspace}
+\usepackage{setspace}
+\usepackage{ragged2e}
+
+% =========================================================
+% Colors
+% =========================================================
+
+\definecolor{Accent}{HTML}{B42318}
+\definecolor{Text}{HTML}{202124}
+\definecolor{Muted}{HTML}{5F6368}
+\definecolor{Rule}{HTML}{D5D8DC}
+
+\color{Text}
+
+% =========================================================
+% Hyperlinks
+% =========================================================
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=Accent,
+  linkcolor=Accent,
+  pdfauthor={刘秉鑫},
+  pdftitle={刘秉鑫 - 求职简历}
+}
+
+\urlstyle{same}
+
+% =========================================================
+% Global typography
+% =========================================================
+
+\pagestyle{empty}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% 正文整体稍微紧凑
+\setstretch{1.00}
+
+\pretolerance=180
+\tolerance=1400
+\emergencystretch=1em
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+% =========================================================
+% Table columns
+% =========================================================
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{J}{>{\justifying\arraybackslash}X}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% =========================================================
+% Personal information
+% =========================================================
+
+\newcommand{\CVName}{刘秉鑫}
+\newcommand{\CVLocation}{中国·成都}
+\newcommand{\CVPhone}{+86 159 1320 7164}
+\newcommand{\CVEmail}{liu050804@gmail.com}
+\newcommand{\CVHomepage}{allforkarina.github.io}
+\newcommand{\CVGitHub}{github.com/allforkarina}
+
+% =========================================================
+% Section
+% =========================================================
+
+\newcommand{\cvsection}[1]{
+  \Needspace{2.2\baselineskip}
+
+  % 上一部分正文 -> section
+  \vspace{7.5pt}
+
+  {\fontsize{11.5}{12.0}\selectfont
+   \bfseries
+   \color{Accent}
+   #1\par
+  }
+
+  \nointerlineskip
+  \vspace{1.2pt}
+
+  {\color{Rule}\rule{\textwidth}{0.65pt}}\par
+
+  % section -> 下一部分正文
+  \vspace{2.4pt}
+}
+
+% =========================================================
+% Bullet list
+% =========================================================
+
+\newenvironment{cvitems}{
+  \begin{itemize}[
+    leftmargin=1.30em,
+    label=\textcolor{Accent}{
+      \raisebox{0.15ex}{\scriptsize\textbullet}
+    },
+    topsep=0.6pt,
+    itemsep=1.1pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+  \justifying
+}{
+  \end{itemize}
+}
+
+% =========================================================
+% Research / Project entry
+% =========================================================
+
+\newcommand{\researchentry}[5]{
+  \Needspace{2.8\baselineskip}
+
+  \begin{tabularx}{\textwidth}{@{}Y R{3.10cm}@{}}
+    {\bfseries #1}
+    &
+    {\bfseries #4}
+    \\[-0.3pt]
+
+    {\color{Muted}#2}
+    &
+    {\color{Muted}#3}
+  \end{tabularx}
+
+  \vspace{-1.3pt}
+
+  #5
+
+  \vspace{0.2pt}
+}
+
+% =========================================================
+% Awards
+% =========================================================
+
+% 注意：这里应该是 3 个参数，而不是原来的 4 个
+\newcommand{\awardentry}[3]{
+  \Needspace{1.8\baselineskip}
+
+  \begin{tabularx}{\textwidth}{@{}p{2.05cm} Y R{1.65cm}@{}}
+
+    {\bfseries #1}
+    &
+    #2
+    &
+    {\bfseries #3}
+
+  \end{tabularx}
+
+  \vspace{1.4pt}
+}
+
+% =========================================================
+% Skills
+% =========================================================
+
+\newcommand{\skillentry}[2]{
+  \begin{tabularx}{\textwidth}{
+    @{}
+    >{\RaggedRight\arraybackslash}p{2.45cm}
+    Y
+    @{}
+  }
+
+    {\bfseries #1}
+    &
+    #2
+
+  \end{tabularx}
+
+  \vspace{1.0pt}
+}
+
+\begin{document}
+\fontsize{9.5}{11.2}\selectfont
+
+\begin{center}
+  {\fontsize{23}{24}\selectfont\bfseries\CVName}\par
+  \vspace{2.2pt}
+  {\fontsize{8.5}{9.6}\selectfont
+    \CVLocation \enspace\textbar\enspace
+    \href{tel:+8615913207164}{\CVPhone} \enspace\textbar\enspace
+    \href{mailto:\CVEmail}{\CVEmail} \enspace\textbar\enspace
+    \href{https://\CVHomepage}{\CVHomepage} \enspace\textbar\enspace
+    \href{https://\CVGitHub}{\CVGitHub}}
+\end{center}
+
+\vspace{-1pt}
+
+\cvsection{教育背景}
+
+\begin{tabularx}{\textwidth}{@{}Y R{4.25cm}@{}}
+  {\bfseries 电子科技大学（UESTC）}
+  & {\bfseries 2023.09 -- 2027.07（预计）} \\
+  {通信工程专业（在读）；鸿鹄计划}
+  & {成都}
+\end{tabularx}
+
+\begin{cvitems}
+  \item \textbf{英语能力：}大学英语四级 614；大学英语六级 567。
+\end{cvitems}
+
+\cvsection{科研经历}
+
+\researchentry
+{WiFiPose：基于 WiFi CSI 的人体姿态估计}
+{团队科研项目；核心研发成员，独立负责模型设计、训练评估与可视化流程}
+{Python / PyTorch}
+{2025.10 -- 至今}
+{
+基于 WiFi CSI 信号开展非视觉人体姿态估计研究，探索利用无线信道中由人体运动引起的时域、频域及空间响应变化，实现从 CSI 信号到人体骨骼关键点的端到端映射。在完成源环境高精度姿态估计的基础上，进一步研究房间环境和目标人员同时变化时的跨域泛化问题，并通过少量目标域样本进行模型适配，以降低 WiFi 感知模型对特定环境和人员的依赖，提升其在真实场景中的迁移能力与可用性。
+
+\begin{cvitems}
+
+  \item \textbf{独立搭建完整实验系统：}基于 MM-Fi 数据集完成数据预处理、CSI 输入构建、模型训练、指标评估及姿态可视化，建立从原始 CSI 到 OpenPose-18 人体关键点预测的端到端实验流程。
+
+  \item \textbf{完成 CSI 特征与模型结构设计：}针对 3 根接收天线、114 个子载波和 64 个时间步的 CSI 数据，构建时域残差、天线差分、子载波梯度及房间响应校准等物理特征，并设计背景门控、轴向注意力、关节查询解码和骨架拓扑传播模块。
+
+  \item \textbf{实现高精度源域姿态估计：}模型在源环境达到 \textbf{98.81\% PCK@0.2} 和 \textbf{0.0271 归一化 MPJPE}，相较约 95\% 的源域基线提升约 \textbf{3.8 个百分点}。
+
+  \item \textbf{完成跨房间、跨人员少样本适配：}模型在目标域直接迁移时达到 73.74\% PCK@0.2；仅使用 \textbf{540 帧}目标域数据（约为源域训练量的 \textbf{0.6\%}）微调后提升至 \textbf{81.08\%}，使用 \textbf{8100 帧}（约 \textbf{10\%}）数据微调后进一步达到 \textbf{92.10\%}。
+
+  \item \textbf{完成系统性消融与误差分析：}对编码器、解码器及全参数适配策略进行对比，并针对输入校准、物理特征库、背景门控和骨架感知损失开展受控消融实验；进一步从动作级和关节级分析模型误差，定位困难动作及腕部关键点等主要性能瓶颈。
+
+  \item \textbf{完善科研工程体系：}建立配置管理、模型检查点、实验指标记录和单元测试流程，保证实验可追踪、可复现；项目论文正在撰写，代码已开源：\href{https://github.com/allforkarina/Wi-Posev2}{Wi-Posev2}。
+
+\end{cvitems}
+}
+
+
+\cvsection{工程项目}
+
+
+\researchentry
+{RepoScouts：GitHub Repository 智能检索与评估 Agent}
+{个人工程项目；独立完成 Agent 工作流、GitHub 工具链与 Web 应用开发}
+{Python / LangGraph / FastAPI / React}
+{2026.09 -- 至今}
+{
+面向开发者选型与学习场景，构建从自然语言需求出发的 GitHub Repository 搜索 Agent，将需求解析、候选搜索、仓库取证、独立评估、确定性排序与结果审查组织为端到端工作流，并通过本地 Web 应用实时呈现执行状态和可解释推荐结果。
+
+\begin{cvitems}
+
+  \item \textbf{设计多阶段 Agent 工作流：}基于 LangGraph 构建 Requirement Parser、Candidate Search、Repository Evaluator、Ranker 与 Critic 节点，以 Pydantic Schema 约束节点输入输出，实现自然语言需求在完整调用链中的结构化传递。
+
+  \item \textbf{实现证据驱动的 GitHub 检索与评估：}封装 GitHub REST API 搜索、仓库元数据、README 与文件树工具，支持 Search Agent 自主调整查询并筛选候选仓库；从需求匹配度、学习价值、代码清晰度、文档质量、复现可行性和维护健康度等维度形成独立评估。
+
+  \item \textbf{构建可校验的排序与重试闭环：}将多指标加权评分与 LLM 生成的推荐理由、取舍分析及学习路径结合，并由 Critic 检查硬性需求、证据一致性和排序合理性；发现问题时按反馈定向回退至 Evaluator 或 Ranker，限制最大重试次数以避免无界循环。
+
+  \item \textbf{完成可观察的本地 Web 应用：}使用 FastAPI 与 SSE 推送节点状态、结构化中间结果及最终排名，基于 React、TypeScript、Vite 和 GitHub Primer 实现响应式界面、明暗主题与节点间协作式取消；补充 API、状态流、异常取消和 Playwright 浏览器测试，并确保 GitHub Token 与模型密钥仅保留在后端。
+
+\end{cvitems}
+
+}
+
+
+\researchentry
+{低功耗 Wi-Fi 反向散射通信系统}
+{团队核心成员；负责数据分析与实验自动化}
+{Linux，Bash}
+{2024.10 -- 2025.06}
+{
+面向低功耗、低复杂度无线通信场景，参与搭建基于现有 Wi-Fi 信号的无源反向散射通信系统，通过射频开关控制标签对环境 Wi-Fi 信号进行调制与反射，在无需主动射频发射链路的条件下实现低速率信息传输。项目重点围绕反向散射链路的实验验证、数据采集与解码可靠性展开，并分析信道扰动、帧损坏及纠错机制对通信性能的影响。
+
+\begin{cvitems}
+
+  \item \textbf{参与反向散射链路搭建与验证：}基于 Wi-Fi 网卡、射频开关及无源标签完成 \textbf{5.4 GHz} 反向散射实验链路搭建，在既有 Wi-Fi 帧上叠加标签反射信息，并完成米级距离下低速率数据传输验证。
+
+  \item \textbf{独立完成实验流程自动化：}编写 Linux/Bash 脚本，将数据包注入、网络抓包、帧筛选、模式统计及结果分析等步骤串联为“发送--反射--采集--分析”自动化闭环，减少重复人工操作并提升实验效率与可复现性。
+
+  \item \textbf{负责通信数据分析与误差评估：}使用 Wireshark 及脚本分析反向散射前后 Wi-Fi 帧的完整性变化、损坏模式及残余解码误差，量化不同实验条件下的信息恢复效果。
+
+\end{cvitems}
+
+}
+
+
+\cvsection{荣誉奖项}
+
+\awardentry
+  {全国一等奖}
+  {第十九届“挑战杯”全国大学生课外学术科技作品竞赛“揭榜挂帅”专项赛}
+  {2025.12}
+
+\awardentry
+  {全国一等奖}
+  {2025 年全国大学生物联网设计竞赛全国总决赛}
+  {2025.08}
+
+\awardentry
+  {全国三等奖}
+  {第八届全国大学生 5 分钟科研英语演讲大赛}
+  {2025.08}
+
+\awardentry
+  {优秀奖学金}
+  {连续两个学年获得。}
+  {2023--2025}
+
+\cvsection{技术能力}
+
+\skillentry
+  {编程与深度学习}
+  {Python、PyTorch；数据集与数据加载、模型模块、损失设计、评估指标与可视化。}
+
+\skillentry
+  {视觉与机器学习}
+  {人体姿态估计、多模态、结构化预测、骨架感知约束、消融实验及动作级/关节级诊断。}
+
+\skillentry
+  {科研工程}
+  {可复现实验、Git、Linux/Bash、PowerShell、单元测试、诊断可视化与技术文档。}
+
+\end{document}

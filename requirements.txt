@@ -1,0 +1,8 @@
+langchain-deepseek
+langchain-core
+langgraph
+pydantic
+python-dotenv
+requests
+fastapi
+uvicorn[standard]
