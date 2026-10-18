@@ -1,0 +1,1624 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:52:09.292000+08:00",
+  "finished_at": "2026-10-19T02:54:02.865426+08:00",
+  "business_run_id": "05babf2afff145f287fabcb14473dc3d",
+  "workflow_wall_time_s": 90.157,
+  "collection_wall_time_s": 113.572,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "PyTorch time series forecasting",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "PyTorch"
+      ],
+      "difficulty": "beginner",
+      "must_have": [
+        "provides a way to obtain public datasets",
+        "includes training scripts",
+        "includes evaluation scripts",
+        "documents data splitting to avoid train/test leakage"
+      ],
+      "nice_to_have": [
+        "simple model runnable on CPU",
+        "clear README",
+        "minimal example reproducible within one day"
+      ],
+      "exclusions": [
+        "projects that require a large GPU to complete the minimal example"
+      ],
+      "learning_goal": "learn PyTorch for time series forecasting and reproduce a project within one day",
+      "time_budget_in_hours": 8
+    },
+    "candidates": {
+      "search_queries": [
+        "time series forecasting pytorch in:name,description,readme language:Python stars:>100",
+        "pytorch time series forecasting tutorial example dataset training script language:Python",
+        "topic:time-series-forecasting topic:pytorch language:Python",
+        "\"time series\" forecasting LSTM python tutorial train.py predict.py dataset CSV simple language:Python stars:20..3000"
+      ],
+      "candidates": [
+        {
+          "full_name": "sktime/pytorch-forecasting",
+          "reason": "PyTorch forecasting library with dataset utilities and training/evaluation examples; worth checking whether its tutorials and time-series splitting documentation suit a beginner CPU workflow."
+        },
+        {
+          "full_name": "thuml/Time-Series-Library",
+          "reason": "Deep time-series model library with training/evaluation scripts and dataset preparation code; inspect whether a small model configuration can run on CPU within the time budget."
+        },
+        {
+          "full_name": "unit8co/darts",
+          "reason": "User-friendly forecasting library with PyTorch-based models and public dataset loaders; worth reviewing beginner documentation and leakage-safe splitting guidance."
+        },
+        {
+          "full_name": "awslabs/gluonts",
+          "reason": "Probabilistic time-series toolkit with dataset abstractions and training/evaluation tooling; inspect PyTorch estimator examples and CPU feasibility."
+        },
+        {
+          "full_name": "oliverguhr/transformer-time-series-prediction",
+          "reason": "Compact proof-of-concept with training code and an included dataset; promising for a minimal reproducible CPU tutorial and easy inspection."
+        },
+        {
+          "full_name": "cure-lab/LTSF-Linear",
+          "reason": "Simple linear forecasting baselines with official training/evaluation scripts and benchmark data; likely suitable for CPU and quick reproduction, pending README and split documentation review."
+        },
+        {
+          "full_name": "KasperGroesLudvigsen/influenza_transformer",
+          "reason": "Small PyTorch Transformer example with dataset and training code; worth checking for clear README, evaluation steps, and one-day CPU reproducibility."
+        },
+        {
+          "full_name": "zalandoresearch/pytorch-ts",
+          "reason": "PyTorch probabilistic forecasting framework built on GluonTS; inspect whether its examples document dataset loading, splitting, and train/eval scripts clearly."
+        },
+        {
+          "full_name": "thuml/iTransformer",
+          "reason": "Official forecasting implementation with training/evaluation scripts and dataset preparation; worth checking whether a small configuration avoids large-GPU requirements for the minimal example."
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "sktime/pytorch-forecasting",
+        "purpose_summary": "A PyTorch-based library providing high-level APIs and state-of-the-art deep learning architectures (TFT, N-BEATS, N-HiTS, DeepAR, PatchTST, LSTM/GRU) for time series forecasting, built on PyTorch Lightning for CPU/GPU training.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "Repository includes examples/data/stallion.parquet and data/examples.py; tutorials (stallion.ipynb, ar.ipynb) use public datasets. README references tutorials with datasets."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "examples/ar.py, examples/nbeats.py, examples/stallion.py are runnable training scripts; base model class provides training via PyTorch Lightning."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "Multi-horizon metrics module documented (docs/source/metrics.rst); examples compute and report validation metrics; callbacks/predict.py supports prediction/evaluation."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "Data module files (_encoder_decoder_data_module.py, _tslib_data_module.py) and docs/source/data.rst exist, but the provided evidence does not explicitly show documentation of train/test splitting to avoid leakage."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 78,
+        "code_clarity": 70,
+        "documentation_quality": 82,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 80,
+        "strengths": [
+          "Comprehensive, well-documented library with tutorials and readthedocs",
+          "Multiple architectures and clear high-level API",
+          "Includes runnable example scripts and bundled sample dataset",
+          "Actively maintained with CI, changelog, and recent pushes"
+        ],
+        "weaknesses": [
+          "Large codebase (436 entries, 43MB) may overwhelm a beginner",
+          "Heavy dependency stack (PyTorch Lightning, optuna, etc.) increases setup complexity",
+          "Explicit data-splitting/leakage documentation not clearly evidenced",
+          "833 open issues suggests complexity and potential rough edges"
+        ],
+        "uncertainties": [
+          "Whether a minimal CPU example is fully reproducible within 8 hours given dependency weight",
+          "Explicit documentation of train/test split strategy to avoid leakage",
+          "Whether tutorials require GPU for reasonable runtime"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "thuml/Time-Series-Library",
+        "purpose_summary": "A comprehensive PyTorch library/benchmark for deep time series analysis covering long/short-term forecasting, imputation, anomaly detection, and classification, with many model implementations and shell scripts for running experiments.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "uncertain",
+            "evidence": "README references datasets (ETT, MSL, PSM, SMAP, SMD) and a pic/dataset.png, and data_provider/data_loader.py exists, but the provided README excerpt does not clearly show download instructions or a dataset acquisition script."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "run.py plus exp/exp_long_term_forecasting.py, exp_short_term_forecasting.py, etc., and numerous scripts/ shell files (e.g., scripts/anomaly_detection/MSL/TimesNet.sh) indicate training entry points."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "exp modules contain experiment/training-evaluation logic, and run.py drives experiments; shell scripts invoke runs that include evaluation."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "data_provider/data_loader.py exists but the README excerpt does not explicitly document train/val/test splitting strategy; cannot verify from provided evidence."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 70,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 75,
+        "strengths": [
+          "Large, well-known PyTorch time series library with many model implementations",
+          "Clear modular structure (data_provider, exp, layers, models, scripts)",
+          "Includes training/evaluation experiment modules and shell scripts",
+          "Has a beginner tutorial notebook (TimesNet_tutorial.ipynb) referenced in README",
+          "Dockerfile and docker-compose provided for setup"
+        ],
+        "weaknesses": [
+          "Very large scope with dozens of models, likely overwhelming for a beginner",
+          "Minimal example may require GPU for many models, conflicting with exclusion",
+          "Dataset acquisition and splitting documentation not clearly visible in provided evidence",
+          "Maintainers state they are not actively adding new features"
+        ],
+        "uncertainties": [
+          "Whether a simple CPU-runnable minimal example exists within 8 hours",
+          "Exact dataset download instructions and train/test split documentation",
+          "Whether default scripts require GPU"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "unit8co/darts",
+        "purpose_summary": "Darts is a Python library for user-friendly time series forecasting and anomaly detection, offering a unified fit()/predict() API across classical models (ARIMA, exponential smoothing) and deep learning models (including PyTorch-based ones), with dataset loaders, backtesting, and evaluation metrics.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "The repository contains a dedicated darts/datasets module (datasets.py, dataset_loaders.py, __init__.py) and the README demonstrates loading public datasets via ETTh2Dataset().load() and reading AirPassengers.csv."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "README shows model.fit(train) usage, and the darts/models tree contains model implementations with fit/predict APIs. However, the evidence shows library code rather than standalone runnable training scripts; training is done via the library API."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "The repository has a darts/metrics module (metrics.py, utils.py) and README mentions backtesting models. Evaluation is provided as library functions rather than standalone scripts."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "README shows train/val splitting examples (series[:-36], series[-36:], split_before(0.6)), but there is no explicit documentation in the provided evidence about avoiding train/test leakage or leakage-safe preprocessing."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 85,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 90,
+        "strengths": [
+          "Comprehensive, well-documented library with quickstart, user guide, API reference, and many articles",
+          "Includes dataset loaders for public datasets",
+          "Unified fit/predict API across classical and PyTorch-based deep learning models",
+          "Actively maintained with frequent updates, CI workflows, and large community",
+          "Includes metrics and backtesting utilities for evaluation"
+        ],
+        "weaknesses": [
+          "Large, complex codebase (579+ entries, huge files like metrics.py at 228KB) that is not beginner-friendly for understanding end-to-end architecture",
+          "It is a library, not a self-contained project with standalone training/evaluation scripts, making a one-day reproduction of a full pipeline harder",
+          "Deep learning models may require GPU for practical training, though CPU-runnable simple models exist",
+          "Explicit documentation on avoiding train/test leakage is not evident in provided evidence"
+        ],
+        "uncertainties": [
+          "Whether a minimal PyTorch forecasting example is runnable on CPU within one day is not fully verifiable from evidence",
+          "Whether data splitting leakage avoidance is documented in the full docs (not shown)",
+          "The repository structure was truncated, so full extent of scripts/examples is unknown"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "awslabs/gluonts",
+        "purpose_summary": "GluonTS is a Python library for probabilistic time series modeling with deep learning models built on PyTorch, providing dataset utilities, estimators, training, and evaluation tooling.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "README example loads the public AirPassengers CSV via URL into a PandasDataset; repository includes a dataset module (src/gluonts/dataset) and dataset-splitting tutorials."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "README shows a training flow via DeepAREstimator(...).train(training_data); examples/ contains runnable scripts such as benchmark_m4.py, gp_synthetic_example.py, and warm_start.py."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "examples/evaluate_model.py exists, and the README demonstrates generating forecasts on a held-out test split."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "satisfied",
+            "evidence": "README uses gluonts.dataset.split.split with an offset and generate_instances; docs/tutorials/data_manipulation/dataset_splitting_example.md.template is dedicated to dataset splitting."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 85,
+        "strengths": [
+          "All four must-have requirements are clearly satisfied",
+          "README provides a compact end-to-end example (load data, split, train, predict, plot)",
+          "Dedicated documentation on dataset splitting and concepts",
+          "Actively maintained with recent pushes and CI workflows",
+          "PyTorch-based torch estimators are first-class"
+        ],
+        "weaknesses": [
+          "Large, complex library (1250+ files) that may overwhelm a beginner",
+          "Framework abstracts much of the PyTorch internals, limiting low-level learning",
+          "Full dev setup (uv sync --all-extras) is heavy for an 8-hour budget",
+          "486 open issues indicate a busy, non-trivial codebase"
+        ],
+        "uncertainties": [
+          "Whether the minimal README example runs comfortably on CPU within the time budget is not explicitly stated",
+          "Exact runtime of training scripts on CPU is unknown",
+          "Whether beginner-oriented tutorials exist beyond the README example is unclear from evidence"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "oliverguhr/transformer-time-series-prediction",
+        "purpose_summary": "A proof-of-concept repository containing two PyTorch transformer models (single-step and multi-step) for time series prediction, demonstrated on a daily minimum temperature dataset.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "The repository includes daily-min-temperatures.csv directly in the repo, which is a public dataset (daily minimum temperatures). It is bundled rather than downloaded, but it is obtainable from the repo."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "transformer-singlestep.py and transformer-multistep.py are standalone scripts that train the models (README mentions training for 100 epochs)."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "The scripts appear to include prediction/plotting logic (docs/result.gif and transformer-future200.png are outputs), though evaluation is embedded in the training scripts rather than separate evaluation scripts."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "The README does not mention data splitting or leakage prevention. The scripts likely contain a split, but the evidence does not confirm documentation of it."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 40,
+        "reproduction_feasibility": 80,
+        "maintenance_health": 45,
+        "strengths": [
+          "Two clear, self-contained PyTorch transformer examples (single-step and multi-step)",
+          "Bundled public dataset makes it easy to run",
+          "Small codebase (two scripts) suitable for beginners",
+          "MIT licensed and reasonably popular"
+        ],
+        "weaknesses": [
+          "README is very short and does not document data splitting or leakage prevention",
+          "No separate evaluation scripts; evaluation is embedded",
+          "Last pushed in 2023, limited recent maintenance",
+          "Proof-of-concept quality, not production-grade"
+        ],
+        "uncertainties": [
+          "Whether data splitting is documented in code comments",
+          "Whether the minimal example runs on CPU within the 8-hour budget",
+          "Exact dependencies in requirements.txt (only 30 bytes)"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "cure-lab/LTSF-Linear",
+        "purpose_summary": "Official PyTorch implementation of the AAAI-23 paper 'Are Transformers Effective for Time Series Forecasting?', providing simple linear forecasting models (Linear, NLinear, DLinear) plus reimplementations of several Transformer-based forecasters for long-term time series forecasting.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "README 'Data Preparation' section links to a Google Drive folder with nine pre-processed benchmarks from Autoformer and instructs placing them in ./dataset."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "run_longExp.py is the main training entry point, and scripts/EXP-LongForecasting contains per-dataset shell scripts (etth1.sh, electricity.sh, etc.)."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "exp/exp_main.py contains the experiment/test logic, and run_longExp.py plus the shell scripts drive training and evaluation; utils/metrics.py provides metric computation."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "data_provider/data_loader.py exists and likely implements chronological splits, but the README does not explicitly document the splitting strategy or leakage avoidance."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 70,
+        "maintenance_health": 55,
+        "strengths": [
+          "Simple linear models (Linear/NLinear/DLinear) are beginner-friendly and CPU-runnable",
+          "Clear README with environment setup, data preparation, and script descriptions",
+          "Well-organized structure with data_provider, exp, models, layers, and scripts directories",
+          "Public datasets provided via Google Drive link",
+          "Includes both training and evaluation entry points"
+        ],
+        "weaknesses": [
+          "README does not explicitly document train/val/test splitting or leakage avoidance",
+          "Repo bundles multiple large sub-projects (FEDformer, Pyraformer) increasing complexity",
+          "Pyraformer includes a precompiled CUDA .so, suggesting GPU dependency for that part",
+          "Last push was 2024-01-27 with 31 open issues, indicating limited recent maintenance",
+          "Python 3.6.9 environment is dated"
+        ],
+        "uncertainties": [
+          "Whether data_loader.py clearly documents chronological splitting to avoid leakage",
+          "Whether the minimal DLinear example runs comfortably on CPU within 8 hours",
+          "Whether the full repo scope (multiple Transformer reimplementations) fits a beginner's one-day budget"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "KasperGroesLudvigsen/influenza_transformer",
+        "purpose_summary": "A PyTorch implementation of the Transformer model from the paper 'Deep Transformer Models for Time Series Forecasting: The Influenza Prevalence Case', accompanied by two Towards Data Science tutorial articles explaining the model and inference step by step.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "The repository includes a data directory with data/dfs_merged_upload.csv (1.7MB), which is the dataset used in the tutorial. The README references 'the data from the .csv file in /data'. The dataset is bundled rather than downloaded via a script, but it is publicly available in the repo."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "sandbox.py (3804 bytes) is described in the README as showing 'how to use the Transformer to make a training prediction on the data from the .csv file in /data', and transformer_timeseries.py plus dataset.py and utils.py provide the model and training utilities."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "uncertain",
+            "evidence": "inference.py and inference_example.py exist and the README says inference_example.py shows 'how to use the function during model validation and testing', but there is no dedicated evaluation script (e.g., computing metrics) explicitly documented. Evaluation appears to be pseudo-code/example-level rather than a full evaluation pipeline."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "dataset.py exists and likely handles splitting, but the README does not describe the train/validation/test split strategy or leakage prevention. The evidence provided does not confirm explicit documentation of splitting methodology."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 78,
+        "code_clarity": 72,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 80,
+        "maintenance_health": 40,
+        "strengths": [
+          "Directly implements a well-known Transformer time series forecasting paper in PyTorch",
+          "Accompanied by two detailed step-by-step tutorial articles explaining the architecture and inference",
+          "Small, focused codebase (~15 files) with clear component separation (dataset, positional encoder, transformer, inference, utils)",
+          "Dataset bundled in the repo, so no external data download needed",
+          "Transformer model is small enough to run on CPU for a minimal example"
+        ],
+        "weaknesses": [
+          "No dedicated evaluation script with metrics; evaluation is only pseudo-code in inference_example.py",
+          "README does not document data splitting or leakage prevention",
+          "Repository has not been pushed to since October 2022, with 9 open issues",
+          "No license specified",
+          "README is brief and relies heavily on external Medium articles for explanation"
+        ],
+        "uncertainties": [
+          "Whether dataset.py implements a proper train/validation/test split with leakage prevention",
+          "Whether the minimal example truly runs within the 8-hour budget on CPU (model size and training time not stated)",
+          "Whether inference_example.py constitutes a usable evaluation script or only illustrative pseudo-code"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "zalandoresearch/pytorch-ts",
+        "purpose_summary": "PyTorchTS is a PyTorch-based probabilistic time series forecasting framework that uses GluonTS as its backend API for loading, transforming, and back-testing time series datasets. It provides implementations of several models including DeepAR, DeepVAR, LSTNet, N-BEATS, TFT, TempFlow, TimeGrad, and Transformer variants.",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "The README quick start loads a public dataset directly from a URL (Twitter_volume_AMZN.csv from the Numenta NAB repo). The repository also includes pts/dataset/repository/_m5.py and pts/dataset/repository/datasets.py, indicating dataset repository utilities. GluonTS backend also provides dataset loading."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "The README shows a training workflow via estimator.train(training_data=...). The repository contains pts/trainer.py and estimator files (e.g., deepar_estimator.py) that implement training. However, these are library modules rather than standalone CLI training scripts; training is invoked through Python code/notebooks."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "The README demonstrates prediction/evaluation via predictor.predict(test_data) and forecast plotting. The repository includes test/model/test_forecast.py and examples notebooks. Evaluation is done through the GluonTS back-testing API rather than dedicated standalone evaluation scripts."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "The README shows a manual split by slicing the target series at different timestamps for training and test data, but there is no explicit documentation explaining train/test leakage avoidance or a formal splitting methodology. The evidence is insufficient to confirm proper documentation of leakage prevention."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 60,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 50,
+        "strengths": [
+          "Covers a broad range of PyTorch time series models (DeepAR, DeepVAR, LSTNet, N-BEATS, TFT, TempFlow, TimeGrad, Transformer)",
+          "README provides a runnable quick-start example with public data and CPU/GPU device selection",
+          "Well-organized package structure separating models, modules, distributions, features, and datasets",
+          "Includes test suite covering models, modules, and distributions",
+          "MIT licensed and pip-installable"
+        ],
+        "weaknesses": [
+          "Framework is built on GluonTS backend, adding a heavy dependency and conceptual overhead for a beginner",
+          "No dedicated standalone training/evaluation CLI scripts; workflows are embedded in notebooks and library code",
+          "Data splitting and leakage avoidance are not explicitly documented",
+          "Many advanced models (TimeGrad, TempFlow, TFT) are complex and not beginner-friendly",
+          "Last push was 2024-06-14 with 104 open issues, suggesting limited recent maintenance"
+        ],
+        "uncertainties": [
+          "Whether the minimal example runs within 8 hours on CPU given GluonTS dependency and model complexity",
+          "Whether examples notebooks require GPU for the more advanced models",
+          "Exact scope of dataset repository utilities beyond M5",
+          "Whether train/test leakage is addressed in any non-README documentation"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "thuml/iTransformer",
+        "purpose_summary": "Official PyTorch implementation of the iTransformer paper (ICLR 2024 Spotlight) for multivariate time series forecasting, with training/evaluation scripts for multiple public benchmarks (ETT, ECL, Traffic, Weather, Exchange, PEMS, SolarEnergy).",
+        "must_have_checks": [
+          {
+            "requirement": "provides a way to obtain public datasets",
+            "status": "satisfied",
+            "evidence": "README states datasets can be obtained from Google Drive or Baidu Cloud links; data_provider/data_loader.py and data_factory.py handle loading of standard public benchmarks."
+          },
+          {
+            "requirement": "includes training scripts",
+            "status": "satisfied",
+            "evidence": "run.py plus numerous shell scripts under scripts/multivariate_forecasting, scripts/boost_performance, etc. (e.g., scripts/multivariate_forecasting/Traffic/iTransformer.sh) invoke training."
+          },
+          {
+            "requirement": "includes evaluation scripts",
+            "status": "satisfied",
+            "evidence": "experiments/exp_long_term_forecasting.py contains the experiment loop; README says 'Train and evaluate the model' via the same scripts, which run training and evaluation together."
+          },
+          {
+            "requirement": "documents data splitting to avoid train/test leakage",
+            "status": "uncertain",
+            "evidence": "data_provider/data_loader.py exists and likely implements chronological splits, but the README does not explicitly document the splitting strategy or leakage avoidance; evidence is insufficient to confirm documentation."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 72,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 80,
+        "strengths": [
+          "Official implementation of a well-known ICLR 2024 paper with clear architecture diagrams and pseudo-code in README",
+          "Well-organized modular structure (data_provider, layers, model, experiments, scripts)",
+          "Multiple ready-to-run shell scripts for standard public benchmarks",
+          "MIT licensed and actively maintained with recent updates",
+          "Includes multiple model variants (iTransformer, iInformer, iReformer, iFlowformer, iFlashformer) aiding comparative learning"
+        ],
+        "weaknesses": [
+          "Datasets are hosted on Google Drive/Baidu Cloud rather than auto-downloaded, adding manual setup friction",
+          "README does not explicitly document train/validation/test splitting or leakage avoidance",
+          "Benchmarks (Traffic, ECL, PEMS) are large multivariate datasets that may be slow or GPU-heavy, conflicting with the beginner/CPU/one-day goal",
+          "No explicit minimal CPU-friendly example or quickstart for beginners",
+          "Difficulty level is closer to intermediate/advanced than beginner"
+        ],
+        "uncertainties": [
+          "Whether a minimal example can complete on CPU within 8 hours is unclear; default scripts likely assume GPU",
+          "Whether data_loader.py documents or enforces leakage-free chronological splitting is not verifiable from the provided evidence",
+          "Exact runtime and memory requirements for the smallest benchmark (e.g., ETTh1) are not stated"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "awslabs/gluonts",
+          "base_score": 76.4,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "Highest deterministic score and the clearest fit for the stated must-haves: it satisfies all four requirements, including dedicated documentation of dataset splitting to avoid leakage. Its README provides a compact load-split-train-predict example with PyTorch-based estimators, which is suitable for an 8-hour reproduction if the learner focuses on the minimal example rather than the full framework.",
+          "tradeoffs": [
+            "Large, complex library with 1250+ files that may overwhelm a beginner.",
+            "The framework abstracts much of the underlying PyTorch code, limiting low-level PyTorch learning.",
+            "Full development setup is heavy for an 8-hour budget.",
+            "CPU runtime for the minimal example is not explicitly confirmed in the evidence."
+          ],
+          "learning_path": [
+            "Begin with the README end-to-end example: load the public AirPassengers CSV into a PandasDataset.",
+            "Study the dataset-splitting tutorial and understand how split offsets and generate_instances prevent train/test leakage.",
+            "Run the minimal training flow using DeepAREstimator.train(training_data) on a small CPU-friendly configuration.",
+            "Generate forecasts on the held-out split and compare them visually or numerically with the test data.",
+            "Inspect examples/evaluate_model.py to understand the supplied evaluation flow.",
+            "Only after reproducing the minimal example, optionally adapt the flow to another small public dataset within the remaining time budget."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "sktime/pytorch-forecasting",
+          "base_score": 71.64,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "A strong second choice with well-documented tutorials, runnable example scripts, multiple PyTorch forecasting architectures, and a bundled example dataset. It is less clearly compliant than GluonTS because explicit train/test leakage documentation is uncertain, but it still offers high learning value for PyTorch forecasting if the learner is comfortable with a heavier dependency stack.",
+          "tradeoffs": [
+            "Large codebase and heavy dependency stack increase setup complexity.",
+            "Explicit documentation of train/test splitting to avoid leakage is not clearly evidenced.",
+            "Minimal CPU reproducibility within 8 hours is uncertain.",
+            "833 open issues suggest potential rough edges."
+          ],
+          "learning_path": [
+            "Start with the README and the Stallion or AR tutorial to see the high-level forecasting workflow.",
+            "Inspect the bundled example dataset and examples/data handling before attempting custom data.",
+            "Run a minimal example script such as examples/ar.py on CPU with reduced training settings.",
+            "Review the data module and docs/source/data.rst to understand how time series are encoded and split.",
+            "Use the documented metrics module and example validation reporting to evaluate the trained model.",
+            "Keep the first reproduction small by using one architecture and a short training run."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "cure-lab/LTSF-Linear",
+          "base_score": 69.95,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "The simplest model family among the candidates, with beginner-friendly linear models such as DLinear/NLinear that are plausibly CPU-runnable and a clear README for data preparation and training scripts. However, it ranks lower because train/test splitting and leakage avoidance are not explicitly documented, and the repository includes extra sub-projects that increase scope beyond a one-day beginner reproduction.",
+          "tradeoffs": [
+            "README does not explicitly document train/val/test splitting or leakage avoidance.",
+            "Repository bundles multiple large sub-projects, increasing complexity.",
+            "Pyraformer includes a precompiled CUDA component, indicating GPU dependency for part of the repo.",
+            "Dated Python 3.6.9 environment and limited recent maintenance.",
+            "Minimal DLinear CPU runtime within 8 hours is not explicitly confirmed."
+          ],
+          "learning_path": [
+            "Read the README Data Preparation section and obtain one public benchmark dataset.",
+            "Run a minimal DLinear experiment using the main training entry point with a small dataset and reduced epochs.",
+            "Inspect data_provider/data_loader.py to understand how chronological splits are implemented, even though the README does not document it clearly.",
+            "Review utils/metrics.py and the experiment logic to see how training and evaluation metrics are computed.",
+            "Use the per-dataset shell scripts only as references, and avoid the additional Transformer sub-projects during the first reproduction.",
+            "If time remains, compare Linear, NLinear, and DLinear behavior on the same small split."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "awslabs/gluonts",
+      "final_reason": "GluonTS is the best repository for the stated goal because it has the highest deterministic score and is the only candidate whose evidence clearly satisfies all four must-have requirements, especially documented dataset splitting to avoid train/test leakage. It also provides a compact README example covering data loading, splitting, training, prediction, and evaluation with PyTorch-based estimators. The main tradeoff is that GluonTS is a large framework that abstracts PyTorch internals, so a beginner should reproduce only the minimal example within the 8-hour budget rather than attempt the full library setup. pytorch-forecasting is a strong alternative with better learning-oriented tutorials, but its leakage documentation is less certain. LTSF-Linear is attractive for simple CPU-friendly models, but its splitting documentation is uncertain and its repository scope is less beginner-focused."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "awslabs/gluonts",
+          "description": "The recommendation acknowledges that CPU runtime for the minimal example is not explicitly confirmed in the evidence, yet still asserts the minimal example is 'suitable for an 8-hour reproduction.' This is a mild tension with the user's exclusion of GPU-requiring projects and the one-day budget, but it is flagged as an uncertainty rather than a hard violation."
+        },
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "awslabs/gluonts",
+          "description": "GluonTS is recommended despite being a large framework that abstracts PyTorch internals, which somewhat conflicts with the user's learning goal of learning PyTorch for time series forecasting. However, the ranking is consistent with the deterministic score and the must-have compliance, and the tradeoff is explicitly disclosed."
+        },
+        {
+          "severity": "warning",
+          "category": "unsupported_claim",
+          "repository": "awslabs/gluonts",
+          "description": "The claim that the README example is 'compact' and covers 'load-split-train-predict' is supported by the evaluation, but the assertion that it is 'suitable for an 8-hour reproduction' is an inference not directly evidenced; it is presented with appropriate caveats."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final ranking is consistent with the deterministic scores and the recommendation is well-supported by the RepositoryEvaluations. GluonTS is the only candidate with all four must-haves clearly satisfied, including documented data splitting, which justifies its top rank. The tradeoffs (large framework, abstraction of PyTorch internals, unconfirmed CPU runtime) are explicitly disclosed and do not constitute hard-requirement violations. No critical issues found; warnings are minor and appropriately caveated."
+    },
+    "critic_feedback": "The final ranking is consistent with the deterministic scores and the recommendation is well-supported by the RepositoryEvaluations. GluonTS is the only candidate with all four must-haves clearly satisfied, including documented data splitting, which justifies its top rank. The tradeoffs (large framework, abstraction of PyTorch internals, unconfirmed CPU runtime) are explicitly disclosed and do not constitute hard-requirement violations. No critical issues found; warnings are minor and appropriately caveated."
+  },
+  "quality_signals": {
+    "best_repository": "awslabs/gluonts",
+    "top_repositories": [
+      "awslabs/gluonts",
+      "sktime/pytorch-forecasting",
+      "cure-lab/LTSF-Linear"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 9,
+    "evaluation_count": 9,
+    "best_must_have_checks": [
+      {
+        "requirement": "provides a way to obtain public datasets",
+        "status": "satisfied",
+        "evidence": "README example loads the public AirPassengers CSV via URL into a PandasDataset; repository includes a dataset module (src/gluonts/dataset) and dataset-splitting tutorials."
+      },
+      {
+        "requirement": "includes training scripts",
+        "status": "satisfied",
+        "evidence": "README shows a training flow via DeepAREstimator(...).train(training_data); examples/ contains runnable scripts such as benchmark_m4.py, gp_synthetic_example.py, and warm_start.py."
+      },
+      {
+        "requirement": "includes evaluation scripts",
+        "status": "satisfied",
+        "evidence": "examples/evaluate_model.py exists, and the README demonstrates generating forecasts on a held-out test split."
+      },
+      {
+        "requirement": "documents data splitting to avoid train/test leakage",
+        "status": "satisfied",
+        "evidence": "README uses gluonts.dataset.split.split with an offset and generate_instances; docs/tutorials/data_manipulation/dataset_splitting_example.md.template is dedicated to dataset splitting."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 3
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 90.151,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "awslabs/gluonts",
+            "description": "The recommendation acknowledges that CPU runtime for the minimal example is not explicitly confirmed in the evidence, yet still asserts the minimal example is 'suitable for an 8-hour reproduction.' This is a mild tension with the user's exclusion of GPU-requiring projects and the one-day budget, but it is flagged as an uncertainty rather than a hard violation."
+          },
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "awslabs/gluonts",
+            "description": "GluonTS is recommended despite being a large framework that abstracts PyTorch internals, which somewhat conflicts with the user's learning goal of learning PyTorch for time series forecasting. However, the ranking is consistent with the deterministic score and the must-have compliance, and the tradeoff is explicitly disclosed."
+          },
+          {
+            "severity": "warning",
+            "category": "unsupported_claim",
+            "repository": "awslabs/gluonts",
+            "description": "The claim that the README example is 'compact' and covers 'load-split-train-predict' is supported by the evaluation, but the assertion that it is 'suitable for an 8-hour reproduction' is an inference not directly evidenced; it is presented with appropriate caveats."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final ranking is consistent with the deterministic scores and the recommendation is well-supported by the RepositoryEvaluations. GluonTS is the only candidate with all four must-haves clearly satisfied, including documented data splitting, which justifies its top rank. The tradeoffs (large framework, abstraction of PyTorch internals, unconfirmed CPU runtime) are explicitly disclosed and do not constitute hard-requirement violations. No critical issues found; warnings are minor and appropriately caveated."
+      }
+    }
+  ],
+  "case_id": "09_pytorch_time_series",
+  "title": "PyTorch 时间序列预测复现",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a1505b-64e0-70f2-95ed-f4b44dc5dd1e",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a1505b-64e0-70f2-95ed-f4b44dc5dd1e?poll=true",
+    "metrics": {
+      "span_count": 102,
+      "llm_calls": 16,
+      "github_tool_calls": 30,
+      "input_tokens": 74882,
+      "output_tokens": 13403,
+      "total_tokens": 88285,
+      "cost_usd": "0.016884468",
+      "llm_usage_coverage": {
+        "calls": 16,
+        "with_total_tokens": 16,
+        "with_cost": 16
+      },
+      "root_reported_tokens": 88285,
+      "root_reported_cost_usd": "0.016884468",
+      "root_latency_s": 90.128243
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "05babf2afff145f287fabcb14473dc3d"
+    },
+    "nodes": [
+      {
+        "id": "01a1505b-6517-7042-93af-56e8f3e4200e",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:52:09.366785+00:00",
+        "end_time": "2026-10-18T18:52:13.747798+00:00",
+        "latency_s": 4.381013
+      },
+      {
+        "id": "01a1505b-7635-7d03-a72a-51cb7698c4a4",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:52:13.748857+00:00",
+        "end_time": "2026-10-18T18:52:39.773545+00:00",
+        "latency_s": 26.024688
+      },
+      {
+        "id": "01a1505b-dbdf-7e80-894e-0a3091548a2d",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:52:39.775546+00:00",
+        "end_time": "2026-10-18T18:53:26.005708+00:00",
+        "latency_s": 46.230162
+      },
+      {
+        "id": "01a1505c-9079-7f11-9ece-2bef09f5ebb7",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:53:26.009215+00:00",
+        "end_time": "2026-10-18T18:53:37.146731+00:00",
+        "latency_s": 11.137516
+      },
+      {
+        "id": "01a1505c-bbfd-75c0-acc1-6e8b19d590e7",
+        "name": "critic",
+        "start_time": "2026-10-18T18:53:37.149237+00:00",
+        "end_time": "2026-10-18T18:53:39.436927+00:00",
+        "latency_s": 2.28769
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a1505c-bc09-78f0-bba3-ed79a4cd73ef",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.26327,
+        "input_tokens": 4194,
+        "output_tokens": 410,
+        "total_tokens": 4604,
+        "cost_usd": "0.00078102",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-9083-7d03-b17c-494af75c6546",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 11.121491,
+        "input_tokens": 2961,
+        "output_tokens": 2210,
+        "total_tokens": 5171,
+        "cost_usd": "0.00167607",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-8354-7a11-a3f6-548b601c6db5",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.356526,
+        "input_tokens": 7500,
+        "output_tokens": 666,
+        "total_tokens": 8166,
+        "cost_usd": "0.001355256",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-80fb-77f0-a900-75e768a9488e",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.593216,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-7ef7-7540-8094-3c1479579d51",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.516295,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-7cd6-71b1-9a1c-26dbd081c0e5",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.544486,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-6e77-7f81-b9e6-36cd5237367c",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.674533,
+        "input_tokens": 7662,
+        "output_tokens": 763,
+        "total_tokens": 8425,
+        "cost_usd": "0.001437756",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-6c83-7ce1-82bd-e54e9a89dbc8",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.494299,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-6a10-71c0-b935-ca9c14dce532",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.626576,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-67d3-7fe2-ba80-f70727012ea7",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.572224,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-59a0-7322-b4cf-d760934479f6",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.631579,
+        "input_tokens": 2529,
+        "output_tokens": 692,
+        "total_tokens": 3221,
+        "cost_usd": "0.000625206",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-579b-7bf3-a4aa-576045e7c9fa",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.514284,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-53ee-7573-a050-977f7f3fae05",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.940603,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-51f7-7ca1-ba1d-51654044fd0d",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.503823,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-4531-70a2-a719-34e18925b85c",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.265128,
+        "input_tokens": 7446,
+        "output_tokens": 597,
+        "total_tokens": 8043,
+        "cost_usd": "0.001305756",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-42c9-7783-9d72-6c22b4a41788",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.608773,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-40ba-7e03-951d-725652ee6690",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.526587,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-3cd2-7962-bf13-a1a3d324da6c",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.99836,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-32ba-7420-8589-b891d79aa70f",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.580778,
+        "input_tokens": 2236,
+        "output_tokens": 512,
+        "total_tokens": 2748,
+        "cost_usd": "0.000473256",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-30cc-7cd3-af0a-9a9f43511710",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.490013,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-2e95-7b02-a2a8-502576ee4551",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.566536,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-2c99-7b22-bfec-ea59018f1a5c",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.507385,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-2123-7ac3-9c70-8d943f873bb6",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.928538,
+        "input_tokens": 7573,
+        "output_tokens": 567,
+        "total_tokens": 8140,
+        "cost_usd": "0.001306806",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-1bd6-7421-8a3e-7027387267ff",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.350391,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-19c9-7600-bfd1-fd36fb9651db",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.52466,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-1794-7160-a462-3e59ea767045",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.564935,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-09b6-7393-a0e5-d6128923eb6e",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.544421,
+        "input_tokens": 7665,
+        "output_tokens": 665,
+        "total_tokens": 8330,
+        "cost_usd": "0.001379406",
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-0727-7dd3-84f5-102382f3cd04",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.647707,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-0470-7b52-a7c8-9a242d05b2e3",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.695378,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505c-025e-7d72-b898-13f5a434c14c",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.530322,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-f607-7940-a1f9-f1e222bfb8c7",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.153904,
+        "input_tokens": 7192,
+        "output_tokens": 571,
+        "total_tokens": 7763,
+        "cost_usd": "0.001252056",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-f3f6-7f01-8e09-980e396ea41b",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.522724,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-f1e4-7f13-a2cc-bd7a384e95bd",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.528948,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-ee2b-7503-9ce4-2bd8d6e2b4ea",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.952913,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-e222-7590-92d5-a5dac6c46c3d",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.075584,
+        "input_tokens": 7491,
+        "output_tokens": 573,
+        "total_tokens": 8064,
+        "cost_usd": "0.001316922",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-e016-7530-869d-e82eaa6f09ba",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.51659,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-de21-7952-83b6-ab953ca4fd1a",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.501436,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-dbe1-7ee2-863a-04ed8d85c4df",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.575751,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-ab19-7053-97b8-081c27083d91",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 12.48034,
+        "input_tokens": 3030,
+        "output_tokens": 2534,
+        "total_tokens": 5564,
+        "cost_usd": "0.001918452",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-89c6-7643-99d6-b2640b4e9448",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 8.518605,
+        "input_tokens": 3388,
+        "output_tokens": 1449,
+        "total_tokens": 4837,
+        "cost_usd": "0.001057728",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-865c-7373-9094-ca649197eda1",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.870626,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-80e1-7033-b9c2-9569e88f570a",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.396863,
+        "input_tokens": 2005,
+        "output_tokens": 234,
+        "total_tokens": 2239,
+        "cost_usd": "0.000309438",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-7b68-78d2-babe-d1dc7f11d42b",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.571876,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-7b67-75e2-a185-70957c6616b4",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.399453,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-7639-7742-8295-676e4ba8cb9f",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.32159,
+        "input_tokens": 801,
+        "output_tokens": 161,
+        "total_tokens": 962,
+        "cost_usd": "0.000160302",
+        "has_error": false
+      },
+      {
+        "id": "01a1505b-65ab-73c0-a403-f2d0d52cc5b7",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 4.230277,
+        "input_tokens": 1209,
+        "output_tokens": 799,
+        "total_tokens": 2008,
+        "cost_usd": "0.000529038",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "thuml/iTransformer",
+          "max_entries": 120
+        },
+        "input_sha256": "51e0e121565536dc31d42eac727eb69917763f95d5674480988a29d13a72dbc4",
+        "output_sha256": "b649bf763a7e914f76f492895b9278e1c68df8bec194cad39260fa0bb7fba351"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "thuml/iTransformer"
+        },
+        "input_sha256": "074e28684e1144184cc8b6fba0aad11f92d965df3920bf3ed114b5449e4c4e70",
+        "output_sha256": "877e5286d0c220770d0aff61c460a63f60666ae9fbf832a28c21c5ab2c5b156e"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "thuml/iTransformer"
+        },
+        "input_sha256": "074e28684e1144184cc8b6fba0aad11f92d965df3920bf3ed114b5449e4c4e70",
+        "output_sha256": "485c7f957d75876942670375c3b0f74421768c5f639f1797a0ecf8cabb24fa42"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "zalandoresearch/pytorch-ts",
+          "max_entries": 120
+        },
+        "input_sha256": "596e680622206385bdca259bb71ea1e20c765374550d2ed7bac45e1b4bf10c16",
+        "output_sha256": "17f2ef238c099e7d7a466f89161fcda83ee756fd9751e248128bbe01279d6835"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "zalandoresearch/pytorch-ts"
+        },
+        "input_sha256": "0e676d739061b222ef0273a273940ed93bd000bf6ef1d887f802279ed33248af",
+        "output_sha256": "57bb21de5003f35e5b8ad42d548285e3a8ade9096e8a9f04a09a833eca72d9c5"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "zalandoresearch/pytorch-ts"
+        },
+        "input_sha256": "0e676d739061b222ef0273a273940ed93bd000bf6ef1d887f802279ed33248af",
+        "output_sha256": "fb4156a8ac92a1a364cd0763190345bfc2203f3fbb09261cd401f31016824259"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "KasperGroesLudvigsen/influenza_transformer",
+          "max_entries": 120
+        },
+        "input_sha256": "ee8108eaef10302586947b97565a26463c7f0fdc59920838e584e81fe2afa96a",
+        "output_sha256": "46608b08cf7c835c60b000da23d7dc47a798240d82665587b09b1efd42c1033d"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "KasperGroesLudvigsen/influenza_transformer"
+        },
+        "input_sha256": "bce66320fe5f0fc7765864ea062efffacef3ced8b75e8e04436e9593cf14749d",
+        "output_sha256": "0d5139ec92c6b14dc6571379a27b8f4efae1da2a85890df783cc2bd7664d12c7"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "KasperGroesLudvigsen/influenza_transformer"
+        },
+        "input_sha256": "bce66320fe5f0fc7765864ea062efffacef3ced8b75e8e04436e9593cf14749d",
+        "output_sha256": "b29e278251d4b2b278b90008f5cee49119cdd5ed1ec023f78efe05f2b876343b"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "cure-lab/LTSF-Linear",
+          "max_entries": 120
+        },
+        "input_sha256": "589d06d68acff7395d381b69c7007e4689708830c16b01c729227cf30e675556",
+        "output_sha256": "6fc98645eb1999895081010977bfca1abb14a14071d1297885ab206161427709"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "cure-lab/LTSF-Linear"
+        },
+        "input_sha256": "0d07cca19ec1015e62cd4cdf5657b7f4baf32cf53491784cdc9ed790a779ccdc",
+        "output_sha256": "eadbe22fdb70873d25616d55b9f135e4bbef19658baba2a04ba07740aa88eb89"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "cure-lab/LTSF-Linear"
+        },
+        "input_sha256": "0d07cca19ec1015e62cd4cdf5657b7f4baf32cf53491784cdc9ed790a779ccdc",
+        "output_sha256": "7c560bea8c42e24a37c617377c8c234ef7d9019ab267a8a36bd3523e7478cf3d"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "oliverguhr/transformer-time-series-prediction",
+          "max_entries": 120
+        },
+        "input_sha256": "91b0e1767f72db0714a712d52ee0d7865d8bca7a4831d0c8fc9effe11663366e",
+        "output_sha256": "8550557634c65812d87b8b86d8030ff3ac8d4a74d60cbcfd7cc7e818a8e19537"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "oliverguhr/transformer-time-series-prediction"
+        },
+        "input_sha256": "a37c54a44249df200dd9c80c0c8288136024b83ef0a53305df5c5709e1026fa4",
+        "output_sha256": "282cf96d4375ab0161a55bf4d7b9a333c0c815a8d7a3478d589cdd45c6730098"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "oliverguhr/transformer-time-series-prediction"
+        },
+        "input_sha256": "a37c54a44249df200dd9c80c0c8288136024b83ef0a53305df5c5709e1026fa4",
+        "output_sha256": "a69ea02e18c215ca296c400f4a6a1cfb34a7cc111b5ea286265e25ee5b46a965"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "dev",
+          "full_name": "awslabs/gluonts",
+          "max_entries": 120
+        },
+        "input_sha256": "a103cab1151aaf708dd8131bc11f1ea553be4e4348a9228c595487f6b83160ac",
+        "output_sha256": "611b2d9691c47a3b86c8307664e4cb885fc6222d0ba7df2dc90780183fea5b23"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "awslabs/gluonts"
+        },
+        "input_sha256": "b024e70db2fab025d19268455f004d8f0eaa575a8120cbd4fa77f3efcc2592b9",
+        "output_sha256": "62aa7671270e4f8f821af16107f6b2af67ac60ffcb517b5cde00f146863af267"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "awslabs/gluonts"
+        },
+        "input_sha256": "b024e70db2fab025d19268455f004d8f0eaa575a8120cbd4fa77f3efcc2592b9",
+        "output_sha256": "52286c1ce6fa4871b49d3115d15799ae8b18dbdf573a2d58813a147e3e9a830b"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "unit8co/darts",
+          "max_entries": 120
+        },
+        "input_sha256": "3128e539a37945998c2dae26c4d806357ab8fd236a9134ee6d4e0905414a664e",
+        "output_sha256": "44425b1073987fa9f3f292c619c6692cb50a63609ba13486619b7fc75d1697d7"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "unit8co/darts"
+        },
+        "input_sha256": "825cdbbe1ab5984ad3676befd13e0676fd4dcd15488860da2c48eb114a873edf",
+        "output_sha256": "0636b45c562316e6a8c71e7d4fcb98ec286185669aef09299563c378e2f4cbd2"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "unit8co/darts"
+        },
+        "input_sha256": "825cdbbe1ab5984ad3676befd13e0676fd4dcd15488860da2c48eb114a873edf",
+        "output_sha256": "4fd56a3961994ec7abbae8d5957cd3329ba619c8c7baaf8410a7d898bf5a3d48"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "thuml/Time-Series-Library",
+          "max_entries": 120
+        },
+        "input_sha256": "044924f93fbe1cb6c2795ad0543fcacf2569a3864751da1e2680061e721960c8",
+        "output_sha256": "a3743ab3d9aee69812851d3cb6411240850380512629b5a494694a2a9bf23f52"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "thuml/Time-Series-Library"
+        },
+        "input_sha256": "9101659a5126d833827c522962e87759fc88706ac9f4a26a28b5218192bb23a2",
+        "output_sha256": "b6efea3210606017d6f6d0e07b0e8f61630ac4f7617a171b179c92f081a7f421"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "thuml/Time-Series-Library"
+        },
+        "input_sha256": "9101659a5126d833827c522962e87759fc88706ac9f4a26a28b5218192bb23a2",
+        "output_sha256": "66d9fa6dd18d6c5c070fb9b8dd86883e38100aff2c3770c1eb5e7db5f36cc210"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "sktime/pytorch-forecasting",
+          "max_entries": 120
+        },
+        "input_sha256": "f5f790b9d84e16fbefed45c0ba56b2d98bf891fcb89aed4736ad2f4ea8f8ebaf",
+        "output_sha256": "4a7c3d32afce3f69569cddd93fb353afaff604ac90006f275f10ac0b7ff351e3"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "sktime/pytorch-forecasting"
+        },
+        "input_sha256": "8797817f8fea0bb0af33c820bb9b5f217c0c270691f2641e4a7e2abcd2ed96f7",
+        "output_sha256": "92348f00ecd980ead8b3fcc4fda08d734ee03c16cd5e02681c5fb02ee42323b9"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "sktime/pytorch-forecasting"
+        },
+        "input_sha256": "8797817f8fea0bb0af33c820bb9b5f217c0c270691f2641e4a7e2abcd2ed96f7",
+        "output_sha256": "6f86a73b6045c935d9f30dba425b91558712b0c5e37372a7d394bd0e014d0157"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "topic:time-series-forecasting topic:pytorch language:Python"
+        },
+        "input_sha256": "e7612c49a2368eadb09d3e95a9041b320c832fcd227fc93dd4a24a6780f1cd88",
+        "output_sha256": "7e072425a01fb69b4df54cea17f6c05c5fb4a88436fe4bced7f011090bf7c40e"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "pytorch time series forecasting tutorial example dataset training script language:Python"
+        },
+        "input_sha256": "bc6af07ec576539d84f8a0866898b720a707442a59b0bc8fc0142965b05f9d0a",
+        "output_sha256": "e501e81b5dd13b5d9512dfae0e00c1aa8d4e9db5ed1a111fda0b025d1974fb99"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "time series forecasting pytorch in:name,description,readme language:Python stars:>100"
+        },
+        "input_sha256": "e352990b123a4ad8bfd3408074e1e7e45a856c03e5ea7e1cb8af27bc02637c3d",
+        "output_sha256": "417490f34a3e833722af67f2963197b6f0c829952d0fcf1e2dbbcde08a3808fb"
+      }
+    ]
+  }
+}

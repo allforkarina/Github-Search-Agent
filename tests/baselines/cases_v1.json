@@ -1,0 +1,75 @@
+{
+  "dataset_version": "reposcouts-baseline-v1",
+  "cases": [
+    {
+      "id": "01_langgraph_beginner",
+      "title": "LangGraph 入门与短时复现",
+      "category": "agent_rag",
+      "request": "我是 Python 入门开发者，想找一个用 LangGraph 实现、有具体实际用途的 AI Agent 项目。必须有清楚的安装步骤和可运行示例，希望 8 小时内能理解主要流程并复现。优先结构简单、文件数量适中的项目；排除只有链接、提示词合集或纯概念介绍的仓库。",
+      "review_focus": ["LangGraph 的使用有证据", "安装与运行步骤", "入门难度和 8 小时时间预算"]
+    },
+    {
+      "id": "02_local_chinese_rag",
+      "title": "中文文档与本地离线 RAG",
+      "category": "agent_rag",
+      "request": "我想学习本地知识库问答，找一个 Python RAG 项目，能导入中文 PDF 或 Markdown 文档，并在回答中给出来源。必须支持本地模型，例如 Ollama，不依赖付费云端 LLM API；目标是普通 CPU 和 Windows 环境。希望有中文说明，能在一天内复现，排除必须使用 GPU 集群的方案。",
+      "review_focus": ["本地模型和 CPU 运行证据", "中文文档与来源引用", "Windows 支持的不确定性"]
+    },
+    {
+      "id": "03_advanced_rag_evaluation",
+      "title": "混合检索、重排与 RAG 评估",
+      "category": "agent_rag",
+      "request": "I am an experienced Python developer looking for a RAG implementation to study retrieval quality. It must demonstrate both lexical and vector retrieval, reranking, and an evaluation script or dataset. Prefer source citations and a clear separation between indexing, retrieval, and generation. I have two days to reproduce a small example. Exclude projects that only wrap a hosted chatbot API without exposing retrieval logic.",
+      "review_focus": ["混合检索与重排的实际实现", "评估脚本或数据集", "检索逻辑可检查"]
+    },
+    {
+      "id": "04_browser_automation_agent",
+      "title": "浏览器自动化 Agent",
+      "category": "agent_rag",
+      "request": "我熟悉 Python，想学习能通过浏览器完成实际任务的 AI Agent。希望项目使用 Playwright 或同类浏览器自动化工具，必须有端到端运行示例和模型配置说明，最好能观察工具调用过程。我有一天时间复现。排除只有录屏、没有核心源码或必须购买商业 SaaS 才能使用的仓库。",
+      "review_focus": ["浏览器工具与 Agent 的连接", "端到端示例与配置", "商业服务依赖"]
+    },
+    {
+      "id": "05_multi_agent_research",
+      "title": "多 Agent 协作研究流程",
+      "category": "agent_rag",
+      "request": "我想理解多 Agent 如何分工协作完成资料研究并生成报告，偏好 Python 和 CrewAI 或 AutoGen。必须有能运行的研究或报告任务、明确的角色定义和任务交接代码，最好有失败处理或反馈机制。我是中级开发者，计划花 12 小时学习。排除只展示几个角色轮流聊天、没有具体产出的示例。",
+      "review_focus": ["角色定义和实际任务交接", "可运行的研究产出", "反馈机制是否有证据"]
+    },
+    {
+      "id": "06_repository_analysis_agent",
+      "title": "仓库分析与代码理解 Agent",
+      "category": "agent_rag",
+      "request": "我想找一个帮助开发者理解 GitHub 仓库或分析 Issue 的 Python Agent 项目。必须能读取仓库内容并根据代码回答问题或生成分析报告，最好结合检索并提供文件路径或证据引用。希望一天内复现；不需要自动提交代码或创建 PR，排除只有聊天界面而没有代码分析流程的项目。",
+      "review_focus": ["仓库内容是否实际参与分析", "文件或证据引用", "代码分析流程可追踪"]
+    },
+    {
+      "id": "07_fastapi_background_tasks",
+      "title": "FastAPI 后台任务工程",
+      "category": "other",
+      "request": "我想学习 Python 后端工程，找一个 FastAPI 配合 Celery 和 Redis 处理后台任务的项目。必须有任务提交和状态查询接口、Docker Compose 启动方式以及测试示例。偏好结构清楚的小型应用，能在 6 小时内运行理解；不需要 AI 或 LLM，排除只有代码片段没有完整运行说明的仓库。",
+      "review_focus": ["提交与查询接口", "Compose 和测试示例", "完整应用与学习规模"]
+    },
+    {
+      "id": "08_react_kanban",
+      "title": "React TypeScript 本地看板",
+      "category": "other",
+      "request": "I want a small React and TypeScript Kanban or task-management app to study component design and state management. It must support moving tasks between columns and persisting data locally, with clear setup instructions. Prefer Vite and a codebase I can understand in four hours. Exclude Next.js projects and apps that require a paid backend service or authentication before the demo works.",
+      "review_focus": ["列间移动与本地持久化", "排除 Next.js 和付费后端", "四小时学习规模"]
+    },
+    {
+      "id": "09_pytorch_time_series",
+      "title": "PyTorch 时间序列预测复现",
+      "category": "other",
+      "request": "我想学习用 PyTorch 做时间序列预测，找一个 Python 项目。必须提供公开数据的获取方式、训练与评估脚本，并说明数据如何划分以避免训练测试混淆。希望有简单模型能在 CPU 上跑通，有清楚的 README，我计划用一天复现；排除必须使用大型 GPU 才能完成最小示例的项目。",
+      "review_focus": ["数据和训练评估可复现", "数据划分说明", "CPU 最小示例"]
+    },
+    {
+      "id": "10_local_data_pipeline",
+      "title": "本地数据处理流水线",
+      "category": "other",
+      "request": "我想学习数据工程，找一个 Python 数据流水线项目，把 CSV 或公开 API 的数据清洗后写入 DuckDB 或 SQLite，并提供可重复运行的流程和测试。希望能看到任务编排或失败处理，适合中级开发者 6 小时内复现。排除必须开通云账号、部署 Kubernetes 或维护 Spark 集群才能运行的项目。",
+      "review_focus": ["清洗和本地数据库流程", "重复运行与测试", "基础设施约束"]
+    }
+  ]
+}

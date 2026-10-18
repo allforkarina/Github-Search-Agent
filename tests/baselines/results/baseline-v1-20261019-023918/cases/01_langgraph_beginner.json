@@ -1,0 +1,1373 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:39:51.058713+08:00",
+  "finished_at": "2026-10-19T02:41:37.331036+08:00",
+  "business_run_id": "8011b86a319843168175eb5c7b7d1bf2",
+  "workflow_wall_time_s": 83.54,
+  "collection_wall_time_s": 106.272,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "用 LangGraph 实现的实用 AI Agent 项目",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "LangGraph"
+      ],
+      "difficulty": "beginner",
+      "must_have": [
+        "使用 LangGraph 实现",
+        "具有具体实际用途",
+        "提供清楚的安装步骤",
+        "包含可运行示例"
+      ],
+      "nice_to_have": [
+        "项目结构简单",
+        "文件数量适中",
+        "主要流程容易理解",
+        "能在 8 小时内复现"
+      ],
+      "exclusions": [
+        "只有链接的仓库",
+        "提示词合集",
+        "纯概念介绍的仓库"
+      ],
+      "learning_goal": "学习并复现 LangGraph AI Agent 项目的主要流程",
+      "time_budget_in_hours": 8
+    },
+    "candidates": {
+      "search_queries": [
+        "langgraph agent example tutorial python",
+        "langgraph python agent chatbot starter template language:Python",
+        "langgraph practical agent project python RAG research assistant",
+        "topic:langgraph language:Python stars:>50",
+        "langgraph multi-agent app python pdf chat customer support in:name,description,readme"
+      ],
+      "candidates": [
+        {
+          "full_name": "eliharoun/langgraph-weather-agent",
+          "reason": "Python 编写的 LangGraph 入门项目，包含天气查询与工具调用示例，具有具体应用场景；值得进一步检查安装步骤、代码结构和可运行性。"
+        },
+        {
+          "full_name": "Abdullah1dev/LangGraph-Tutorials",
+          "reason": "以 Python Notebook 形式覆盖 LangGraph 的节点、边、状态管理和条件路由，适合初学者理解 Agent 主流程；需进一步确认是否包含完整的实用示例和安装说明。"
+        },
+        {
+          "full_name": "sujeetgund/awesome-langgraph",
+          "reason": "包含 LangGraph 工作流、human-in-the-loop、MCP 工具、记忆和 RAG 等动手示例，实用性较强；值得检查其 Python 代码、项目规模和复现难度。"
+        },
+        {
+          "full_name": "IshaanLabs/langgraph-tutorial-freecodecamp-course-code",
+          "reason": "提供 FreeCodeCamp LangGraph 课程代码，包含分步练习和实践实现，适合在有限时间内复现；需进一步确认运行环境、依赖安装和示例完整度。"
+        },
+        {
+          "full_name": "jameslea/agents-learn",
+          "reason": "Python 项目，包含 LangGraph、RAG 和多智能体工作流等动手示例，可作为实用 Agent 候选；需进一步筛选出 LangGraph 相关且适合初学者的部分。"
+        },
+        {
+          "full_name": "arpansaini21/ai-agents-from-scratch",
+          "reason": "描述中包含 Python、LangChain 与 LangGraph 的实战项目和教程，可能符合真实用途与可运行示例要求；需要进一步确认仓库结构、安装步骤和 LangGraph 内容占比。"
+        },
+        {
+          "full_name": "ShadowQuill/langchain-langgraph-tutorial",
+          "reason": "包含 26 个可运行示例和结构化文档，适合快速理解 LangGraph 图编排；需进一步确认主要代码是否为 Python，以及是否提供清楚的安装与运行步骤。"
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "eliharoun/langgraph-weather-agent",
+        "purpose_summary": "A beginner-oriented LangGraph tutorial project building a Weather & Travel Assistant agent with tool calling (weather API, web search) and persistent memory, accompanied by a step-by-step tutorial and workflow diagram.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "satisfied",
+            "evidence": "README badges and description reference LangGraph; files workflow.py, state.py, agent_logic.py indicate a LangGraph graph/state implementation."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "satisfied",
+            "evidence": "Weather & Travel Assistant answering weather queries and travel planning using live weather API and web search tools."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "satisfied",
+            "evidence": "README Quick Start lists prerequisites (Python 3.9+, API keys) and commands: clone, venv, pip install -r requirements.txt, configure .env, python run_agent.py."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "satisfied",
+            "evidence": "run_agent.py entry point plus example usage queries in README; requirements.txt present. Actual runnability not verified but structure supports it."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 80,
+        "documentation_quality": 82,
+        "reproduction_feasibility": 72,
+        "maintenance_health": 30,
+        "strengths": [
+          "Small, simple project structure (~22 entries) with clear separation of tools, models, state, workflow",
+          "Dedicated step-by-step tutorial (22KB) and Mermaid workflow diagram aid understanding",
+          "Concrete real-world use case with tool calling and memory",
+          "Clear quick-start installation instructions"
+        ],
+        "weaknesses": [
+          "Requires three external API keys (OpenAI, Tavily, RapidAPI), adding setup friction",
+          "Very low community engagement (1 star, 0 forks) and no license",
+          "Only a single commit; limited evidence of maintenance",
+          "Some files very small (e.g., tools/search.py 139 bytes), suggesting thin implementation"
+        ],
+        "uncertainties": [
+          "Actual runnability of the code not verified from evidence",
+          "Depth of LangGraph graph construction in workflow.py unknown",
+          "Whether tutorial fully covers end-to-end architecture"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "Abdullah1dev/LangGraph-Tutorials",
+        "purpose_summary": "A collection of Jupyter notebooks intended as structured tutorials for learning LangGraph concepts such as nodes, edges, state management, and conditional routing, with example notebooks like a BMI calculator, a simple LLM workflow, and a simple blog.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "uncertain",
+            "evidence": "Repository description and topics mention LangGraph, and notebooks exist, but no README or notebook contents are provided to confirm LangGraph is actually used in the code."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "uncertain",
+            "evidence": "Notebook filenames (BMI calculator, simple LLM workflow, simple blog) suggest small examples, but without contents it is unclear whether any is a practical, real-world application rather than a toy tutorial."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "not_satisfied",
+            "evidence": "README not found; no installation instructions are present in the available evidence."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "uncertain",
+            "evidence": "Notebook files exist (1_bmi_calculator.ipynb, 3_simple_blog.ipynb), but 2_simple_llm_workflow.ipynb has size 0, and no contents are available to verify runnability."
+          }
+        ],
+        "requirement_match": 0,
+        "learning_value": 30,
+        "code_clarity": 20,
+        "documentation_quality": 5,
+        "reproduction_feasibility": 25,
+        "maintenance_health": 15,
+        "strengths": [
+          "Notebook-based format may be approachable for beginners",
+          "Topics and description align with LangGraph learning goals",
+          "Small number of top-level example notebooks"
+        ],
+        "weaknesses": [
+          "No README or installation instructions",
+          "One notebook (2_simple_llm_workflow.ipynb) is empty (0 bytes)",
+          "A full virtual environment (myvenv) is committed, bloating the repo to ~43MB and obscuring the actual project structure",
+          "No evidence of a concrete practical application",
+          "Very low community engagement (1 star, 0 forks)"
+        ],
+        "uncertainties": [
+          "Whether notebooks actually use LangGraph APIs",
+          "Whether examples are runnable and self-contained",
+          "Whether any example constitutes a real practical use case",
+          "Actual content and quality of the notebooks"
+        ],
+        "suitable_for_next_stage": false
+      },
+      {
+        "full_name": "sujeetgund/awesome-langgraph",
+        "purpose_summary": "A collection of hands-on LangGraph example projects in Python covering basic workflows, human-in-the-loop, MCP tool integration, memory patterns, and RAG with FAISS.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "satisfied",
+            "evidence": "README and topics explicitly reference LangGraph; examples use LangGraph concepts like interrupt(), MemorySaver, MultiServerMCPClient, and graph workflows."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "satisfied",
+            "evidence": "Examples include BMI calculator, document triage, student helper, stock purchase assistant with HITL, RAG chatbot with FAISS and web search — concrete practical use cases."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "satisfied",
+            "evidence": "README provides venv creation, pip install -r requirements.txt, .env setup with API keys, and per-example run commands."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "satisfied",
+            "evidence": "Multiple runnable scripts (with_hitl.py, mcp-client.py, mcp-server.py, rag_chatbot.py) and notebooks with documented run instructions."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 70,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 65,
+        "maintenance_health": 40,
+        "strengths": [
+          "Covers a broad range of LangGraph concepts (workflows, HITL, MCP, memory, RAG) in one repo",
+          "Clear README with setup and per-example run instructions",
+          "Concrete, practical example use cases",
+          "Simple folder-based organization by topic"
+        ],
+        "weaknesses": [
+          "Primary language is Jupyter Notebook, not pure Python scripts",
+          "Requires multiple external API keys (Groq, Alpha Vantage, Google, Tavily) which complicates reproduction",
+          "Very low stars/forks and no license",
+          "Some examples depend on hosted MCP endpoints and external services",
+          "main.py is a minimal unused starter file"
+        ],
+        "uncertainties": [
+          "Actual code quality inside notebooks is not verifiable from structure alone",
+          "Whether all examples run end-to-end without issues is unverified",
+          "requirements.txt content (145 bytes) may be incomplete given the many dependencies"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "IshaanLabs/langgraph-tutorial-freecodecamp-course-code",
+        "purpose_summary": "A collection of Jupyter notebooks containing the code from a freeCodeCamp LangGraph tutorial course, covering basic graphs (hello-world, sequential, conditional, multiple-inputs) and exercises, intended as a learning reference for LangGraph workflows and agents.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "satisfied",
+            "evidence": "Repository is explicitly a LangGraph tutorial with notebooks named hello-world-graph, Sequential-Graph, Conditional-Graph, Multiple-Inputs-Graph, and langgraph topics."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "uncertain",
+            "evidence": "Notebooks appear to be tutorial exercises (hello-world, sequential, conditional graphs) rather than a concrete practical application; no clear real-world use case is described in the README."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "not_satisfied",
+            "evidence": "README only contains a description and a YouTube link; no installation or setup instructions are provided."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "uncertain",
+            "evidence": "Notebooks likely contain runnable code cells, but no requirements file, environment setup, or execution instructions are present to confirm runnability."
+          }
+        ],
+        "requirement_match": 35,
+        "learning_value": 55,
+        "code_clarity": 50,
+        "documentation_quality": 20,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 25,
+        "strengths": [
+          "Covers core LangGraph concepts (sequential, conditional, multi-input graphs)",
+          "Notebook format is approachable for beginners",
+          "Small, focused file count"
+        ],
+        "weaknesses": [
+          "No installation or setup instructions",
+          "No requirements/dependency file",
+          "Primarily tutorial exercises rather than a concrete practical application",
+          "README is minimal and relies on an external video",
+          "Language is Jupyter Notebook, not pure Python scripts"
+        ],
+        "uncertainties": [
+          "Whether notebooks are self-contained and runnable without external setup",
+          "Whether any notebook implements a genuinely practical use case",
+          "Actual code quality and inline documentation inside notebooks"
+        ],
+        "suitable_for_next_stage": false
+      },
+      {
+        "full_name": "jameslea/agents-learn",
+        "purpose_summary": "A systematic AI Agents learning roadmap in Python covering core concepts, LangGraph orchestration, multi-agent workflows, multiple agent frameworks (smolagents, CrewAI, AutoGen, MetaGPT, LlamaIndex), advanced patterns, and production engineering, with runnable code per phase.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "satisfied",
+            "evidence": "README lists phase 03-langgraph-agent (custom_react_agent.py), 04-multi-agent (multi_agent_supervisor.py), and 12-autonomous-agents/babyagi_langgraph.py, all explicitly LangGraph-based."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "satisfied",
+            "evidence": "Includes a Self-RAG system (05-final-project/rag_agent.py), research agent, multi-agent supervisor, and production engineering demos — concrete agent applications rather than pure theory."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "satisfied",
+            "evidence": "README '快速开始' section gives venv setup, pip install -r requirements/base.txt, per-phase requirements, .env configuration with OPENAI_API_KEY, MODEL_NAME, TAVILY_API_KEY, plus special MetaGPT Python 3.11 note."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "satisfied",
+            "evidence": "Each phase directory contains runnable .py files (e.g., simple_agent.py, custom_react_agent.py, multi_agent_supervisor.py, rag_agent.py, babyagi_langgraph.py) with accompanying explanation/summary markdown."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 68,
+        "documentation_quality": 85,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 45,
+        "strengths": [
+          "Explicit LangGraph coverage across multiple phases (03, 04, 12)",
+          "Rich documentation: per-phase summary.md, explanation.md, concept.md files",
+          "Concrete end-to-end projects like Self-RAG and multi-agent supervisor",
+          "Clear installation and env configuration instructions",
+          "MIT licensed and well-organized by learning phases"
+        ],
+        "weaknesses": [
+          "Very broad scope (15 phases + deep dives) may overwhelm a beginner within 8 hours",
+          "Many external dependencies (LangGraph, LlamaIndex, CrewAI, AutoGen, MetaGPT, RAGAS, Langfuse) increase setup complexity",
+          "MetaGPT phase requires separate Python 3.11 environment due to dependency conflicts",
+          "Requires multiple API keys (OpenAI, Tavily) which adds friction",
+          "Zero stars/forks and very recent creation — limited community validation"
+        ],
+        "uncertainties": [
+          "Actual runnability of each example not verified from evidence alone",
+          "requirements/ directory referenced in README but not visible in truncated structure",
+          "Whether the LangGraph examples are beginner-friendly in code complexity (files are 5-11KB, moderate)",
+          "Maintenance activity beyond initial push unclear given 0 stars/issues"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "arpansaini21/ai-agents-from-scratch",
+        "purpose_summary": "A repository intended to teach building AI agents from scratch with Python, LangChain, and LangGraph, but currently contains only a README, LICENSE, and .gitignore with no actual code or examples.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "not_satisfied",
+            "evidence": "The repository contains no Python source files or LangGraph code; only .gitignore, LICENSE, and README.md exist in the file structure."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "not_satisfied",
+            "evidence": "No implementation exists, so no concrete practical use case is demonstrated. The README only states an intention to provide tutorials and projects."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "not_satisfied",
+            "evidence": "The README is a single sentence with no installation instructions, dependencies, or setup steps."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "not_satisfied",
+            "evidence": "There are no example files, scripts, or notebooks in the repository structure."
+          }
+        ],
+        "requirement_match": 0,
+        "learning_value": 5,
+        "code_clarity": 5,
+        "documentation_quality": 5,
+        "reproduction_feasibility": 5,
+        "maintenance_health": 10,
+        "strengths": [
+          "README states a relevant learning goal involving LangGraph and Python",
+          "MIT license is present"
+        ],
+        "weaknesses": [
+          "No code, examples, or tutorials exist despite the description",
+          "No installation or usage instructions",
+          "Cannot learn or reproduce any LangGraph agent flow from this repository",
+          "Repository is essentially empty (3 files, 3 KB)"
+        ],
+        "uncertainties": [
+          "Whether the author plans to add content in the future",
+          "Whether the repository was created as a placeholder"
+        ],
+        "suitable_for_next_stage": false
+      },
+      {
+        "full_name": "ShadowQuill/langchain-langgraph-tutorial",
+        "purpose_summary": "A structured, bilingual LangChain/LangGraph tutorial repository with 13 phases and 26 runnable examples, progressing from basic chains and RAG to LangGraph state-graph orchestration, HITL, persistence, MCP, and multi-agent A2A patterns.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 LangGraph 实现",
+            "status": "satisfied",
+            "evidence": "README describes LangGraph state-graph/node/conditional-edge orchestration as the core; examples/p6 (branching, router_graph, crew_graph), p7 (hitl_approve, persistence, time_travel), p9 capstone, p12/p13 multi-agent examples all appear to use LangGraph."
+          },
+          {
+            "requirement": "具有具体实际用途",
+            "status": "satisfied",
+            "evidence": "Examples cover RAG, tool calling, HITL approval, persistence, deployment/serving, MCP tools, and multi-agent A2A collaboration — concrete agent capabilities rather than pure concept text."
+          },
+          {
+            "requirement": "提供清楚的安装步骤",
+            "status": "satisfied",
+            "evidence": "README provides Makefile-based setup (make setup), manual venv/pip steps, .env configuration for Ollama/DeepSeek/Qwen/OpenAI, and explicit run commands (make run p=N, python -m examples.p1.hello_chain)."
+          },
+          {
+            "requirement": "包含可运行示例",
+            "status": "satisfied",
+            "evidence": "26 runnable examples across examples/p1–p13 with a verify.sh script for phases 10–13; README documents how to run each."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 78,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 68,
+        "maintenance_health": 55,
+        "strengths": [
+          "Comprehensive, progressive curriculum explicitly centered on LangGraph state-graph concepts",
+          "Bilingual VitePress documentation with per-phase explanations and acceptance checklists",
+          "Clear setup path via Makefile plus manual fallback, with multiple LLM provider options including free local Ollama",
+          "Many small, focused runnable examples organized by phase",
+          "Includes verify.sh for automated sanity checks of advanced phases"
+        ],
+        "weaknesses": [
+          "Repository language metadata is Shell, not Python, though Python examples dominate",
+          "13 phases and 26 examples may exceed an 8-hour beginner budget if all are attempted",
+          "Advanced phases (MCP, A2A, deployment) add dependencies and complexity beyond beginner scope",
+          "Very low community engagement (7 stars, 0 forks, 0 watchers) limits external validation",
+          "Requires LLM provider configuration (API key or local Ollama) before examples run"
+        ],
+        "uncertainties": [
+          "Actual code quality and LangGraph usage depth inside example files cannot be fully verified from structure alone",
+          "Whether all 26 examples run cleanly end-to-end is not confirmed by evidence",
+          "Python version requirement (3.13+) may be restrictive for some beginner environments",
+          "Maintenance activity is recent but the project is young with limited history"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "eliharoun/langgraph-weather-agent",
+          "base_score": 82.54,
+          "score_rank": 2,
+          "final_rank": 1,
+          "recommendation_reason": "This is the best fit for a beginner who wants to reproduce a practical LangGraph AI Agent project within 8 hours. It is explicitly beginner-oriented, has a small and clear project structure, focuses on one concrete Weather & Travel Assistant use case, and includes tool calling, persistent memory, a step-by-step tutorial, and a workflow diagram. It meets all must-have requirements and is easier to scope than a broad multi-phase tutorial repository.",
+          "tradeoffs": [
+            "Requires three external API keys, which adds setup friction for a beginner.",
+            "Very low community engagement and only a single commit reduce external validation.",
+            "Some implementation files appear thin, so the depth of LangGraph graph construction may be limited.",
+            "Actual end-to-end runnability is not fully confirmed by the supplied evidence."
+          ],
+          "learning_path": [
+            "Read the README Quick Start and the step-by-step tutorial first to understand prerequisites, API key requirements, installation commands, and the intended agent behavior.",
+            "Inspect the state definition and workflow graph construction first, using state.py and workflow.py, to map how LangGraph nodes, edges, and state flow are organized.",
+            "Then inspect agent_logic.py plus the tools and models directories to understand how weather lookup, web search, and persistent memory are connected to the graph.",
+            "Run run_agent.py with a simple weather query first, then try a travel-planning query and observe how tool calling and memory affect the workflow.",
+            "After the basic flow works, review how errors or missing API keys affect execution and document the minimum configuration needed to reproduce the agent locally."
+          ],
+          "ranking_override": true,
+          "override_reason": "Base score rank 2, moved to final rank 1 because it is explicitly beginner-oriented, small, single-purpose, and better scoped for an 8-hour reproduction than the broader multi-phase tutorial repository."
+        },
+        {
+          "full_name": "ShadowQuill/langchain-langgraph-tutorial",
+          "base_score": 83.61,
+          "score_rank": 1,
+          "final_rank": 2,
+          "recommendation_reason": "This repository has the highest deterministic score and is an excellent structured LangGraph learning resource, with clear setup instructions, bilingual documentation, and many runnable examples covering LangGraph state graphs, branching, HITL, persistence, MCP, and multi-agent patterns. However, its 13 phases and 26 examples are broader and more advanced than needed for a beginner-focused 8-hour first reproduction, so it is better as a guided curriculum or reference after completing a smaller project.",
+          "tradeoffs": [
+            "The full curriculum is likely too large for an 8-hour beginner session if all phases are attempted.",
+            "Advanced phases such as MCP, A2A, and deployment add complexity beyond the beginner goal.",
+            "Repository language metadata is Shell even though Python examples dominate.",
+            "Requires LLM provider configuration and may require Python 3.13+, which can be restrictive for some beginners."
+          ],
+          "learning_path": [
+            "Read the README setup section first and choose a minimal learning path rather than attempting all 13 phases.",
+            "Use the Makefile setup or the manual virtual environment and pip steps, then configure one LLM provider, preferably a free local Ollama option if available.",
+            "Run the earliest basic chain example first to verify the environment before moving to LangGraph-specific examples.",
+            "Study the LangGraph state-graph and branching/router examples, especially the p6 examples, to understand nodes, conditional edges, and graph orchestration.",
+            "If time remains, inspect p7 HITL and persistence examples and the p9 capstone; defer p12/p13 MCP, A2A, and deployment content unless the basics are already clear."
+          ],
+          "ranking_override": true,
+          "override_reason": "Base score rank 1, moved to final rank 2 because the repository is broader and more advanced than the user's beginner-focused 8-hour single-project reproduction goal, even though its documentation and example coverage are stronger overall."
+        },
+        {
+          "full_name": "sujeetgund/awesome-langgraph",
+          "base_score": 79.45,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "This repository offers a useful collection of hands-on LangGraph examples across workflows, HITL, MCP, memory, and RAG, but it is less suitable as the first 8-hour beginner reproduction project. The examples are organized by topic rather than forming one focused practical agent, many are notebook-based, and multiple external API keys and hosted services increase setup complexity.",
+          "tradeoffs": [
+            "Primary language is Jupyter Notebook rather than pure Python scripts, which may be less convenient for a beginner reproduction workflow.",
+            "Requires multiple external API keys and some hosted MCP endpoints, increasing setup and debugging friction.",
+            "The repository is a collection of examples rather than one cohesive practical AI Agent project.",
+            "Actual code quality and end-to-end runnability inside notebooks are not fully verified from the supplied evidence."
+          ],
+          "learning_path": [
+            "Read the README setup and per-example run instructions first, then select one small self-contained example instead of trying the whole collection.",
+            "Start with a simple workflow or practical use-case example such as the BMI calculator or document triage to understand the basic LangGraph graph structure.",
+            "Inspect how state, nodes, and edges are defined in that chosen example before moving to tool calling or memory patterns.",
+            "Run the selected example end-to-end and confirm which API keys are actually required; avoid MCP and hosted-service examples until the basic workflow is working.",
+            "If time permits, move to the HITL stock purchase assistant or RAG chatbot example, but treat those as follow-up exercises rather than part of the minimum 8-hour path."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "eliharoun/langgraph-weather-agent",
+      "final_reason": "The deterministic top score belongs to ShadowQuill/langchain-langgraph-tutorial, but the scores are close and the user's constraints emphasize beginner difficulty, a practical AI Agent project, simple structure, and reproduction within 8 hours. eliharoun/langgraph-weather-agent is the better first choice because it is explicitly beginner-oriented, small, focused on one concrete weather/travel assistant use case, and includes a step-by-step tutorial and workflow diagram. ShadowQuill remains valuable as a broader LangGraph curriculum and reference, while sujeetgund/awesome-langgraph is best used later for exploring additional LangGraph patterns."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "eliharoun/langgraph-weather-agent",
+          "description": "The final rank 1 overrides the deterministic score rank 2 (82.54 vs 83.61). The override is justified by explicit user-specific reasons (beginner orientation, single focused use case, small structure, 8-hour scope), which is acceptable, but the score gap is small and the override relies on qualitative fit rather than a large quantitative advantage."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "eliharoun/langgraph-weather-agent",
+          "description": "The recommendation states the project 'includes tool calling, persistent memory, a step-by-step tutorial, and a workflow diagram' — these are supported by the evaluation. However, the claim that it is 'easier to scope than a broad multi-phase tutorial repository' is a comparative judgment not directly quantified in the evaluation, though it is reasonably inferred from the structure descriptions."
+        },
+        {
+          "severity": "warning",
+          "category": "unsupported_claim",
+          "repository": "eliharoun/langgraph-weather-agent",
+          "description": "The tradeoff 'Some implementation files appear thin, so the depth of LangGraph graph construction may be limited' is supported by the evaluation's weakness about small files and uncertainty about workflow.py depth, so this is acceptable as a hedged claim."
+        },
+        {
+          "severity": "warning",
+          "category": "hard_requirement",
+          "repository": "eliharoun/langgraph-weather-agent",
+          "description": "All four must-have requirements are marked satisfied in the evaluation, but '包含可运行示例' is noted as 'Actual runnability not verified.' This is a residual uncertainty rather than a violation, since the structure supports runnability and the requirement is marked satisfied."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All hard requirements are marked satisfied for the selected repository, and the ranking override from score rank 2 to final rank 1 is explicitly justified by user-specific constraints (beginner difficulty, single practical use case, 8-hour reproduction budget, simple structure). The override reason is strong enough to satisfy the ranking-consistency rule. Claims about features, structure, and setup are grounded in the evaluation. Remaining concerns are minor: unverified end-to-end runnability, thin implementation files, and low community engagement are appropriately disclosed as tradeoffs rather than hidden. No critical issues found; no retry needed."
+    },
+    "critic_feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All hard requirements are marked satisfied for the selected repository, and the ranking override from score rank 2 to final rank 1 is explicitly justified by user-specific constraints (beginner difficulty, single practical use case, 8-hour reproduction budget, simple structure). The override reason is strong enough to satisfy the ranking-consistency rule. Claims about features, structure, and setup are grounded in the evaluation. Remaining concerns are minor: unverified end-to-end runnability, thin implementation files, and low community engagement are appropriately disclosed as tradeoffs rather than hidden. No critical issues found; no retry needed."
+  },
+  "quality_signals": {
+    "best_repository": "eliharoun/langgraph-weather-agent",
+    "top_repositories": [
+      "eliharoun/langgraph-weather-agent",
+      "ShadowQuill/langchain-langgraph-tutorial",
+      "sujeetgund/awesome-langgraph"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 7,
+    "evaluation_count": 7,
+    "best_must_have_checks": [
+      {
+        "requirement": "使用 LangGraph 实现",
+        "status": "satisfied",
+        "evidence": "README badges and description reference LangGraph; files workflow.py, state.py, agent_logic.py indicate a LangGraph graph/state implementation."
+      },
+      {
+        "requirement": "具有具体实际用途",
+        "status": "satisfied",
+        "evidence": "Weather & Travel Assistant answering weather queries and travel planning using live weather API and web search tools."
+      },
+      {
+        "requirement": "提供清楚的安装步骤",
+        "status": "satisfied",
+        "evidence": "README Quick Start lists prerequisites (Python 3.9+, API keys) and commands: clone, venv, pip install -r requirements.txt, configure .env, python run_agent.py."
+      },
+      {
+        "requirement": "包含可运行示例",
+        "status": "satisfied",
+        "evidence": "run_agent.py entry point plus example usage queries in README; requirements.txt present. Actual runnability not verified but structure supports it."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 4
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 83.536,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "eliharoun/langgraph-weather-agent",
+            "description": "The final rank 1 overrides the deterministic score rank 2 (82.54 vs 83.61). The override is justified by explicit user-specific reasons (beginner orientation, single focused use case, small structure, 8-hour scope), which is acceptable, but the score gap is small and the override relies on qualitative fit rather than a large quantitative advantage."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "eliharoun/langgraph-weather-agent",
+            "description": "The recommendation states the project 'includes tool calling, persistent memory, a step-by-step tutorial, and a workflow diagram' — these are supported by the evaluation. However, the claim that it is 'easier to scope than a broad multi-phase tutorial repository' is a comparative judgment not directly quantified in the evaluation, though it is reasonably inferred from the structure descriptions."
+          },
+          {
+            "severity": "warning",
+            "category": "unsupported_claim",
+            "repository": "eliharoun/langgraph-weather-agent",
+            "description": "The tradeoff 'Some implementation files appear thin, so the depth of LangGraph graph construction may be limited' is supported by the evaluation's weakness about small files and uncertainty about workflow.py depth, so this is acceptable as a hedged claim."
+          },
+          {
+            "severity": "warning",
+            "category": "hard_requirement",
+            "repository": "eliharoun/langgraph-weather-agent",
+            "description": "All four must-have requirements are marked satisfied in the evaluation, but '包含可运行示例' is noted as 'Actual runnability not verified.' This is a residual uncertainty rather than a violation, since the structure supports runnability and the requirement is marked satisfied."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All hard requirements are marked satisfied for the selected repository, and the ranking override from score rank 2 to final rank 1 is explicitly justified by user-specific constraints (beginner difficulty, single practical use case, 8-hour reproduction budget, simple structure). The override reason is strong enough to satisfy the ranking-consistency rule. Claims about features, structure, and setup are grounded in the evaluation. Remaining concerns are minor: unverified end-to-end runnability, thin implementation files, and low community engagement are appropriately disclosed as tradeoffs rather than hidden. No critical issues found; no retry needed."
+      }
+    }
+  ],
+  "case_id": "01_langgraph_beginner",
+  "title": "LangGraph 入门与短时复现",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15050-2123-7962-bfd0-5989bbd25521",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15050-2123-7962-bfd0-5989bbd25521?poll=true",
+    "metrics": {
+      "span_count": 88,
+      "llm_calls": 14,
+      "github_tool_calls": 24,
+      "input_tokens": 50623,
+      "output_tokens": 13443,
+      "total_tokens": 64066,
+      "cost_usd": "0.013627122",
+      "llm_usage_coverage": {
+        "calls": 14,
+        "with_total_tokens": 14,
+        "with_cost": 14
+      },
+      "root_reported_tokens": 64066,
+      "root_reported_cost_usd": "0.013627122",
+      "root_latency_s": 83.516508
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "8011b86a319843168175eb5c7b7d1bf2"
+    },
+    "nodes": [
+      {
+        "id": "01a15050-2158-7552-9a5e-32a00c6a38b7",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:39:51.127707+00:00",
+        "end_time": "2026-10-18T18:39:55.232014+00:00",
+        "latency_s": 4.104307
+      },
+      {
+        "id": "01a15050-3161-73d3-a4d9-8ae17ff6c9d5",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:39:55.233517+00:00",
+        "end_time": "2026-10-18T18:40:18.137331+00:00",
+        "latency_s": 22.903814
+      },
+      {
+        "id": "01a15050-8ada-7111-a662-dbd55a904a71",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:40:18.138334+00:00",
+        "end_time": "2026-10-18T18:40:51.289767+00:00",
+        "latency_s": 33.151433
+      },
+      {
+        "id": "01a15051-0c5c-7d42-ac08-660bc30e0a04",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:40:51.291767+00:00",
+        "end_time": "2026-10-18T18:41:11.666179+00:00",
+        "latency_s": 20.374412
+      },
+      {
+        "id": "01a15051-5bf6-71d0-ad16-a12f81336c1a",
+        "name": "critic",
+        "start_time": "2026-10-18T18:41:11.670693+00:00",
+        "end_time": "2026-10-18T18:41:14.589753+00:00",
+        "latency_s": 2.91906
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15051-5c01-72a0-acfc-55ff4d6759bf",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.899524,
+        "input_tokens": 4411,
+        "output_tokens": 544,
+        "total_tokens": 4955,
+        "cost_usd": "0.00089397",
+        "has_error": false
+      },
+      {
+        "id": "01a15051-0c66-7c10-a349-6730862acb2e",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 20.357385,
+        "input_tokens": 2978,
+        "output_tokens": 4102,
+        "total_tokens": 7080,
+        "cost_usd": "0.00281382",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-fda3-7d20-b5a6-1aa773a42857",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.761761,
+        "input_tokens": 8486,
+        "output_tokens": 694,
+        "total_tokens": 9180,
+        "cost_usd": "0.001519956",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-fb90-7042-83ad-3450220bea35",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.524418,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-f905-7932-988c-306065116ea0",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.650496,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-f6ed-7f83-93af-24029f33f5ee",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.535576,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-eebd-7fd2-918a-84cc0900d6ad",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.090741,
+        "input_tokens": 1804,
+        "output_tokens": 424,
+        "total_tokens": 2228,
+        "cost_usd": "0.000355656",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-ecc5-77c0-af4c-a5054df76215",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.501267,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-ea7a-7fd2-b601-a5fe540f87b9",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.586994,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-e877-7880-8209-a0fd4f82433f",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.514233,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-dbe6-7972-9b4f-6ecf70aa44f9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.211385,
+        "input_tokens": 7983,
+        "output_tokens": 686,
+        "total_tokens": 8669,
+        "cost_usd": "0.001439706",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-d9e9-7781-9b7c-865c62a61dda",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.502226,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-d77e-7963-a9be-7a86e2032e40",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.617873,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-d581-79b2-9383-bd26dbdbc8e8",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.509133,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-cb2b-76c2-a1de-3644cdbaf8f9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.641492,
+        "input_tokens": 2307,
+        "output_tokens": 489,
+        "total_tokens": 2796,
+        "cost_usd": "0.000470106",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-c928-7d91-8066-9054f314a6d1",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.51197,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-c707-7443-bda7-3364cac01e2f",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.545022,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-c4eb-71a0-bd30-f0ac4f8794c5",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.540857,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-b8c6-7872-b16c-e1f3b8ceea05",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.104367,
+        "input_tokens": 3849,
+        "output_tokens": 538,
+        "total_tokens": 4387,
+        "cost_usd": "0.000730806",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-b6d3-7132-afff-3a69a42af71c",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.495302,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-b31c-70b2-80e1-66b102931425",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.951237,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-af72-7bb1-9fd8-1183b40864cf",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.9385,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-a4c1-7953-9046-29c77c2fdefb",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.731943,
+        "input_tokens": 7410,
+        "output_tokens": 543,
+        "total_tokens": 7953,
+        "cost_usd": "0.001267956",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-9f69-76e2-96ab-eb710aa0d65d",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.361471,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-9d8a-7bc0-a350-64791e66443a",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.478513,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-9b8d-7b62-bf66-456164d25f0b",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.508124,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-9284-72e3-bce2-41e3db083b83",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.308694,
+        "input_tokens": 3085,
+        "output_tokens": 518,
+        "total_tokens": 3603,
+        "cost_usd": "0.000623022",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-8ee3-70e3-ba52-1419e62e2cac",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.924891,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-8cea-7e01-a586-4841c4a2b815",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.505316,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-8adb-78e0-b5c3-ba55e95ebc53",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.526448,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-5aa6-7be2-b4af-8efcb0b6864f",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 12.334996,
+        "input_tokens": 1943,
+        "output_tokens": 2517,
+        "total_tokens": 4460,
+        "cost_usd": "0.001745202",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-411d-7a00-8eee-266d09bdff20",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 6.5243,
+        "input_tokens": 2300,
+        "output_tokens": 1230,
+        "total_tokens": 3530,
+        "cost_usd": "0.000781944",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-3a6c-75b2-8bb0-144c91a384b8",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.701977,
+        "input_tokens": 2059,
+        "output_tokens": 189,
+        "total_tokens": 2248,
+        "cost_usd": "0.000290538",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-35e1-7662-8277-12eceb3710ce",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.707775,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-35df-79f1-ba44-58542d30b863",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.698058,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-35dc-7c80-a8ff-b6494bce3118",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.16528,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15050-3165-72f3-80fc-0a0838d8b02e",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.137086,
+        "input_tokens": 804,
+        "output_tokens": 192,
+        "total_tokens": 996,
+        "cost_usd": "0.000179352",
+        "has_error": false
+      },
+      {
+        "id": "01a15050-21ed-73c3-b72d-b1d64f5d1bf9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 3.952458,
+        "input_tokens": 1204,
+        "output_tokens": 777,
+        "total_tokens": 1981,
+        "cost_usd": "0.000515088",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "ShadowQuill/langchain-langgraph-tutorial",
+          "max_entries": 120
+        },
+        "input_sha256": "90bf5c1d05215b1248451e541cccb5c2e9fe74529e64166a72b0bfc394e79f59",
+        "output_sha256": "dfae38f2637585d581ed1d515a6f6cd90448f982c276bf3edc50bb15df9b132e"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "ShadowQuill/langchain-langgraph-tutorial"
+        },
+        "input_sha256": "1ebcbfc57851154c1798a302e391635976c7e49cab2a9f0022910ff798712447",
+        "output_sha256": "997298fc813c17b493c295c194a4f0658935463e91bdbd4de481ec77cb88aa0e"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "ShadowQuill/langchain-langgraph-tutorial"
+        },
+        "input_sha256": "1ebcbfc57851154c1798a302e391635976c7e49cab2a9f0022910ff798712447",
+        "output_sha256": "90b483285b71d1ea4ef9b4ca501e5e0d2b21be781301100751ef81dbe820e60b"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "arpansaini21/ai-agents-from-scratch",
+          "max_entries": 120
+        },
+        "input_sha256": "9f76b8d65606f2fb0c2126ae17f236a3c58a43c6dd2b987021e3cc9f895a9fd9",
+        "output_sha256": "8f28b519836d834a4650f870f53de1b386b1777c494d82ec48e6ca9b198624c6"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "arpansaini21/ai-agents-from-scratch"
+        },
+        "input_sha256": "f7c01d38f5fb8ee75bb1c51c7ec2d3a6f1e9679cd3cc1f1a31591d6ba6e02955",
+        "output_sha256": "3192e799f388f1b7269ea53b57a06a602e0f26f962ce18b8ea2550eab7ddfbe1"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "arpansaini21/ai-agents-from-scratch"
+        },
+        "input_sha256": "f7c01d38f5fb8ee75bb1c51c7ec2d3a6f1e9679cd3cc1f1a31591d6ba6e02955",
+        "output_sha256": "bf96c59e075aa7bedda0ca6593d2ca28977ffc5edc01a3be64b60097b4631abf"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "jameslea/agents-learn",
+          "max_entries": 120
+        },
+        "input_sha256": "85cbc9c18b3a7ce473413079ca883fc29170cb818b8f58d65dbf84168275ed8b",
+        "output_sha256": "2041efe9dcc5b0aeb6874b53c79a357aa5951002c17efabe8643029df6c00e0c"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "jameslea/agents-learn"
+        },
+        "input_sha256": "163cd2ab275e6cb443a3b043323f22426396f237c97db0e5c3cba80bc14901b3",
+        "output_sha256": "c11f84786b198ab4d9151cb2a872fce7b48558d806b6d21e1afc5daf9b0e0426"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "jameslea/agents-learn"
+        },
+        "input_sha256": "163cd2ab275e6cb443a3b043323f22426396f237c97db0e5c3cba80bc14901b3",
+        "output_sha256": "8d198711536dba4a61b7569407b58227b72d9092f03389438e1c01cf0cb1f1cc"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "IshaanLabs/langgraph-tutorial-freecodecamp-course-code",
+          "max_entries": 120
+        },
+        "input_sha256": "c0f0c70e694477bec25702bcd7fd327a42aa2439dec9da67f6f8f01b359bbb94",
+        "output_sha256": "358abe748d1cd5afc9931157ba2fb20e7bc31141d91b4aa5672ef1133c2accef"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "IshaanLabs/langgraph-tutorial-freecodecamp-course-code"
+        },
+        "input_sha256": "342d1331d149c702e4d3766b5ab3b8080a314711eeef7c04fd786204310ab76e",
+        "output_sha256": "90ef560186e65c4317f04b86a41be9995a161ad635352675bf40fb9641dfa0e8"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "IshaanLabs/langgraph-tutorial-freecodecamp-course-code"
+        },
+        "input_sha256": "342d1331d149c702e4d3766b5ab3b8080a314711eeef7c04fd786204310ab76e",
+        "output_sha256": "b414b72cc68cf1b6de2509ac06b06ed9c4b8b328ffbc241b5b59fa1092c793ec"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "sujeetgund/awesome-langgraph",
+          "max_entries": 120
+        },
+        "input_sha256": "2dceb8a2fbac99c3bab68850681eda4058b1ad1f9b308a6a04c82d8282a8ab91",
+        "output_sha256": "dcd4a20fd7ebae7d0ae499b4323c975ef6682cfb9ce46f810684bb7edc364ab5"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "sujeetgund/awesome-langgraph"
+        },
+        "input_sha256": "2cc6e3b2635a3f6cf1ab2419441a94979a4b8f5ea46b5d5d065ed1aff3fd2f9c",
+        "output_sha256": "4d37441794a0291ba087e4a9f5c4b960ab5a098864b898f12553ea861a2d472d"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "sujeetgund/awesome-langgraph"
+        },
+        "input_sha256": "2cc6e3b2635a3f6cf1ab2419441a94979a4b8f5ea46b5d5d065ed1aff3fd2f9c",
+        "output_sha256": "35e7b50232c75d2bf1e1ff61a9e9d1a9bd17aa5e6ade5a4e672502c5b1f7bb79"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "Abdullah1dev/LangGraph-Tutorials",
+          "max_entries": 120
+        },
+        "input_sha256": "2d12e531a789b845e78090595b64239a8df9be7275ae5175b4f87763f4aecdc4",
+        "output_sha256": "9601cec55546b40583b6c09654480b935ef61f81db8b6b5e684df9e933dc44fb"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "Abdullah1dev/LangGraph-Tutorials"
+        },
+        "input_sha256": "2d5325fff4b85ccd41d27104d24e2642211bbacb767b2dd5e15b601dd15b8a67",
+        "output_sha256": "bb7e85ab488ad82f6081c1d1936150badd4f9ee3d6c39e33bc7b3d39cfb80467"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "Abdullah1dev/LangGraph-Tutorials"
+        },
+        "input_sha256": "2d5325fff4b85ccd41d27104d24e2642211bbacb767b2dd5e15b601dd15b8a67",
+        "output_sha256": "c301ba0329d205c2d8cdafb4820b6483854a7d481a48d7f8e1344b5419a92556"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "eliharoun/langgraph-weather-agent",
+          "max_entries": 120
+        },
+        "input_sha256": "132b1955f877e790e27755fe46e347b172906d9c390b288f6c55cc4c56cfbf24",
+        "output_sha256": "2ddb01d52e40c9e01197ec81cd593b8908b286269132aa1ccb09309e55150aa4"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "eliharoun/langgraph-weather-agent"
+        },
+        "input_sha256": "23c7317f3b6adff7de1eb55bd0a245169a910df5a5a7abe64939726a317418a5",
+        "output_sha256": "1148740e9b9bc9e0f50209e98fa0763013d92bcdcb956606a9121238044dd83d"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "eliharoun/langgraph-weather-agent"
+        },
+        "input_sha256": "23c7317f3b6adff7de1eb55bd0a245169a910df5a5a7abe64939726a317418a5",
+        "output_sha256": "13a41ac5a1874af424d117147a20f7a31722e4d5491cbb603982caf85b108210"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "langgraph practical agent project python RAG research assistant"
+        },
+        "input_sha256": "6d4bc156595822ad15d44af2c5f92ac25947cec6f4d86656976426599b924397",
+        "output_sha256": "e6a43e08411676fcecc972ab9e6c2f4de5720b09c5b2f5252979d9151449582b"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "langgraph python agent chatbot starter template language:Python"
+        },
+        "input_sha256": "8b63d4217d0d158257cdcdbf72cf6c9453489c43c1cf1f30e81fc49f6eade68b",
+        "output_sha256": "71be39a6769926cd81bd260ccf0a6e39f16c39937a7118e25f40cbf9a243ba0a"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "langgraph agent example tutorial python"
+        },
+        "input_sha256": "0933e56dbde0a488593e0c205937b818dc85d0f742a195f256192351c60e5752",
+        "output_sha256": "d31d17220f0c9be2301965252ce656177ca5b3ae60eb6c3e9bcbca8e392a5cf8"
+      }
+    ]
+  }
+}

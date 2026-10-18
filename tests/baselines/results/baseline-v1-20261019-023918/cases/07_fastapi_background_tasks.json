@@ -1,0 +1,1363 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:48:42.094394+08:00",
+  "finished_at": "2026-10-19T02:50:17.534792+08:00",
+  "business_run_id": "d65e30a66cfb4b4c932904baf7a2dc0d",
+  "workflow_wall_time_s": 72.809,
+  "collection_wall_time_s": 95.439,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "Python 后端工程：使用 FastAPI、Celery 和 Redis 处理后台任务的项目",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "FastAPI",
+        "Celery",
+        "Redis"
+      ],
+      "difficulty": "intermediate",
+      "must_have": [
+        "任务提交接口",
+        "任务状态查询接口",
+        "Docker Compose 启动方式",
+        "测试示例"
+      ],
+      "nice_to_have": [
+        "结构清楚的小型应用",
+        "完整可运行的示例项目",
+        "便于在短时间内理解和复现"
+      ],
+      "exclusions": [
+        "AI 或 LLM 相关项目",
+        "只有代码片段、没有完整运行说明的仓库"
+      ],
+      "learning_goal": "学习 Python 后端工程，通过运行和理解一个 FastAPI + Celery + Redis 后台任务项目来掌握相关开发方式",
+      "time_budget_in_hours": 6
+    },
+    "candidates": {
+      "search_queries": [
+        "fastapi celery redis docker-compose background tasks in:name,description,readme language:Python",
+        "fastapi celery worker redis queue example template language:Python stars:>50",
+        "topic:fastapi topic:celery language:Python"
+      ],
+      "candidates": [
+        {
+          "full_name": "fastapi-practices/fastapi-best-architecture",
+          "reason": "明确包含 FastAPI、Celery、Docker 和分层后端架构，可能具备任务队列与 Docker Compose 启动方式；值得进一步检查任务提交/状态接口、测试示例以及项目复杂度是否适合中级学习。"
+        },
+        {
+          "full_name": "GregaVrbancic/fastapi-celery",
+          "reason": "最小 FastAPI + Celery 示例，使用 Redis 作为 Celery backend，并带有典型的任务提交与状态查询流程；适合快速理解 FastAPI、Celery、Redis 后台任务协作方式。"
+        },
+        {
+          "full_name": "asacristani/fastapi-rocket-boilerplate",
+          "reason": "FastAPI 现代技术栈 boilerplate，可能集成 Celery、Redis、Docker 和测试；值得检查是否提供完整可运行的后台任务示例与 Compose 启动说明。"
+        },
+        {
+          "full_name": "tedivm/robs_awesome_python_template",
+          "reason": "描述中明确提到 FastAPI、Celery、Docker、CI/CD 的生产级 Python 模板；值得进一步确认是否包含 Redis、任务状态接口、测试示例以及适合短时间复现的运行文档。"
+        },
+        {
+          "full_name": "Kuzyashin/FastAPI_Tortoise_template",
+          "reason": "描述直接包含 FastAPI、Celery、Docker 模板，技术栈组合匹配；值得检查其任务提交接口、状态查询接口、Docker Compose 配置和测试示例是否齐全。"
+        },
+        {
+          "full_name": "iam-abbas/FastAPI-Production-Boilerplate",
+          "reason": "生产级 FastAPI boilerplate，通常具备较清晰的项目结构和 Docker/测试支持；需要进一步确认是否包含 Celery、Redis 以及完整的后台任务示例。"
+        },
+        {
+          "full_name": "nickatnight/cookiecutter-fastapi-backend",
+          "reason": "Cookiecutter FastAPI 后端模板，描述称 batteries included；值得检查是否集成 Celery/Redis、提供 Docker Compose 启动方式和测试示例，从而判断是否适合作为学习项目。"
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "fastapi-practices/fastapi-best-architecture",
+        "purpose_summary": "An enterprise-level FastAPI backend architecture template using SQLAlchemy, Pydantic, Celery, Redis, and Docker, organized in a three-tier (api/service/crud) structure with admin modules for auth, users, roles, menus, logs, and monitoring.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (task submission endpoint)",
+            "status": "uncertain",
+            "evidence": "A backend/app/task directory exists in the structure, and Celery is listed in the description/topics, but the truncated structure does not show the task API endpoints or a submission route. Cannot confirm a dedicated task-submission endpoint."
+          },
+          {
+            "requirement": "任务状态查询接口 (task status query endpoint)",
+            "status": "uncertain",
+            "evidence": "No explicit task-status endpoint is visible in the provided structure. The task directory is present but its contents are not shown due to truncation."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "uncertain",
+            "evidence": "A Dockerfile exists and Docker is a listed topic, but no docker-compose.yml is visible in the provided structure entries. README does not include compose instructions; it points to external docs."
+          },
+          {
+            "requirement": "测试示例 (test examples)",
+            "status": "satisfied",
+            "evidence": "backend/app/admin/tests/api_v1/test_auth.py exists, indicating at least a sample test suite is present."
+          }
+        ],
+        "requirement_match": 25,
+        "learning_value": 55,
+        "code_clarity": 70,
+        "documentation_quality": 45,
+        "reproduction_feasibility": 35,
+        "maintenance_health": 80,
+        "strengths": [
+          "Clear three-tier architecture (api/schema/service/crud/model) that is well organized",
+          "Active maintenance with recent pushes and CI workflows",
+          "Includes Celery and Redis in the stack",
+          "Has a test directory with example tests",
+          "MIT licensed and popular (2589 stars)"
+        ],
+        "weaknesses": [
+          "README is thin and defers setup to an external documentation site, not self-contained",
+          "No visible docker-compose.yml in the provided structure, so Docker Compose startup is unverified",
+          "Task submission/status endpoints are not confirmed in the visible structure",
+          "Enterprise-scale scope (auth, RBAC, menus, logs, monitoring, plugins) is far larger than a small background-task demo",
+          "Large codebase (535 entries) may be hard to grasp within a 6-hour budget"
+        ],
+        "uncertainties": [
+          "Whether a dedicated task submission API endpoint exists",
+          "Whether a task status query endpoint exists",
+          "Whether Docker Compose is provided for startup",
+          "Contents of backend/app/task directory",
+          "Actual setup complexity and dependency footprint"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "GregaVrbancic/fastapi-celery",
+        "purpose_summary": "A minimal example project demonstrating FastAPI with Celery, using RabbitMQ as the task broker, Redis as the Celery result backend, and Flower for task monitoring, all orchestrated via Docker Compose.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (Task submission endpoint)",
+            "status": "satisfied",
+            "evidence": "README instructs navigating to http://localhost:8000/docs and executing a test API call; app/main.py exists as the FastAPI entrypoint, implying an endpoint that dispatches a Celery task."
+          },
+          {
+            "requirement": "任务状态查询接口 (Task status query endpoint)",
+            "status": "uncertain",
+            "evidence": "README mentions monitoring execution via console logs or Flower, but does not explicitly document a task-status query endpoint. app/main.py is only 860 bytes, so a status endpoint may or may not exist; evidence is insufficient to confirm."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "docker-compose.yml and docker-compose-services.yml are present, and README states 'docker-compose up' starts RabbitMQ, Redis, flower, and application/worker instances."
+          },
+          {
+            "requirement": "测试示例 (Test examples)",
+            "status": "uncertain",
+            "evidence": "README refers to executing a 'test API call' via /docs, but no test files or test directory appear in the repository structure. No automated test suite is evidenced."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 70,
+        "code_clarity": 75,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 85,
+        "maintenance_health": 70,
+        "strengths": [
+          "Very small, focused codebase (11 entries) that is easy to read end-to-end",
+          "Clear Docker Compose setup with separate services compose file",
+          "README provides both Docker and non-Docker run instructions",
+          "Includes Flower monitoring for observing Celery task execution",
+          "Well-suited to a 6-hour learning budget"
+        ],
+        "weaknesses": [
+          "Uses RabbitMQ as broker rather than Redis as broker; Redis is only the result backend, which partially diverges from the requested stack",
+          "No explicit evidence of a task status query endpoint",
+          "No automated test files present in the structure",
+          "No license specified",
+          "Minimal documentation beyond the README"
+        ],
+        "uncertainties": [
+          "Whether a task status query endpoint exists in app/main.py",
+          "Whether any test examples exist beyond the manual /docs call",
+          "Exact contents of app/main.py and worker files were not provided"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "asacristani/fastapi-rocket-boilerplate",
+        "purpose_summary": "A FastAPI backend boilerplate providing infrastructure (Docker Compose), async Celery with RabbitMQ broker and Redis backend, SQLModel ORM, Alembic migrations, OAuth2 auth, an admin dashboard, and pytest-based testing, intended as a starting point for building Python APIs.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (Task submission endpoint)",
+            "status": "uncertain",
+            "evidence": "Celery is configured (app/core/celery.py) and the README mentions async Celery with RabbitMQ/Redis, but the visible routes (app/services/user/routes.py) are user/auth routes. No explicit task-submission endpoint is visible in the provided structure or README."
+          },
+          {
+            "requirement": "任务状态查询接口 (Task status query endpoint)",
+            "status": "uncertain",
+            "evidence": "No route or README section describing a task status query endpoint is present in the evidence. Celery backend is Redis, but no API exposing task status is shown."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "docker-compose.yml exists and README documents 'make run' to build and run Docker services, with docs at localhost:8000/docs and RabbitMQ at localhost:15672."
+          },
+          {
+            "requirement": "测试示例 (Test examples)",
+            "status": "satisfied",
+            "evidence": "Extensive test tree exists (app/core/test/*, app/services/user/test/*), conftest.py, and README documents 'make test' with pytest and coverage, using in-memory SQLite."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 65,
+        "code_clarity": 75,
+        "documentation_quality": 70,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 60,
+        "strengths": [
+          "Clear layered structure (core/services) with separated models, schemas, routes, and tests",
+          "Docker Compose and Makefile provide a documented startup path",
+          "Includes real test suite with pytest and coverage",
+          "Covers FastAPI, Celery, Redis, RabbitMQ, SQLModel, Alembic in one project",
+          "MIT licensed and reasonably popular (493 stars)"
+        ],
+        "weaknesses": [
+          "No explicit task submission or task status query endpoints visible; Celery appears configured but not demonstrated as a background-task API",
+          "Uses RabbitMQ as broker in addition to Redis, adding a component beyond the requested stack",
+          "Boilerplate scope is broad (auth, admin, SDK generation) which may dilute focus on background tasks",
+          "Last push was 2024-05-04 with 17 open issues, suggesting limited recent maintenance",
+          "Setup requires Poetry, Node (for SDK), Trunk, and multiple Docker services, increasing complexity for a 6-hour budget"
+        ],
+        "uncertainties": [
+          "Whether any Celery task is actually defined and exposed via an API endpoint",
+          "Whether the task status can be queried through an HTTP endpoint",
+          "Actual runtime reliability of the Docker Compose setup given the stale last push",
+          "Whether the README's truncated 'Routes' section contains task-related examples"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "tedivm/robs_awesome_python_template",
+        "purpose_summary": "A CookieCutter project template that scaffolds production-ready Python projects with optional integrations including FastAPI, Celery, Redis-backed caching, SQLAlchemy, Docker, and CI/CD. It is a generator/template rather than a single runnable FastAPI+Celery+Redis background-task application.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (task submission API endpoint)",
+            "status": "uncertain",
+            "evidence": "The template includes FastAPI integration and a celery.py module plus docs/dev/api.md and docs/dev/celery.md, but the visible structure does not show a concrete task-submission endpoint. The generated project's actual routes are not visible in the evidence."
+          },
+          {
+            "requirement": "任务状态查询接口 (task status query API endpoint)",
+            "status": "uncertain",
+            "evidence": "No explicit task-status endpoint is visible in the file structure. Celery integration exists (celery.py, tests/test_celery.py, docs/dev/celery.md), but a status-query route cannot be confirmed from the evidence."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "The generated project contains compose.yaml, dockerfile.www, dockerfile.celery, docker/www/prestart.sh, docker/celery/prestart.sh, and docs/dev/docker.md, indicating Docker Compose-based startup is supported."
+          },
+          {
+            "requirement": "测试示例 (test examples)",
+            "status": "satisfied",
+            "evidence": "The generated project includes tests/conftest.py, tests/test_celery.py, tests/test_www.py, tests/services/test_cache.py, and others, plus pytest configuration and CI workflows."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 55,
+        "code_clarity": 70,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 80,
+        "strengths": [
+          "Extensive documentation including dedicated docs for celery, docker, api, testing, and settings",
+          "Includes Docker Compose, Dockerfiles, and prestart scripts for web and Celery services",
+          "Includes test examples including test_celery.py and test_www.py",
+          "Well-organized template structure with clear separation of concerns",
+          "Actively maintained with recent pushes and CI workflows"
+        ],
+        "weaknesses": [
+          "It is a CookieCutter template/generator, not a ready-to-run FastAPI+Celery+Redis background-task application",
+          "No concrete task submission or task status query endpoints are visible in the evidence",
+          "Requires generating a project first, adding setup complexity for a 6-hour learning budget",
+          "Template flexibility (optional components, cleanup hooks) may obscure the end-to-end architecture for a learner",
+          "Redis usage is implied via caching/Celery but not explicitly confirmed as the Celery broker in the evidence"
+        ],
+        "uncertainties": [
+          "Whether the generated project includes explicit task submission and status query API endpoints",
+          "Whether Redis is configured as the Celery broker/backend in the generated project",
+          "The actual content and runnability of the generated FastAPI routes",
+          "Whether the generated project runs end-to-end out of the box within the time budget"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "Kuzyashin/FastAPI_Tortoise_template",
+        "purpose_summary": "A FastAPI boilerplate/template project that bundles Tortoise ORM, Aerich migrations, JWT user auth, Celery, Redis/RabbitMQ, Flower, NGINX and Docker Compose files, intended as a starting scaffold for backend services.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (task submission endpoint)",
+            "status": "uncertain",
+            "evidence": "The repo has app/core/tasks.py (373 bytes) and app/core/celery_app.py, plus Celery config, but the README does not describe any API endpoint for submitting background tasks. The only visible routes are user/auth routes (app/applications/users/routes.py, app/core/auth/routers/login.py). No evidence of a task-submission HTTP endpoint."
+          },
+          {
+            "requirement": "任务状态查询接口 (task status query endpoint)",
+            "status": "not_satisfied",
+            "evidence": "No route file or README section references task status retrieval (e.g., AsyncResult / task id lookup). Flower is included for monitoring, but that is not an application-level status query API."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "Multiple compose files exist: docker-compose.local.yml, docker-compose.prod.full.yml, docker-compose.prod.slim.yml, plus swarm variants, backend.Dockerfile, celery.Dockerfile, flower.Dockerfile, and a Makefile. README mentions Docker-compose files."
+          },
+          {
+            "requirement": "测试示例 (test examples)",
+            "status": "not_satisfied",
+            "evidence": "The file structure contains no tests directory, no test_*.py files, and no pytest configuration. README does not mention testing."
+          }
+        ],
+        "requirement_match": 25,
+        "learning_value": 55,
+        "code_clarity": 65,
+        "documentation_quality": 30,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 55,
+        "strengths": [
+          "Well-organized modular structure (app/applications, app/core, app/settings) that demonstrates a Django-style FastAPI layout",
+          "Includes Celery, Redis, RabbitMQ, Flower and Docker Compose configurations, covering the requested stack components",
+          "Multiple Dockerfiles and compose variants show realistic deployment patterns",
+          "Reasonable star count (260) and non-archived status"
+        ],
+        "weaknesses": [
+          "No task submission or task status query API endpoints — the core of the user's learning goal is missing",
+          "No test examples or test directory at all",
+          "README is very short and lacks run instructions, endpoint documentation, or a walkthrough",
+          "Celery appears only as a minimal scaffold (tasks.py is 373 bytes) rather than a demonstrated background-task workflow",
+          "Heavy extra scope (JWT auth, email templates, NGINX, certbot, swarm) increases setup complexity beyond the 6-hour budget",
+          "Requires copying template.config.py to config.py and manual secret/env setup, which is not fully documented"
+        ],
+        "uncertainties": [
+          "Contents of app/core/tasks.py and app/core/celery_app.py are unknown; they may contain a sample task but no HTTP interface",
+          "Whether docker-compose.local.yml actually brings up a working stack without manual config edits",
+          "Whether any hidden test or example scripts exist outside the listed structure",
+          "License is NOASSERTION, which may affect reuse"
+        ],
+        "suitable_for_next_stage": false
+      },
+      {
+        "full_name": "iam-abbas/FastAPI-Production-Boilerplate",
+        "purpose_summary": "A production-oriented FastAPI boilerplate with layered architecture (models, repositories, controllers, API), including JWT auth, row-level access control, Redis caching, Celery background tasks, Alembic migrations, and a testing suite.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (Task submission endpoint)",
+            "status": "satisfied",
+            "evidence": "api/v1/tasks/tasks.py and app/controllers/task.py exist, plus app/schemas/requests/tasks.py, indicating task submission endpoints and request schemas."
+          },
+          {
+            "requirement": "任务状态查询接口 (Task status query endpoint)",
+            "status": "satisfied",
+            "evidence": "app/models/task.py and app/schemas/responses/tasks.py exist alongside api/v1/tasks/tasks.py, suggesting task records with status fields and response schemas for querying."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "docker-compose.yml present; README instructs 'docker-compose up -d' to run database and redis containers."
+          },
+          {
+            "requirement": "测试示例 (Test examples)",
+            "status": "satisfied",
+            "evidence": "A 'tests' directory exists in the structure and README lists 'Testing suite' as a feature."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 72,
+        "code_clarity": 78,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 55,
+        "strengths": [
+          "Covers the full FastAPI + Celery + Redis stack with task submission and status endpoints",
+          "Clear layered architecture (core/app/api) documented in README",
+          "Docker Compose provided for Redis and database",
+          "Includes tests directory and testing suite feature",
+          "Detailed README with installation and usage guidance"
+        ],
+        "weaknesses": [
+          "Boilerplate is feature-heavy (auth, RBAC, caching, migrations), which may overwhelm a 6-hour learning budget",
+          "Requires Poetry, Docker, Makefile, and Alembic migrations, adding setup complexity",
+          "Celery worker startup is not clearly documented in the README excerpt",
+          "Repository last pushed in 2023, suggesting limited recent maintenance"
+        ],
+        "uncertainties": [
+          "Exact contents of tests directory not visible (structure truncated)",
+          "Whether task status query endpoint is fully implemented vs. only schemas present",
+          "Celery worker configuration and run instructions not shown in README excerpt",
+          "Whether the project runs end-to-end without additional undocumented steps"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "nickatnight/cookiecutter-fastapi-backend",
+        "purpose_summary": "A Cookiecutter template that generates a deployable FastAPI backend scaffold with optional Celery + Redis async tasks, SQLModel/Postgres, Alembic migrations, Docker Compose, and CI/CD for PaaS deployment.",
+        "must_have_checks": [
+          {
+            "requirement": "任务提交接口 (task submission endpoint)",
+            "status": "uncertain",
+            "evidence": "The template includes Celery/Redis support (use_celery option) and src/core/tasks.py plus src/worker.py, but the visible route files (src/api/routes.py, src/api/v1/health.py) only show a health endpoint. No explicit task-submission API route is visible in the structure."
+          },
+          {
+            "requirement": "任务状态查询接口 (task status query endpoint)",
+            "status": "uncertain",
+            "evidence": "No route file or README section demonstrates a task-status query endpoint. The structure shows only health.py under api/v1, so status querying cannot be verified."
+          },
+          {
+            "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+            "status": "satisfied",
+            "evidence": "README lists Docker & Docker Compose integration; the generated project contains docker-compose.yml and ops/docker-compose.test.yml, plus a Makefile."
+          },
+          {
+            "requirement": "测试示例 (test examples)",
+            "status": "satisfied",
+            "evidence": "Generated project includes tests/test_routes.py; repo-level tests include test_bake_project.py, test_docker_build.sh, test_hooks.py, and a unit-tests.yml workflow."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 60,
+        "code_clarity": 70,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 70,
+        "strengths": [
+          "Covers the requested stack: FastAPI, Celery, Redis, Docker Compose",
+          "Layered architecture (api, core, db, models, repositories, schemas) is clear and educational",
+          "Includes tests and CI workflows",
+          "ReadTheDocs documentation and quickstart available",
+          "MIT licensed and actively updated"
+        ],
+        "weaknesses": [
+          "It is a Cookiecutter template, not a ready-to-run example app; user must generate a project first",
+          "No visible task-submission or task-status API endpoints in the structure",
+          "Celery is optional (default 'no'), so the async-task flow is not guaranteed",
+          "Adds extra complexity (Postgres, Alembic, SQLModel, Sentry, PaaS deploys) beyond the core learning goal"
+        ],
+        "uncertainties": [
+          "Whether generated projects include concrete task submission/status endpoints",
+          "Actual content of src/core/tasks.py and src/worker.py",
+          "How much of the Celery flow is demonstrated end-to-end in docs",
+          "Whether the 6-hour budget is enough to generate, configure, and understand the full scaffold"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "iam-abbas/FastAPI-Production-Boilerplate",
+          "base_score": 79.35,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "This repository is the strongest match for the stated learning goal because it is the only candidate whose supplied evidence clearly satisfies all four must-haves: task submission endpoint, task status query endpoint, Docker Compose startup, and test examples. It also uses the requested FastAPI + Celery + Redis stack and documents a layered architecture, making it suitable for studying how a backend task flow is organized from API route through controller, model/schema, background task, and Redis-backed infrastructure.",
+          "tradeoffs": [
+            "Feature-heavy for a 6-hour budget: auth, RBAC, caching, migrations, and boilerplate conventions add scope beyond background tasks.",
+            "Setup involves Poetry, Docker, Makefile, and Alembic, so initial reproduction may take longer than a minimal example.",
+            "Celery worker startup is not clearly documented in the provided README excerpt, so some runtime investigation is needed.",
+            "Repository was last pushed in 2023, indicating limited recent maintenance."
+          ],
+          "learning_path": [
+            "Read the README setup and architecture sections first, but timebox auth/RBAC/caching topics because they are not central to background tasks.",
+            "Start the Redis and database services using the documented Docker Compose path, then identify how the FastAPI app is launched.",
+            "Inspect api/v1/tasks/tasks.py together with app/schemas/requests/tasks.py and app/schemas/responses/tasks.py to understand task submission and status response shapes.",
+            "Trace app/controllers/task.py and app/models/task.py to see how task records are created, persisted, and queried.",
+            "Locate the Celery task registration/worker configuration in the project and run a worker, then submit a task and query its status through the API.",
+            "Review the tests directory to understand expected task API behavior, focusing on the background-task flow rather than unrelated boilerplate features."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "GregaVrbancic/fastapi-celery",
+          "base_score": 67.4,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "This is the most approachable candidate for a short learning session: it is small, focused, Docker Compose-based, and includes Flower for observing Celery execution. It is a useful fallback if the learner prioritizes a minimal runnable example over complete evidence for all must-haves. However, it is not ranked first because the supplied evidence does not confirm a task status query endpoint or automated test examples, and it uses RabbitMQ as the broker rather than Redis, which diverges from the requested FastAPI + Celery + Redis stack.",
+          "tradeoffs": [
+            "Uses RabbitMQ as the task broker, with Redis only as the Celery result backend, so it only partially matches the requested Redis-centered stack.",
+            "Task status query endpoint is uncertain from the evidence.",
+            "No automated test files are evidenced; only a manual test API call through /docs is mentioned.",
+            "No license is specified and documentation is minimal beyond the README."
+          ],
+          "learning_path": [
+            "Read the README and Docker Compose instructions first to understand the service topology.",
+            "Inspect app/main.py to identify the FastAPI entrypoint and the available task-related API behavior.",
+            "Run the Docker Compose setup and open /docs to submit a test task, then observe execution through logs and Flower.",
+            "Determine whether a programmatic task status query endpoint exists; if not, use Flower and logs to understand status tracking limitations.",
+            "Use this project as a quick Celery mental model, then compare its RabbitMQ-based flow with a Redis-broker design when reviewing the selected repository."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "asacristani/fastapi-rocket-boilerplate",
+          "base_score": 60.2,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "This repository has useful engineering structure, Docker Compose, a real pytest suite, and Celery/Redis configuration, but the evidence does not show explicit task submission or task status query endpoints. For a learning goal centered on building and understanding a FastAPI + Celery + Redis background-task API, that is a significant gap. It is better treated as a broader FastAPI boilerplate example than as the primary background-task learning project.",
+          "tradeoffs": [
+            "No explicit task submission or task status query endpoint is visible in the provided evidence.",
+            "Celery appears configured but not demonstrated as a background-task API flow.",
+            "Uses RabbitMQ as broker in addition to Redis, adding a component beyond the requested stack.",
+            "Boilerplate scope includes auth, admin dashboard, SDK generation, migrations, and multiple tools, which may exceed a 6-hour budget.",
+            "Last push was 2024-05-04 with open issues, suggesting limited recent maintenance."
+          ],
+          "learning_path": [
+            "Read the README and startup instructions first to understand the Docker Compose and Makefile workflow.",
+            "Inspect app/core/celery.py to understand how Celery is configured and which broker/backend is used.",
+            "Review the layered structure and test suite in app/core/test and app/services/user/test to learn boilerplate testing patterns.",
+            "Check whether any route actually exposes task submission or status behavior; do not assume Celery configuration alone satisfies the background-task API requirement.",
+            "If using this project, treat it as a study of broader FastAPI production structure rather than a focused FastAPI + Celery + Redis task example."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "iam-abbas/FastAPI-Production-Boilerplate",
+      "final_reason": "The deterministic score leader, iam-abbas/FastAPI-Production-Boilerplate, remains the best choice because the supplied evidence confirms all required must-haves, including both task endpoints, Docker Compose, and tests, and it uses the requested FastAPI + Celery + Redis stack. The minimal fastapi-celery repository is easier to reproduce in 6 hours and has better feasibility, but it has uncertain task status endpoint and test coverage and uses RabbitMQ as broker. The fastapi-rocket-boilerplate repository has good structure and tests but lacks visible task API endpoints. Therefore, the top-scored repository is also the best fit for the learning goal, with the practical caveat that the learner should timebox its broader boilerplate features and focus on the task API and Celery/Redis flow."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+          "description": "The task status query endpoint is marked 'satisfied' based on the presence of models/schemas and a tasks route file, but the evaluation itself lists 'whether task status query endpoint is fully implemented vs. only schemas present' as an uncertainty. The recommendation treats this must-have as confirmed, which slightly overstates the evidence. This is a warning rather than critical because the evidence is reasonably suggestive."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+          "description": "The recommendation states the project 'uses the requested FastAPI + Celery + Redis stack', but the evaluation does not explicitly confirm Redis is used as the Celery broker (only that Redis caching and Celery background tasks exist, and Docker Compose runs Redis). The stack alignment is plausible but not fully evidenced."
+        },
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+          "description": "The selected repository has notably lower reproduction_feasibility (62) and maintenance_health (55) than the alternative GregaVrbancic/fastapi-celery (85 and 70), and the user has a tight 6-hour budget with a preference for easy reproduction. The ranker acknowledges this tradeoff and justifies it via must-have completeness, which is a defensible user-specific reason, but the time-budget tension is a real risk worth flagging."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final recommendation is logically consistent: the top-ranked repository is the only candidate whose evaluation marks all four must-haves as satisfied, and the ranking matches the deterministic score order with no override. The ranker appropriately acknowledges the tradeoffs (feature-heaviness, setup complexity, stale maintenance) and provides a focused learning path that timeboxes unrelated boilerplate. Minor concerns: the task status endpoint and Redis-as-broker claims are slightly stronger than the underlying evidence strictly supports, and the chosen repo's lower reproduction feasibility conflicts somewhat with the 6-hour budget. These are warnings, not critical violations, so the recommendation passes. No re-evaluation or re-ranking is required."
+    },
+    "critic_feedback": "The final recommendation is logically consistent: the top-ranked repository is the only candidate whose evaluation marks all four must-haves as satisfied, and the ranking matches the deterministic score order with no override. The ranker appropriately acknowledges the tradeoffs (feature-heaviness, setup complexity, stale maintenance) and provides a focused learning path that timeboxes unrelated boilerplate. Minor concerns: the task status endpoint and Redis-as-broker claims are slightly stronger than the underlying evidence strictly supports, and the chosen repo's lower reproduction feasibility conflicts somewhat with the 6-hour budget. These are warnings, not critical violations, so the recommendation passes. No re-evaluation or re-ranking is required."
+  },
+  "quality_signals": {
+    "best_repository": "iam-abbas/FastAPI-Production-Boilerplate",
+    "top_repositories": [
+      "iam-abbas/FastAPI-Production-Boilerplate",
+      "GregaVrbancic/fastapi-celery",
+      "asacristani/fastapi-rocket-boilerplate"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 7,
+    "evaluation_count": 7,
+    "best_must_have_checks": [
+      {
+        "requirement": "任务提交接口 (Task submission endpoint)",
+        "status": "satisfied",
+        "evidence": "api/v1/tasks/tasks.py and app/controllers/task.py exist, plus app/schemas/requests/tasks.py, indicating task submission endpoints and request schemas."
+      },
+      {
+        "requirement": "任务状态查询接口 (Task status query endpoint)",
+        "status": "satisfied",
+        "evidence": "app/models/task.py and app/schemas/responses/tasks.py exist alongside api/v1/tasks/tasks.py, suggesting task records with status fields and response schemas for querying."
+      },
+      {
+        "requirement": "Docker Compose 启动方式 (Docker Compose startup)",
+        "status": "satisfied",
+        "evidence": "docker-compose.yml present; README instructs 'docker-compose up -d' to run database and redis containers."
+      },
+      {
+        "requirement": "测试示例 (Test examples)",
+        "status": "satisfied",
+        "evidence": "A 'tests' directory exists in the structure and README lists 'Testing suite' as a feature."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 3
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 72.802,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+            "description": "The task status query endpoint is marked 'satisfied' based on the presence of models/schemas and a tasks route file, but the evaluation itself lists 'whether task status query endpoint is fully implemented vs. only schemas present' as an uncertainty. The recommendation treats this must-have as confirmed, which slightly overstates the evidence. This is a warning rather than critical because the evidence is reasonably suggestive."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+            "description": "The recommendation states the project 'uses the requested FastAPI + Celery + Redis stack', but the evaluation does not explicitly confirm Redis is used as the Celery broker (only that Redis caching and Celery background tasks exist, and Docker Compose runs Redis). The stack alignment is plausible but not fully evidenced."
+          },
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "iam-abbas/FastAPI-Production-Boilerplate",
+            "description": "The selected repository has notably lower reproduction_feasibility (62) and maintenance_health (55) than the alternative GregaVrbancic/fastapi-celery (85 and 70), and the user has a tight 6-hour budget with a preference for easy reproduction. The ranker acknowledges this tradeoff and justifies it via must-have completeness, which is a defensible user-specific reason, but the time-budget tension is a real risk worth flagging."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final recommendation is logically consistent: the top-ranked repository is the only candidate whose evaluation marks all four must-haves as satisfied, and the ranking matches the deterministic score order with no override. The ranker appropriately acknowledges the tradeoffs (feature-heaviness, setup complexity, stale maintenance) and provides a focused learning path that timeboxes unrelated boilerplate. Minor concerns: the task status endpoint and Redis-as-broker claims are slightly stronger than the underlying evidence strictly supports, and the chosen repo's lower reproduction feasibility conflicts somewhat with the 6-hour budget. These are warnings, not critical violations, so the recommendation passes. No re-evaluation or re-ranking is required."
+      }
+    }
+  ],
+  "case_id": "07_fastapi_background_tasks",
+  "title": "FastAPI 后台任务工程",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15058-3b84-7343-910c-6a7d2ad242ca",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15058-3b84-7343-910c-6a7d2ad242ca?poll=true",
+    "metrics": {
+      "span_count": 85,
+      "llm_calls": 13,
+      "github_tool_calls": 24,
+      "input_tokens": 59405,
+      "output_tokens": 11897,
+      "total_tokens": 71302,
+      "cost_usd": "0.014299062",
+      "llm_usage_coverage": {
+        "calls": 13,
+        "with_total_tokens": 13,
+        "with_cost": 13
+      },
+      "root_reported_tokens": 71302,
+      "root_reported_cost_usd": "0.014299062",
+      "root_latency_s": 72.77845
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "d65e30a66cfb4b4c932904baf7a2dc0d"
+    },
+    "nodes": [
+      {
+        "id": "01a15058-3bc2-7972-a590-d782f6a985a9",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:48:42.178278+00:00",
+        "end_time": "2026-10-18T18:48:44.852702+00:00",
+        "latency_s": 2.674424
+      },
+      {
+        "id": "01a15058-4635-77c0-92bd-ce778ad51930",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:48:44.853707+00:00",
+        "end_time": "2026-10-18T18:49:04.863683+00:00",
+        "latency_s": 20.009976
+      },
+      {
+        "id": "01a15058-9461-7d73-bb68-ff2bb6ba66c3",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:49:04.864684+00:00",
+        "end_time": "2026-10-18T18:49:39.550687+00:00",
+        "latency_s": 34.686003
+      },
+      {
+        "id": "01a15059-1be1-74a2-ae00-cc91536d7767",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:49:39.552685+00:00",
+        "end_time": "2026-10-18T18:49:51.678661+00:00",
+        "latency_s": 12.125976
+      },
+      {
+        "id": "01a15059-4b42-7b01-981b-3c54c60f5098",
+        "name": "critic",
+        "start_time": "2026-10-18T18:49:51.681666+00:00",
+        "end_time": "2026-10-18T18:49:54.891771+00:00",
+        "latency_s": 3.210105
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15059-4b4f-7ae3-9cba-f364625135f2",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 3.187632,
+        "input_tokens": 4593,
+        "output_tokens": 512,
+        "total_tokens": 5105,
+        "cost_usd": "0.00090207",
+        "has_error": false
+      },
+      {
+        "id": "01a15059-1beb-7e90-9a4d-bfd5d86d3e03",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 12.111324,
+        "input_tokens": 3141,
+        "output_tokens": 2458,
+        "total_tokens": 5599,
+        "cost_usd": "0.00185187",
+        "has_error": false
+      },
+      {
+        "id": "01a15059-10a7-7512-9e41-a7d09cf644c2",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.866764,
+        "input_tokens": 7751,
+        "output_tokens": 648,
+        "total_tokens": 8399,
+        "cost_usd": "0.001382106",
+        "has_error": false
+      },
+      {
+        "id": "01a15059-0e5e-7151-8318-977314252662",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.577657,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15059-0c06-7810-9d73-0afbabfba1c6",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.598681,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15059-09c9-7690-8ece-a4cd0df43d0e",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.571653,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-ff24-7742-a7b5-3dd445e6a846",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.718933,
+        "input_tokens": 6933,
+        "output_tokens": 587,
+        "total_tokens": 7520,
+        "cost_usd": "0.001222806",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-fd1a-7031-9871-f680318a28a1",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.516649,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-fac7-77e2-b8de-555e1e7da617",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.594529,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-f8ab-76d0-a4e3-0f7bd047a8f9",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.539327,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-e89a-7972-91ea-253f157137a6",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 4.108953,
+        "input_tokens": 4403,
+        "output_tokens": 757,
+        "total_tokens": 5160,
+        "cost_usd": "0.000945306",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-e693-7ad0-a6a3-d9df1f9ef4dc",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.514105,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-e42a-73c2-8cf8-eff1cd732cab",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.617444,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-e22a-79f3-a08b-8ede81a44d28",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.511697,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-d44b-77b0-92f5-a4a814040bff",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.546594,
+        "input_tokens": 7788,
+        "output_tokens": 712,
+        "total_tokens": 8500,
+        "cost_usd": "0.001426056",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-d246-7580-a7d2-5f791b0eea9f",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.509551,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-cfb0-70f2-b643-062f0aeabdc9",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.662105,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-cd95-7dc0-910f-dec5fecacb0f",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.537672,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-bf50-74d0-b7a2-41e788d1f104",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.647752,
+        "input_tokens": 7002,
+        "output_tokens": 707,
+        "total_tokens": 7709,
+        "cost_usd": "0.001305156",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-bd34-70a0-9375-987790a329db",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.533677,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-bb2e-73f0-8612-b938fa0c5e98",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.518102,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-b91b-70a2-b14b-6bd20c0b1ad9",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.530847,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-aeae-7671-bec9-766927ae59dd",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.666163,
+        "input_tokens": 2490,
+        "output_tokens": 587,
+        "total_tokens": 3077,
+        "cost_usd": "0.000556356",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-acaf-76a3-8fc9-9a14399513da",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.507639,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-aaa1-7352-97b0-5467e80f11be",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.525482,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-a8a1-7891-980d-c033a2cd2529",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.512613,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-9c37-7e81-a025-571483ab9bd4",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.172383,
+        "input_tokens": 6827,
+        "output_tokens": 614,
+        "total_tokens": 7441,
+        "cost_usd": "0.001241922",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-98f4-7992-aed7-86a00447cf53",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.82831,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-96b9-7642-8844-b913e4a5324f",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.570214,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-9462-7a50-85ad-395936b652d7",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.598316,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-668e-75f2-90be-4ac20c4c93de",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 11.723221,
+        "input_tokens": 3118,
+        "output_tokens": 2546,
+        "total_tokens": 5664,
+        "cost_usd": "0.001938852",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-4ef9-75e2-9b0b-ce29ef636144",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 6.027387,
+        "input_tokens": 3314,
+        "output_tokens": 1117,
+        "total_tokens": 4431,
+        "cost_usd": "0.001016772",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-4b8f-7761-b47e-b4ed8155c4a1",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.779943,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-4b8d-70c0-bc19-3121cbd94682",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.552019,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-4b8c-72f3-88a6-4e6bba1b74b8",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.875225,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15058-463a-70a3-8232-7ad40abe209d",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.356246,
+        "input_tokens": 835,
+        "output_tokens": 204,
+        "total_tokens": 1039,
+        "cost_usd": "0.000191202",
+        "has_error": false
+      },
+      {
+        "id": "01a15058-3c6c-7dc0-a6c6-1b33fa00fd41",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 2.500497,
+        "input_tokens": 1210,
+        "output_tokens": 448,
+        "total_tokens": 1658,
+        "cost_usd": "0.000318588",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "nickatnight/cookiecutter-fastapi-backend",
+          "max_entries": 120
+        },
+        "input_sha256": "8cc16db552f43525711da22c65be929dee9e236f5914a4d144b9e68add3bb73d",
+        "output_sha256": "e81bd4a2c466b36ce61989ef0e1be22dd254dd95dc3179ddeaecd7a01ef7cb86"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "nickatnight/cookiecutter-fastapi-backend"
+        },
+        "input_sha256": "897dc934dfd03e3370a8e1d42d089aec9dbf9838efc6df6a88cca7c381bb54fd",
+        "output_sha256": "cc931ac0adb5322c8599b9898f153d8aa811d972ee36ded8ded859fcf9f0e73c"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "nickatnight/cookiecutter-fastapi-backend"
+        },
+        "input_sha256": "897dc934dfd03e3370a8e1d42d089aec9dbf9838efc6df6a88cca7c381bb54fd",
+        "output_sha256": "ddc30aec54991cd76ea03b96b7df59b82ed6122a58f691589409a166d603eca5"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "iam-abbas/FastAPI-Production-Boilerplate",
+          "max_entries": 120
+        },
+        "input_sha256": "a11231c4ec6ed95c9965fbcb079b7519adf3d589dcd8db93f17e6900ae57ff17",
+        "output_sha256": "7d44d30a1e80a904f33ea79269a4bae4b0ea446ce19c93975722c0b4e203b4ba"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "iam-abbas/FastAPI-Production-Boilerplate"
+        },
+        "input_sha256": "46a7d7f3cf1ea59a5d5c82707e8723de6f108b03517861679f6e185e4829ea3c",
+        "output_sha256": "91d320c00d9f6161f54b91cc256e4acc6078a40ced65e4312704ca176d0ab9c4"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "iam-abbas/FastAPI-Production-Boilerplate"
+        },
+        "input_sha256": "46a7d7f3cf1ea59a5d5c82707e8723de6f108b03517861679f6e185e4829ea3c",
+        "output_sha256": "0cfca7693c96bd7d442db8a11647ba82f8291c8428a0051174f9ae9d52205418"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "Kuzyashin/FastAPI_Tortoise_template",
+          "max_entries": 120
+        },
+        "input_sha256": "7a03a91eb8bc94e55c5772d8d8d92e3abefbfd3587ad9bc2dfc6772f43cb1aa9",
+        "output_sha256": "30e420655e253db4e3388ecf974f66429ef72cf04d8b9a5d8a1acf543468721c"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "Kuzyashin/FastAPI_Tortoise_template"
+        },
+        "input_sha256": "26943e3ca165c8adb92f98afc0b4449390fea3dc10ddf53840e14da77bed2787",
+        "output_sha256": "b13834e82353932a3cde76e11be6cffbf5a93822631405793cb71ff961c2006a"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "Kuzyashin/FastAPI_Tortoise_template"
+        },
+        "input_sha256": "26943e3ca165c8adb92f98afc0b4449390fea3dc10ddf53840e14da77bed2787",
+        "output_sha256": "fec3655b1cd380988b84e5a2b8b445a04cc2f6cbdf947cc7cd984e8926ef5c03"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "tedivm/robs_awesome_python_template",
+          "max_entries": 120
+        },
+        "input_sha256": "c727c3dcb576fef1f551c530e9c5134f3eedc974f45ff03fb15fe0e380db04a8",
+        "output_sha256": "6b525e9c5c4befdd093e19880a3528850e832a1568ac80b5bace1f45905680bf"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "tedivm/robs_awesome_python_template"
+        },
+        "input_sha256": "be356bf4f5b5a43f31df3152b82645596199e7535ae4d01a416e11aaa7bdce89",
+        "output_sha256": "bb74561fbb1af7af60501ef8f0c533b96a969cfe5ec64ceb2dae2b15f57d5a26"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "tedivm/robs_awesome_python_template"
+        },
+        "input_sha256": "be356bf4f5b5a43f31df3152b82645596199e7535ae4d01a416e11aaa7bdce89",
+        "output_sha256": "1578412ee7a0f1bb598c7cb1d5f48bda66077df637bf17cc107cfb2202dd4b2e"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "asacristani/fastapi-rocket-boilerplate",
+          "max_entries": 120
+        },
+        "input_sha256": "7c5410c58e610b9a08d4b24e89d01960f50ba739859ec52d80f8e5a3a5df53a1",
+        "output_sha256": "6d5dc13573b8bb566473e5b2cda44506a541ecdec5c594e5ea80296b7d9a18f4"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "asacristani/fastapi-rocket-boilerplate"
+        },
+        "input_sha256": "6933c5af5c1691e6e610c144abd7ce02f8be57b6ab0d06f9aafb120b28c901fa",
+        "output_sha256": "411542acf9c2304cc584e5c9d2c07a7a0225d7ab520574c767695835aacbb4df"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "asacristani/fastapi-rocket-boilerplate"
+        },
+        "input_sha256": "6933c5af5c1691e6e610c144abd7ce02f8be57b6ab0d06f9aafb120b28c901fa",
+        "output_sha256": "46e5255006ad0d38787c50ca8350b8e5680095c73952d5ab2673871568c3a5d0"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "GregaVrbancic/fastapi-celery",
+          "max_entries": 120
+        },
+        "input_sha256": "69a06f638247021367a95e42797c5a295d5f545c3544f82635f6451983b4b53a",
+        "output_sha256": "35523d3d87186fc0c8d0a760afd6adda9b96534c0830852eccb2492077ca6140"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "GregaVrbancic/fastapi-celery"
+        },
+        "input_sha256": "b6c62329c382e431ce3ff8655d2022e35ed5285bd38f94bed9dfa9a3347f0532",
+        "output_sha256": "0a7e5cb4323aabe324a299ba7bb45de681dd4740e10c1ac6ad8c1eef58c8dd51"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "GregaVrbancic/fastapi-celery"
+        },
+        "input_sha256": "b6c62329c382e431ce3ff8655d2022e35ed5285bd38f94bed9dfa9a3347f0532",
+        "output_sha256": "bd7ca788637d1d1a06fc6a9af9a71c236109cc650852008a5c8c9d2f24892950"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "fastapi-practices/fastapi-best-architecture",
+          "max_entries": 120
+        },
+        "input_sha256": "96f34829ca10bdfdf6b7f885cb403be7215b3fabf9b751cdb6cedb85b5169b87",
+        "output_sha256": "78c694c1b07fa3634c72b82d0cbf0dc836f5f5f11505abff61107f0d35d60300"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "fastapi-practices/fastapi-best-architecture"
+        },
+        "input_sha256": "dfc601a5ae741535348b0737ef1acf5a17154d89c7f3c5bb7d2211612e5ab5c3",
+        "output_sha256": "6885d111744c1c1857ee0adfde285402af8531cb9a99a2a9524c3ecc20e4c6bd"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "fastapi-practices/fastapi-best-architecture"
+        },
+        "input_sha256": "dfc601a5ae741535348b0737ef1acf5a17154d89c7f3c5bb7d2211612e5ab5c3",
+        "output_sha256": "19752c9f0b5855224921c57dc3ef21da1a275f73a6048c27374a621f9aac34ed"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "topic:fastapi topic:celery language:Python"
+        },
+        "input_sha256": "344c622db04d9b834231886848dbce2b690a6aea9e64068d390ce16c53136378",
+        "output_sha256": "dca686a342816c8eea0d5e74fbef5285bba2aa70d4e4508e570d98534ceae3d1"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "fastapi celery worker redis queue example template language:Python stars:>50"
+        },
+        "input_sha256": "8b2ae10dfb537cc9f2c8d771ce6c3a63d9af5265d51720260cf1bd64ef9a6a05",
+        "output_sha256": "c1d8b2aa52569ebac2aae9b1ff7db3037cd3de64246e81254e4bc0225a566df6"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "fastapi celery redis docker-compose background tasks in:name,description,readme language:Python"
+        },
+        "input_sha256": "e6359025621eccebd6774a7b4728a3fb63d22693a64bf481e79df87d8f4ef149",
+        "output_sha256": "bbcbaf2806927fd76a1ffc0992cc413ecf72e1413547ee0bdc8a81ea635c0802"
+      }
+    ]
+  }
+}

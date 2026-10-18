@@ -1,0 +1,278 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:41:41.575151+08:00",
+  "finished_at": "2026-10-19T02:42:27.414642+08:00",
+  "business_run_id": "0798c18b4b9c4589b71be5ed15e298b3",
+  "workflow_wall_time_s": 23.847,
+  "collection_wall_time_s": 45.839,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "failed",
+    "retry_count": 0,
+    "critic_passed": null,
+    "outcome": "failed"
+  },
+  "terminal_event": "run.failed",
+  "terminal_payload": {
+    "error_type": "ValueError",
+    "message": "evaluations must exist before ranking."
+  },
+  "state": {
+    "requirements": {
+      "topic": "本地知识库问答 RAG 项目",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "RAG",
+        "Ollama",
+        "本地大语言模型"
+      ],
+      "difficulty": "any",
+      "must_have": [
+        "Python RAG 项目",
+        "支持本地知识库问答",
+        "支持导入中文 PDF 或 Markdown 文档",
+        "回答中提供来源或引用",
+        "支持本地模型，例如 Ollama",
+        "不依赖付费云端 LLM API",
+        "可在普通 CPU 和 Windows 环境运行",
+        "不要求 GPU 集群"
+      ],
+      "nice_to_have": [
+        "有中文说明或中文文档",
+        "复现步骤简单，可在一天内完成",
+        "对 Windows 环境和 CPU 运行有明确说明"
+      ],
+      "exclusions": [
+        "依赖付费云端 LLM API",
+        "必须使用 GPU 集群",
+        "仅支持云端 LLM 的方案"
+      ],
+      "learning_goal": "学习并复现本地知识库问答/RAG 项目，作为普通 CPU 和 Windows 环境下可运行、带来源引用的本地 RAG 参考实现",
+      "time_budget_in_hours": 8
+    },
+    "candidates": {
+      "search_queries": [
+        "RAG Ollama local knowledge base question answering language:Python stars:>200",
+        "本地知识库 问答 RAG 大模型 中文 PDF language:Python",
+        "RAG citations sources local LLM CPU Windows language:Python topic:rag",
+        "rag ollama"
+      ],
+      "candidates": []
+    },
+    "evaluations": []
+  },
+  "quality_signals": {
+    "best_repository": null,
+    "top_repositories": [],
+    "best_in_top": null,
+    "unique_top_repositories": null,
+    "candidate_count": 0,
+    "evaluation_count": 0,
+    "best_must_have_checks": null,
+    "critic_issue_counts": {},
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [],
+  "case_id": "02_local_chinese_rag",
+  "title": "中文文档与本地离线 RAG",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15051-d0d9-78e3-9a3e-2d53f9e252c1",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15051-d0d9-78e3-9a3e-2d53f9e252c1?poll=true",
+    "metrics": {
+      "span_count": 29,
+      "llm_calls": 5,
+      "github_tool_calls": 3,
+      "input_tokens": 5954,
+      "output_tokens": 4235,
+      "total_tokens": 10189,
+      "cost_usd": "0.002831988",
+      "llm_usage_coverage": {
+        "calls": 5,
+        "with_total_tokens": 5,
+        "with_cost": 5
+      },
+      "root_reported_tokens": 10189,
+      "root_reported_cost_usd": "0.002831988",
+      "root_latency_s": 23.829842
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": null,
+      "environment": "baseline",
+      "execution_status": "failed",
+      "model_name": "deepseek-flash",
+      "outcome": "failed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "0798c18b4b9c4589b71be5ed15e298b3"
+    },
+    "nodes": [
+      {
+        "id": "01a15051-d113-7ea3-8416-30e80709faf0",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:41:41.650778+00:00",
+        "end_time": "2026-10-18T18:41:50.633265+00:00",
+        "latency_s": 8.982487
+      },
+      {
+        "id": "01a15051-f42a-7b20-bd05-a1a4343e2bdc",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:41:50.634274+00:00",
+        "end_time": "2026-10-18T18:42:05.414303+00:00",
+        "latency_s": 14.780029
+      },
+      {
+        "id": "01a15052-2de7-7bb0-ae85-ffdc18e9df99",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:42:05.415301+00:00",
+        "end_time": "2026-10-18T18:42:05.416300+00:00",
+        "latency_s": 0.000999
+      },
+      {
+        "id": "01a15052-2de9-7652-bf25-48cacf2850cf",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:42:05.416300+00:00",
+        "end_time": "2026-10-18T18:42:05.418810+00:00",
+        "latency_s": 0.00251
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15052-28e8-7f22-9a8c-451923ad0df9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.274838,
+        "input_tokens": 968,
+        "output_tokens": 175,
+        "total_tokens": 1143,
+        "cost_usd": "0.000193752",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-0808-7d93-a30f-cd82aad0f453",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 8.404728,
+        "input_tokens": 1729,
+        "output_tokens": 1390,
+        "total_tokens": 3119,
+        "cost_usd": "0.000867558",
+        "has_error": false
+      },
+      {
+        "id": "01a15051-fce8-79c2-aaec-b022f9e81aa9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 2.840897,
+        "input_tokens": 1148,
+        "output_tokens": 553,
+        "total_tokens": 1701,
+        "cost_usd": "0.000372288",
+        "has_error": false
+      },
+      {
+        "id": "01a15051-f934-7831-8d93-abdb4cdd04ed",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.940478,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15051-f931-7a00-9e7d-075408b63b65",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.521959,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15051-f930-75d1-9db4-609d70684c02",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.950765,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15051-f42f-7423-949a-850f4434871b",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.2727,
+        "input_tokens": 897,
+        "output_tokens": 220,
+        "total_tokens": 1117,
+        "cost_usd": "0.000210102",
+        "has_error": false
+      },
+      {
+        "id": "01a15051-d1be-7bf3-aa91-4bbc04af9961",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 8.807869,
+        "input_tokens": 1212,
+        "output_tokens": 1897,
+        "total_tokens": 3109,
+        "cost_usd": "0.001188288",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "RAG citations sources local LLM CPU Windows language:Python topic:rag"
+        },
+        "input_sha256": "a3e2769460b0201ce781ceac462d5ac14df69a60a2d1e93172dc2e236724ee77",
+        "output_sha256": "b7cd4d78effbf30317a614baaf65f1af54731d981ea37609f4f7df8647d4d08b"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "本地知识库 问答 RAG 大模型 中文 PDF language:Python"
+        },
+        "input_sha256": "6bf483011365ef4078ea01dbb3315029fc3f7e50cd8ad9e3f5bd851d060520d3",
+        "output_sha256": "4a3f62059c9a44cb39d004f115109ace25d9218d7b7d431b4de7f4387af00f55"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "RAG Ollama local knowledge base question answering language:Python stars:>200"
+        },
+        "input_sha256": "46540b9175469e01434dedc060995afa71418cc24e35bf72318d81d1211fb5d8",
+        "output_sha256": "07e413ed7b28570ea200b5f38be3c11e14d40e789b4a890bdcd2e1f233e5a876"
+      }
+    ]
+  }
+}

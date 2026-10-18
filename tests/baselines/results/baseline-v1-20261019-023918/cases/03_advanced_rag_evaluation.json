@@ -1,0 +1,1382 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:42:31.481774+08:00",
+  "finished_at": "2026-10-19T02:44:10.755631+08:00",
+  "business_run_id": "2a558284b76d4e4ebe3d92a49e30024f",
+  "workflow_wall_time_s": 78.258,
+  "collection_wall_time_s": 99.272,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "RAG implementation for studying retrieval quality",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "RAG",
+        "lexical retrieval",
+        "vector retrieval",
+        "reranking",
+        "evaluation"
+      ],
+      "difficulty": "advanced",
+      "must_have": [
+        "demonstrates both lexical retrieval and vector retrieval",
+        "includes reranking",
+        "includes an evaluation script or dataset",
+        "exposes retrieval logic rather than only wrapping a hosted chatbot API"
+      ],
+      "nice_to_have": [
+        "source citations",
+        "clear separation between indexing, retrieval, and generation",
+        "small reproducible example suitable for a two-day study"
+      ],
+      "exclusions": [
+        "projects that only wrap a hosted chatbot API without exposing retrieval logic"
+      ],
+      "learning_goal": "Study retrieval quality and reproduce a small RAG example",
+      "time_budget_in_hours": 16
+    },
+    "candidates": {
+      "search_queries": [
+        "hybrid retrieval reranking RAG python in:name,description,readme",
+        "RAG evaluation retrieval metrics BM25 vector search python",
+        "hybrid search BM25 dense retrieval reranker citations python RAG"
+      ],
+      "candidates": [
+        {
+          "full_name": "weiwill88/Local_Pdf_Chat_RAG",
+          "reason": "Description explicitly mentions a transparent Python RAG reference with FAISS + BM25 hybrid retrieval, reranking, and UI/API layers, making it highly relevant for studying retrieval quality."
+        },
+        {
+          "full_name": "AsgarD-15/advanced-rag-chatbot-",
+          "reason": "Description explicitly lists BM25 + vector hybrid search, cross-encoder re-ranking, cited answers, and RAGAS evaluation metrics, closely matching the requested retrieval and evaluation requirements."
+        },
+        {
+          "full_name": "NVIDIA-AI-Blueprints/rag",
+          "reason": "A Python RAG reference blueprint that likely exposes a full retrieval-augmented pipeline worth inspecting for modular indexing, retrieval, and generation structure."
+        },
+        {
+          "full_name": "HKUDS/LightRAG",
+          "reason": "A Python RAG implementation with active development and a retrieval-centric design; worth checking whether its retrieval and evaluation components can inform a small study setup."
+        },
+        {
+          "full_name": "PromtEngineer/localGPT",
+          "reason": "A local document RAG project in Python that may provide a reproducible example of document ingestion and retrieval logic without relying only on a hosted chatbot API."
+        },
+        {
+          "full_name": "coleam00/mcp-crawl4ai-rag",
+          "reason": "A Python RAG project involving crawling and retrieval capabilities; worth inspecting whether it separates indexing/retrieval logic and includes usable evaluation hooks."
+        },
+        {
+          "full_name": "DataTalksClub/llm-zoomcamp",
+          "reason": "An educational LLM course repository likely containing RAG examples and evaluation material, useful as a source of small reproducible study exercises even though its primary language is Jupyter Notebook."
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "weiwill88/Local_Pdf_Chat_RAG",
+        "purpose_summary": "An educational, transparent Python RAG reference implementation that splits document loading, chunking, embeddings, FAISS vector retrieval, BM25 lexical retrieval, hybrid retrieval, reranking, and answer generation into readable modules, with Gradio and FastAPI interfaces.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README pipeline diagram shows FAISS dense retrieval and BM25 keyword retrieval feeding into hybrid retrieval; structure includes core/vector_store.py (FAISS index) and core/bm25_index.py (BM25 index), plus core/retriever.py for hybrid retrieval."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README lists 'Optional reranking: supports a CrossEncoder or model-based relevance scoring' and the pipeline includes a Reranking stage; core/reranker.py exists in the structure."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "uncertain",
+            "evidence": "The repository has tests (tests/test_retrieval.py, etc.) and CI, but no dedicated retrieval-quality evaluation script or evaluation dataset is visible in the structure. The README explicitly notes that evaluation should be added before production use, suggesting it is not included."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Retrieval logic is implemented in local modules: core/retriever.py, core/vector_store.py, core/bm25_index.py, core/reranker.py, core/embeddings.py. The README emphasizes an 'inspectable pipeline' with replaceable modules rather than a hosted chatbot wrapper."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 85,
+        "code_clarity": 82,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 70,
+        "maintenance_health": 80,
+        "strengths": [
+          "Clear modular separation of indexing, retrieval, reranking, and generation",
+          "Explicit hybrid retrieval combining FAISS vector search and BM25 lexical search",
+          "Dedicated reranker module with CrossEncoder support",
+          "Extensive documentation including an openwiki with architecture, retrieval, and testing guides",
+          "Credential-free tests and CI, MIT license",
+          "Active maintenance with recent commits, releases, and issue handling"
+        ],
+        "weaknesses": [
+          "No clear dedicated retrieval-quality evaluation script or benchmark dataset",
+          "Requires configuring an external model backend (Ollama, SiliconFlow, or OpenAI-compatible API) which adds setup friction",
+          "Large Gradio UI file (rag_demo.py ~23KB) and multiple interfaces increase surface area for a two-day study",
+          "README itself states evaluation is not yet included, which is central to the user's learning goal"
+        ],
+        "uncertainties": [
+          "Whether tests/test_retrieval.py contains any retrieval-quality metrics or only functional assertions",
+          "Whether any evaluation dataset exists outside the visible structure",
+          "Actual setup time for model backend configuration within the 16-hour budget"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "AsgarD-15/advanced-rag-chatbot-",
+        "purpose_summary": "A production-oriented RAG chatbot that combines BM25 lexical search with Qdrant vector search via reciprocal rank fusion, applies cross-encoder reranking and context compression, returns cited answers, and includes RAGAS-style evaluation metrics, exposed through a FastAPI backend and Streamlit UI.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README describes hybrid search combining BM25 keyword search (rank-bm25) with dense vector similarity in Qdrant via Reciprocal Rank Fusion; architecture diagram shows separate 'BM25 Index (Keyword)' and 'Qdrant (Vector Store)' components; app/vector_store.py and app/embeddings.py exist in the structure."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "Dedicated app/reranker.py module plus README references to cross-encoder/ms-marco-MiniLM-L-6-v2 re-scoring retrieved chunks; query API exposes a use_reranker flag and metadata reports num_chunks_after_rerank."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "satisfied",
+            "evidence": "app/evaluation.py (6980 bytes) implements RAGAS-style metrics (faithfulness, answer relevancy, context precision, context recall); a POST /evaluate endpoint is documented. No standalone evaluation dataset file is visible in the structure, so the dataset aspect is only partially evidenced."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Retrieval is implemented in-repo across app/rag_pipeline.py, app/vector_store.py, app/reranker.py, app/chunker.py, and app/embeddings.py; OpenAI is used only for embeddings/generation, not as a hosted retrieval service."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 78,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 30,
+        "strengths": [
+          "Covers the full target stack: BM25 lexical retrieval, vector retrieval, cross-encoder reranking, and RAGAS-style evaluation",
+          "Clear modular separation (loader, chunker, embeddings, vector_store, reranker, rag_pipeline, evaluation, api) that maps well to indexing/retrieval/generation stages",
+          "Includes source citations with chunk metadata and scores, matching a nice-to-have",
+          "Docker Compose and .env.example lower setup friction; tests exist for chunker and pipeline",
+          "README provides architecture diagram, endpoint table, and example request/response"
+        ],
+        "weaknesses": [
+          "No visible evaluation dataset or golden QA file in the repository structure, so evaluation reproducibility is limited",
+          "Requires an OpenAI API key and Qdrant (Docker), adding external dependency and cost for a 16-hour study",
+          "Repository is very small (26 KB) with zero stars/forks and no license file despite MIT badge",
+          "Multi-query expansion, context compression, FastAPI, and Streamlit add surface area beyond the core retrieval study goal"
+        ],
+        "uncertainties": [
+          "Actual code quality and correctness of hybrid fusion, reranking, and evaluation metrics cannot be verified from structure alone",
+          "Whether the evaluation module can run without live LLM calls (LLM-as-judge) is unclear",
+          "README appears truncated mid-section ('## Eval'), so full evaluation documentation is unknown",
+          "Maintenance signals are ambiguous: created and pushed dates are close together with a later update timestamp, suggesting minimal ongoing activity"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "NVIDIA-AI-Blueprints/rag",
+        "purpose_summary": "NVIDIA's reference RAG blueprint: an enterprise-grade, decomposable RAG pipeline built on NVIDIA NIM microservices, with hybrid (dense+sparse) retrieval, reranking, agentic RAG, and RAGAS-based evaluation, deployable via Docker Compose or Kubernetes.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README 'Search and Retrieval' lists 'Hybrid search with dense and sparse search', indicating both vector (dense) and lexical/sparse retrieval are implemented."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README lists 'Reranking to further improve accuracy' and references the llama-nemotron-rerank-1b-v2 NIM reranking model."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "satisfied",
+            "evidence": "README 'Evaluation' section lists 'Evaluation scripts (RAGAS framework)'; repo also contains a data/ directory with sample multimodal documents and a dataset.zip."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Repository is a full open-source blueprint with ingestion server, RAG server, pluggable vector DB, hybrid search, and reranking components; it is not merely a chatbot API wrapper. However, core retrieval models are hosted NIM microservices."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 70,
+        "documentation_quality": 82,
+        "reproduction_feasibility": 35,
+        "maintenance_health": 80,
+        "strengths": [
+          "Covers the full RAG stack including hybrid dense+sparse retrieval, reranking, and RAGAS evaluation",
+          "Clear separation of ingestion, retrieval, and generation into distinct services",
+          "Extensive documentation, deployment options (Docker Compose, Kubernetes), and sample data",
+          "Actively maintained with recent pushes and CI pipelines"
+        ],
+        "weaknesses": [
+          "Heavy reliance on NVIDIA NIM microservices and GPU infrastructure, making local reproduction costly and complex",
+          "Large, enterprise-scale codebase (982 entries) with many components, far beyond a small two-day study example",
+          "Retrieval models are hosted/GPU-accelerated services, so the actual retrieval algorithms are not fully exposed in-repo",
+          "Setup requires Docker, GPU drivers, and multiple microservices, raising the barrier significantly"
+        ],
+        "uncertainties": [
+          "Exact contents and runnability of the RAGAS evaluation scripts are not shown in the truncated evidence",
+          "Whether the pipeline can run meaningfully without NVIDIA GPU hardware or paid hosted endpoints",
+          "Actual code organization of retrieval logic within the truncated file structure"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "HKUDS/LightRAG",
+        "purpose_summary": "LightRAG is a Python retrieval-augmented generation framework (EMNLP 2025) that builds a knowledge graph from documents and combines graph-based, vector, and keyword retrieval with reranking to answer queries. It is a large, production-oriented system with API server, web UI, and multiple storage backends.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README and topics reference RAG, knowledge-graph, and vector storage; the project supports keyword/lexical and vector retrieval modes (e.g., 'mix' query mode combining KG and vector retrieval, OpenSearch unified storage, pgvector filtered search design docs)."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README news entry [2025.08] states 'Reranker is now supported, significantly boosting performance for mixed queries (set as default query mode).'"
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "satisfied",
+            "evidence": "README news entry [2025.11] states 'Integrated RAGAS for Evaluation and Langfuse for Tracing. Updated the API to return retrieved contexts alongside query results to support context precision metrics.' Also docs/Reproduce.md exists."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Repository is a full framework with storage backends, chunking strategies, knowledge-graph extraction, and query modes; docs/ProgramingWithCore.md and design docs (PgVectorFilteredSearch, VectorSpaceProvenance) show exposed retrieval internals rather than a thin chatbot wrapper."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 62,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 92,
+        "strengths": [
+          "Covers all must-have retrieval concepts: lexical, vector, reranking, and evaluation (RAGAS)",
+          "Extensive documentation including design contracts, API server docs, and a Reproduce.md guide",
+          "Actively maintained with frequent feature releases and CI workflows",
+          "Exposes real retrieval internals (storage backends, chunking, KG extraction) rather than wrapping a chatbot API"
+        ],
+        "weaknesses": [
+          "Very large codebase (~1483 entries, 117MB) with many components (API server, web UI, multiple storage backends) that is hard to grasp end-to-end in 16 hours",
+          "Setup complexity is high: Docker, multiple storage backends, LLM/embedding/reranker configuration, role-specific LLM config",
+          "Heavy reliance on external LLM and embedding services, complicating a small reproducible study",
+          "Retrieval quality study is entangled with knowledge-graph extraction, making isolated retrieval-quality experiments harder"
+        ],
+        "uncertainties": [
+          "Exact location and scope of the evaluation script/dataset is not fully visible in the truncated structure",
+          "Whether a minimal two-day reproducible example exists without full infrastructure is unclear",
+          "Actual code readability of core retrieval modules cannot be verified from structure alone"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "PromtEngineer/localGPT",
+        "purpose_summary": "A private, on-premise document intelligence platform implementing a full RAG pipeline with hybrid retrieval (dense vector search fused with LanceDB full-text search via RRF), a cross-encoder reranker, contextual enrichment, optional late chunking, and a documented evaluation harness with corpora and ablation decisions.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README states a 'hybrid search engine that fuses dense vector search with LanceDB's native full-text search' and 'Reciprocal Rank Fusion: Vector and full-text hits are fused with RRF'. Documentation/retrieval_pipeline.md exists."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README: 'Reranking: A cross-encoder pass over the fused candidate set, on by default with calibrated score-based selection' and references eval/DECISIONS.md."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "satisfied",
+            "evidence": "eval/ directory contains build_goldset.py, verify_facts.py, multiple corpora (acquisition PDFs, RFC texts, HR policy, service manual) with .facts.json gold data, BASELINE.md, DECISIONS.md, and dated ablation decision files."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "README describes plain-Python RAG core with no web/agent framework, modular components, configurable retrieval flags (latechunk, verification, pruning), and local Ollama/HuggingFace models. Retrieval pipeline documented in Documentation/retrieval_pipeline.md."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 88,
+        "code_clarity": 72,
+        "documentation_quality": 92,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 85,
+        "strengths": [
+          "Covers all four must-have requirements explicitly, including hybrid lexical+vector retrieval and cross-encoder reranking",
+          "Rich evaluation infrastructure with gold datasets, corpora, baselines, and ablation decision records — ideal for studying retrieval quality",
+          "Extensive documentation: architecture overview, retrieval pipeline, indexing pipeline, design rationale, and API reference",
+          "Modular, configurable pipeline exposing retrieval internals rather than hiding behind a hosted API",
+          "Active maintenance with recent pushes and low open-issue count"
+        ],
+        "weaknesses": [
+          "Large, multi-component system (backend server, frontend, Docker, RAG API, Ollama) that is heavy for a 16-hour study budget",
+          "Requires local LLM/embedding models via Ollama and Docling parsing, adding significant setup and compute overhead",
+          "Codebase size (server.py ~58KB, database.py ~33KB) and 262 entries make end-to-end comprehension time-consuming",
+          "Evaluation harness is sophisticated but may be hard to isolate for a focused retrieval-quality study within two days"
+        ],
+        "uncertainties": [
+          "Exact setup time and hardware requirements for running the full pipeline locally are not fully verifiable from evidence",
+          "Whether a minimal retrieval-only reproduction path exists without the full UI/backend stack is unclear",
+          "Repository structure was truncated, so full extent of retrieval module organization is not fully visible"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "coleam00/mcp-crawl4ai-rag",
+        "purpose_summary": "An MCP server that crawls websites with Crawl4AI, stores content in Supabase, and provides RAG retrieval tools (including hybrid search, reranking, and agentic RAG) for AI agents and coding assistants.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "README lists 'Hybrid Search combining vector and keyword search' as an advanced RAG strategy, indicating both lexical (keyword) and vector retrieval are implemented."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README explicitly lists 'Reranking for improved result relevance using cross-encoder models' as a supported strategy."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "uncertain",
+            "evidence": "No evaluation script or dataset is visible in the file structure; only test_script.py exists under knowledge_graphs, which appears related to hallucination detection rather than retrieval evaluation. README does not mention an evaluation harness."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Retrieval logic is implemented in src/crawl4ai_mcp.py and src/utils.py with Supabase vector DB, hybrid search, and reranking; it is not merely a hosted chatbot wrapper."
+          }
+        ],
+        "requirement_match": 75,
+        "learning_value": 70,
+        "code_clarity": 55,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 60,
+        "strengths": [
+          "Covers hybrid (lexical + vector) retrieval and reranking, matching core study interests",
+          "Exposes retrieval logic in source files rather than hiding behind a hosted API",
+          "Detailed README describing RAG strategies and configuration",
+          "MIT licensed and actively updated"
+        ],
+        "weaknesses": [
+          "No clear evaluation script or dataset for measuring retrieval quality",
+          "Requires external services (Supabase, OpenAI API key, optionally Neo4j) increasing setup complexity",
+          "Large monolithic source files (crawl4ai_mcp.py ~74KB, utils.py ~28KB) reduce code clarity",
+          "Knowledge graph components add significant scope beyond a small two-day study",
+          "README notes the repo is a testbed with issues/PRs not actively addressed"
+        ],
+        "uncertainties": [
+          "Whether any retrieval evaluation metrics or benchmarks exist within the large source files",
+          "Actual separation between indexing, retrieval, and generation is unclear from structure alone",
+          "Whether the hybrid search and reranking are fully implemented vs. partially stubbed"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "DataTalksClub/llm-zoomcamp",
+        "purpose_summary": "A free 10-week course repository teaching practical LLM application development, including RAG, vector search, embeddings, agents, evaluation, monitoring, hybrid search, and reranking, delivered as markdown lessons and Jupyter notebooks.",
+        "must_have_checks": [
+          {
+            "requirement": "demonstrates both lexical retrieval and vector retrieval",
+            "status": "satisfied",
+            "evidence": "Module 1 (01-agentic-rag) covers keyword/lexical search (05-search.md), and Module 2 (02-vector-search) covers semantic/vector search with embeddings (02-embeddings.md, 04-vector-search.md, 05-minsearch-vector.md). Module 6 explicitly covers hybrid search combining vector and keyword search."
+          },
+          {
+            "requirement": "includes reranking",
+            "status": "satisfied",
+            "evidence": "README syllabus for Module 6 (Best Practices) explicitly lists 'Rerank results for higher precision' and 'Hybrid search: combine vector and keyword search'."
+          },
+          {
+            "requirement": "includes an evaluation script or dataset",
+            "status": "satisfied",
+            "evidence": "Module 4 (04-evaluation) is dedicated to 'Measure retrieval and answer quality' with offline and online evaluation. Module 1 also includes a dataset lesson (04-dataset.md)."
+          },
+          {
+            "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+            "status": "satisfied",
+            "evidence": "Repository contains explicit search implementation lessons (05-search.md), a rag_helper.py, ingest.py, and notebooks building search and RAG pipelines from scratch rather than only calling a chatbot API."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 88,
+        "code_clarity": 72,
+        "documentation_quality": 90,
+        "reproduction_feasibility": 70,
+        "maintenance_health": 85,
+        "strengths": [
+          "Covers the full requested stack: lexical search, vector search, hybrid search, reranking, and evaluation",
+          "Structured as a progressive course with dedicated modules for each concept",
+          "Extensive markdown documentation and diagrams explaining architecture",
+          "Includes hands-on notebooks and Python scripts (ingest.py, rag_helper.py) exposing retrieval logic",
+          "Actively maintained with recent pushes and low open-issue count"
+        ],
+        "weaknesses": [
+          "Primary language is Jupyter Notebook, not pure Python, so code is spread across notebooks",
+          "Large repository (643 entries, ~150MB) spanning many modules beyond the user's scope, which may dilute focus",
+          "Requires API credits (~$1-5) and external services (OpenAI, PGVector, Kestra) for full reproduction",
+          "No license specified",
+          "Reranking and evaluation are embedded in broader modules rather than a single self-contained example"
+        ],
+        "uncertainties": [
+          "Exact contents of Module 4 evaluation scripts and Module 6 reranking code are not visible in the truncated structure",
+          "Whether a single small reproducible end-to-end example fits within a 16-hour budget is unclear given the 10-week course scope",
+          "Depth of reranking implementation (e.g., cross-encoder vs. LLM-based) is not verifiable from evidence"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "DataTalksClub/llm-zoomcamp",
+          "base_score": 85.65,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "Best overall fit for the stated learning goal and 16-hour budget. It has the highest deterministic score, satisfies every must-have, and is structured as a progressive course with dedicated coverage of lexical search, vector search, hybrid search, reranking, and evaluation. Its lessons and scripts expose retrieval logic rather than hiding it behind a hosted chatbot API, making it practical to study retrieval quality while reproducing a small RAG example.",
+          "tradeoffs": [
+            "The repository is a broad 10-week course, so the user must deliberately narrow scope to the retrieval and evaluation modules rather than following the whole syllabus.",
+            "Much of the implementation is in Jupyter notebooks rather than a compact pure-Python package.",
+            "Full reproduction may require external services and API credits, though a focused retrieval study can likely avoid some of that surface area.",
+            "Reranking and evaluation are embedded within broader modules rather than provided as one isolated self-contained example.",
+            "The repository is large and includes many topics beyond the user's stated scope."
+          ],
+          "learning_path": [
+            "Start with the README and syllabus to identify the modules relevant to the 16-hour goal: lexical search, vector search, evaluation, and hybrid search/reranking.",
+            "Study the Module 1 lexical search lesson and dataset lesson first to understand keyword retrieval and how evaluation data is introduced.",
+            "Move to Module 2 to study embeddings, vector search, and the vector-search implementation approach, comparing it directly with lexical retrieval.",
+            "Review Module 6 material on hybrid search and reranking to understand how lexical and vector results are combined and then refined.",
+            "Inspect Module 4 evaluation content to learn how retrieval and answer quality are measured, then adapt a small evaluation question set for your own reproduction.",
+            "Trace the practical pipeline through the available Python scripts and notebooks, especially ingest.py, rag_helper.py, and the search/RAG notebooks, to see how indexing, retrieval, and generation are separated.",
+            "Reproduce a minimal end-to-end example using a small document set, then compare lexical-only, vector-only, and hybrid/reranked retrieval results using the evaluation approach from the course."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "PromtEngineer/localGPT",
+          "base_score": 82.79,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "The strongest repository for deeply studying retrieval quality, with explicit hybrid retrieval using dense vectors and LanceDB full-text search fused by RRF, a cross-encoder reranker, and unusually rich evaluation infrastructure including gold datasets, corpora, baselines, and ablation decision records. However, its heavier local setup and larger multi-component architecture make it less immediately suited to a focused 16-hour reproduction than the top-ranked course repository.",
+          "tradeoffs": [
+            "Excellent retrieval and evaluation depth comes at the cost of a large, multi-component system that is heavy for a two-day study.",
+            "Running the full pipeline requires local models via Ollama and Docling parsing, adding setup and compute overhead.",
+            "The codebase is substantial, so end-to-end comprehension is time-consuming.",
+            "The evaluation harness is sophisticated but may be difficult to isolate for a narrowly focused retrieval-quality experiment.",
+            "A minimal retrieval-only reproduction path is not clearly evidenced, so the user may need to spend time separating retrieval from the broader application stack."
+          ],
+          "learning_path": [
+            "Begin with the architecture and retrieval pipeline documentation to understand how indexing, hybrid retrieval, reranking, and generation fit together.",
+            "Read the evaluation baseline and decision records to see how retrieval quality was measured and how design choices were justified.",
+            "Inspect the configurable retrieval flags and modular components to identify which pieces control hybrid search, reranking, chunking, and verification.",
+            "Study the gold dataset construction and verification scripts together with the provided corpora to understand how retrieval evaluation data is built and validated.",
+            "Trace a query through the hybrid retrieval flow: dense vector search, full-text search, RRF fusion, and cross-encoder reranking.",
+            "Use the evaluation harness or a reduced version of it to compare retrieval variants, but avoid trying to understand the entire backend/frontend stack within the 16-hour budget."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "AsgarD-15/advanced-rag-chatbot-",
+          "base_score": 80.75,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "A compact, modular implementation that covers BM25 lexical retrieval, Qdrant vector retrieval, reciprocal rank fusion, cross-encoder reranking, source citations, and RAGAS-style evaluation. It is attractive for its clear separation of retrieval components, but it ranks third because the evaluation dataset is not visibly present, maintenance signals are weak, and the small repository has less verified depth than the higher-ranked options.",
+          "tradeoffs": [
+            "No visible golden QA file or evaluation dataset, limiting reproducibility of retrieval-quality measurements.",
+            "Requires OpenAI API access and Qdrant via Docker, adding external dependencies and cost.",
+            "The repository is very small and appears to have low maintenance activity.",
+            "FastAPI and Streamlit add application surface area beyond the core retrieval study.",
+            "The actual correctness and depth of hybrid fusion, reranking, and evaluation code cannot be fully verified from the supplied evidence."
+          ],
+          "learning_path": [
+            "Start with the modular retrieval modules: inspect the vector store, reranker, and RAG pipeline to understand how BM25 and Qdrant results are combined and reranked.",
+            "Study the embeddings and chunking modules to understand indexing choices and how retrieved chunks carry metadata for citations.",
+            "Review the evaluation module to understand the RAGAS-style metrics, but recognize that a reusable evaluation dataset is not visibly provided.",
+            "Build a small evaluation question set yourself so you can measure lexical-only, vector-only, hybrid, and reranked retrieval variants.",
+            "Use the API and README examples only as a harness for running queries; focus on tracing retrieval logic rather than the UI or deployment layer.",
+            "Compare this compact implementation against the top-ranked course material to reinforce how hybrid retrieval and reranking affect measured retrieval quality."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "DataTalksClub/llm-zoomcamp",
+      "final_reason": "DataTalksClub/llm-zoomcamp is selected as the best repository because it has the highest deterministic score, satisfies all must-have requirements, and offers the best balance between retrieval-quality study and a feasible 16-hour reproduction. It explicitly covers lexical retrieval, vector retrieval, hybrid search, reranking, and evaluation while exposing retrieval logic through lessons and Python scripts. PromtEngineer/localGPT has stronger dedicated retrieval-evaluation infrastructure, but it is heavier to set up and harder to isolate within a two-day budget. AsgarD-15/advanced-rag-chatbot- is modular and compact, but its missing visible evaluation dataset and weak maintenance signals make it less reliable for studying and reproducing retrieval quality."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "DataTalksClub/llm-zoomcamp",
+          "description": "The top-ranked repository is a broad 10-week course rather than a focused RAG retrieval example. The ranker acknowledges this and provides an explicit user-specific narrowing strategy, so the ranking is defensible, but the fit to a 16-hour focused study is weaker than the score suggests."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "DataTalksClub/llm-zoomcamp",
+          "description": "The evaluation must-have is supported only by module/syllabus references; the actual evaluation scripts and reranking implementation depth are listed as uncertainties in the evaluation. The recommendation's claim that it 'explicitly covers' reranking and evaluation is somewhat stronger than the underlying evidence."
+        },
+        {
+          "severity": "warning",
+          "category": "unsupported_claim",
+          "repository": "DataTalksClub/llm-zoomcamp",
+          "description": "The learning path asserts that a focused retrieval study 'can likely avoid some of that surface area' regarding external services and API credits; this is speculative and not directly supported by the evaluation."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "PromtEngineer/localGPT",
+          "description": "The recommendation describes 'unusually rich evaluation infrastructure' and 'gold datasets, corpora, baselines, and ablation decision records'; this is supported, but the claim that a minimal retrieval-only reproduction path is unclear is correctly flagged as an uncertainty rather than a fact."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final ranking is internally consistent: it follows the deterministic score order, all must-have requirements are marked satisfied with evidence, and the ranker explicitly justifies why the higher-scoring course repository is preferred over the deeper but heavier localGPT for a 16-hour budget. No hard-requirement violations or logical contradictions were found. Remaining issues are minor warnings about the strength of some claims relative to the underlying evaluation uncertainties, particularly around llm-zoomcamp's evaluation/reranking depth and the speculative note about avoiding external services. These do not warrant a retry."
+    },
+    "critic_feedback": "The final ranking is internally consistent: it follows the deterministic score order, all must-have requirements are marked satisfied with evidence, and the ranker explicitly justifies why the higher-scoring course repository is preferred over the deeper but heavier localGPT for a 16-hour budget. No hard-requirement violations or logical contradictions were found. Remaining issues are minor warnings about the strength of some claims relative to the underlying evaluation uncertainties, particularly around llm-zoomcamp's evaluation/reranking depth and the speculative note about avoiding external services. These do not warrant a retry."
+  },
+  "quality_signals": {
+    "best_repository": "DataTalksClub/llm-zoomcamp",
+    "top_repositories": [
+      "DataTalksClub/llm-zoomcamp",
+      "PromtEngineer/localGPT",
+      "AsgarD-15/advanced-rag-chatbot-"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 7,
+    "evaluation_count": 7,
+    "best_must_have_checks": [
+      {
+        "requirement": "demonstrates both lexical retrieval and vector retrieval",
+        "status": "satisfied",
+        "evidence": "Module 1 (01-agentic-rag) covers keyword/lexical search (05-search.md), and Module 2 (02-vector-search) covers semantic/vector search with embeddings (02-embeddings.md, 04-vector-search.md, 05-minsearch-vector.md). Module 6 explicitly covers hybrid search combining vector and keyword search."
+      },
+      {
+        "requirement": "includes reranking",
+        "status": "satisfied",
+        "evidence": "README syllabus for Module 6 (Best Practices) explicitly lists 'Rerank results for higher precision' and 'Hybrid search: combine vector and keyword search'."
+      },
+      {
+        "requirement": "includes an evaluation script or dataset",
+        "status": "satisfied",
+        "evidence": "Module 4 (04-evaluation) is dedicated to 'Measure retrieval and answer quality' with offline and online evaluation. Module 1 also includes a dataset lesson (04-dataset.md)."
+      },
+      {
+        "requirement": "exposes retrieval logic rather than only wrapping a hosted chatbot API",
+        "status": "satisfied",
+        "evidence": "Repository contains explicit search implementation lessons (05-search.md), a rag_helper.py, ingest.py, and notebooks building search and RAG pipelines from scratch rather than only calling a chatbot API."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 4
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 78.253,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "DataTalksClub/llm-zoomcamp",
+            "description": "The top-ranked repository is a broad 10-week course rather than a focused RAG retrieval example. The ranker acknowledges this and provides an explicit user-specific narrowing strategy, so the ranking is defensible, but the fit to a 16-hour focused study is weaker than the score suggests."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "DataTalksClub/llm-zoomcamp",
+            "description": "The evaluation must-have is supported only by module/syllabus references; the actual evaluation scripts and reranking implementation depth are listed as uncertainties in the evaluation. The recommendation's claim that it 'explicitly covers' reranking and evaluation is somewhat stronger than the underlying evidence."
+          },
+          {
+            "severity": "warning",
+            "category": "unsupported_claim",
+            "repository": "DataTalksClub/llm-zoomcamp",
+            "description": "The learning path asserts that a focused retrieval study 'can likely avoid some of that surface area' regarding external services and API credits; this is speculative and not directly supported by the evaluation."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "PromtEngineer/localGPT",
+            "description": "The recommendation describes 'unusually rich evaluation infrastructure' and 'gold datasets, corpora, baselines, and ablation decision records'; this is supported, but the claim that a minimal retrieval-only reproduction path is unclear is correctly flagged as an uncertainty rather than a fact."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final ranking is internally consistent: it follows the deterministic score order, all must-have requirements are marked satisfied with evidence, and the ranker explicitly justifies why the higher-scoring course repository is preferred over the deeper but heavier localGPT for a 16-hour budget. No hard-requirement violations or logical contradictions were found. Remaining issues are minor warnings about the strength of some claims relative to the underlying evaluation uncertainties, particularly around llm-zoomcamp's evaluation/reranking depth and the speculative note about avoiding external services. These do not warrant a retry."
+      }
+    }
+  ],
+  "case_id": "03_advanced_rag_evaluation",
+  "title": "混合检索、重排与 RAG 评估",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15052-93cc-7893-9287-84feab92841e",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15052-93cc-7893-9287-84feab92841e?poll=true",
+    "metrics": {
+      "span_count": 88,
+      "llm_calls": 14,
+      "github_tool_calls": 24,
+      "input_tokens": 63473,
+      "output_tokens": 12239,
+      "total_tokens": 75712,
+      "cost_usd": "0.014775774",
+      "llm_usage_coverage": {
+        "calls": 14,
+        "with_total_tokens": 14,
+        "with_cost": 14
+      },
+      "root_reported_tokens": 75712,
+      "root_reported_cost_usd": "0.014775774",
+      "root_latency_s": 78.233743
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "2a558284b76d4e4ebe3d92a49e30024f"
+    },
+    "nodes": [
+      {
+        "id": "01a15052-9400-7e03-a22f-8c185706eb8a",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:42:31.551832+00:00",
+        "end_time": "2026-10-18T18:42:37.938550+00:00",
+        "latency_s": 6.386718
+      },
+      {
+        "id": "01a15052-acf4-7600-a86d-d257cc08e2c8",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:42:37.939551+00:00",
+        "end_time": "2026-10-18T18:42:55.847923+00:00",
+        "latency_s": 17.908372
+      },
+      {
+        "id": "01a15052-f2e9-7a52-bfa2-a01d91c4cadf",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:42:55.848924+00:00",
+        "end_time": "2026-10-18T18:43:34.135532+00:00",
+        "latency_s": 38.286608
+      },
+      {
+        "id": "01a15053-887a-76a3-a100-685361c47414",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:43:34.138041+00:00",
+        "end_time": "2026-10-18T18:43:47.167611+00:00",
+        "latency_s": 13.02957
+      },
+      {
+        "id": "01a15053-bb62-7cf1-bfeb-7fbf43388bea",
+        "name": "critic",
+        "start_time": "2026-10-18T18:43:47.170714+00:00",
+        "end_time": "2026-10-18T18:43:49.731096+00:00",
+        "latency_s": 2.560382
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15053-bb6e-7801-be37-535152333365",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.539334,
+        "input_tokens": 5051,
+        "output_tokens": 477,
+        "total_tokens": 5528,
+        "cost_usd": "0.00094977",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-8883-7550-9862-946e23cf06d6",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 13.014546,
+        "input_tokens": 3503,
+        "output_tokens": 2615,
+        "total_tokens": 6118,
+        "cost_usd": "0.00200037",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-79ec-70d2-9341-1d24f8e67bd0",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.718806,
+        "input_tokens": 8577,
+        "output_tokens": 699,
+        "total_tokens": 9276,
+        "cost_usd": "0.001536606",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-760a-76e1-bc40-890f49825f14",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.987094,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-742b-7d62-a7d3-92c05aaba1b2",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.479603,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-7095-7f71-b587-8d843deb1cf8",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.916847,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-6487-7822-8878-62b69f4315ee",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.082045,
+        "input_tokens": 3891,
+        "output_tokens": 593,
+        "total_tokens": 4484,
+        "cost_usd": "0.000770106",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-626f-7c11-9a54-ec284a27a7a2",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.533155,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-5e8d-7883-acfc-d853222210e8",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.993654,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-5c64-7ef3-b120-95191f1df6b2",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.552916,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-4e02-7253-813e-e4890a3d16fd",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.677938,
+        "input_tokens": 7796,
+        "output_tokens": 737,
+        "total_tokens": 8533,
+        "cost_usd": "0.001442256",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-4a21-7331-ad78-74eebc5a810b",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.98661,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-45d5-7691-b082-ce58737b222f",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.10008,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-4221-7a00-851c-de9d69c259a1",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.94679,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-3545-7e33-82a0-82570f7b35f2",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.28736,
+        "input_tokens": 7970,
+        "output_tokens": 707,
+        "total_tokens": 8677,
+        "cost_usd": "0.001450356",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-3317-7501-933d-b18e6d324281",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.551915,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-30f7-7d61-8bbe-3fc6c29e3410",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.543475,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-2eb6-7541-9e74-17053d69287b",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.576413,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-22ac-7791-97b7-dfeae892b1a6",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.077339,
+        "input_tokens": 7541,
+        "output_tokens": 631,
+        "total_tokens": 8172,
+        "cost_usd": "0.001340406",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-2023-7e40-8a3c-b33b0e0c7eb4",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.641265,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-1dec-7ba2-b321-36ab8dd60acc",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.566893,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-1bad-7a72-8820-b1459571907b",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.574979,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-0c54-78b3-a2f1-cfad82935fbd",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.924781,
+        "input_tokens": 4206,
+        "output_tokens": 815,
+        "total_tokens": 5021,
+        "cost_usd": "0.000950556",
+        "has_error": false
+      },
+      {
+        "id": "01a15053-0a71-71c3-ab55-1db0c6621858",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.479472,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-0826-7243-997f-460db73c79a9",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.586936,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15053-062c-7f63-a5c5-7fd5192e91c2",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.506269,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-f8ed-7d81-bb6c-b7c500769ef0",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.386309,
+        "input_tokens": 6246,
+        "output_tokens": 687,
+        "total_tokens": 6933,
+        "cost_usd": "0.001198572",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-f6fc-7b70-863a-fa7e83e27d35",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.490348,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-f514-74b1-ba29-27882b2b30dd",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.487601,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-f2ea-7f23-97be-046b5c3175a0",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.55428,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-d880-7280-8f03-76a2caabce6b",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 6.756558,
+        "input_tokens": 1915,
+        "output_tokens": 1319,
+        "total_tokens": 3234,
+        "cost_usd": "0.001022202",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-c098-7ab2-9b7a-a44f7722d965",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 6.107282,
+        "input_tokens": 2520,
+        "output_tokens": 1173,
+        "total_tokens": 3693,
+        "cost_usd": "0.000743112",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-be77-7ea3-94da-43b680eadc9a",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.54295,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-b64d-7bf0-974d-70990ece250b",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 2.08271,
+        "input_tokens": 2218,
+        "output_tokens": 289,
+        "total_tokens": 2507,
+        "cost_usd": "0.000355572",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-b34b-7181-8f25-ec171fc5c842",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.59444,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-b349-7a43-b8cf-27bf369d405b",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.770213,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15052-acf9-75f2-829f-aecd25909f73",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.610829,
+        "input_tokens": 827,
+        "output_tokens": 313,
+        "total_tokens": 1140,
+        "cost_usd": "0.000255402",
+        "has_error": false
+      },
+      {
+        "id": "01a15052-94a0-7c41-900d-83d153084eef",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 6.222674,
+        "input_tokens": 1212,
+        "output_tokens": 1184,
+        "total_tokens": 2396,
+        "cost_usd": "0.000760488",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "DataTalksClub/llm-zoomcamp",
+          "max_entries": 120
+        },
+        "input_sha256": "704da1bf95f6dadc166ebafdd22c30ce6ef769c1a2edcfded7faa540b18475ce",
+        "output_sha256": "2949a79bc09f615154b1072bfba086b58297be44301c7721630296aad4c8c11c"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "DataTalksClub/llm-zoomcamp"
+        },
+        "input_sha256": "01d00422d36f0ae693b57b0d63fe37df43bf984230b8d7ac637fe0fd7037f792",
+        "output_sha256": "6e84dba122a62d373049b9fbb2c48c31f8e0836298ab6497b1af97583fd29e81"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "DataTalksClub/llm-zoomcamp"
+        },
+        "input_sha256": "01d00422d36f0ae693b57b0d63fe37df43bf984230b8d7ac637fe0fd7037f792",
+        "output_sha256": "ea8777a7ff8d908eef3ac3946b25d1d5e9464baee24a24ab29d844ece039c258"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "coleam00/mcp-crawl4ai-rag",
+          "max_entries": 120
+        },
+        "input_sha256": "d84bb852b0f7e9e312d1a190cc0d447745cbfde7c963069cfe316b345ae1fbe8",
+        "output_sha256": "a38973dcb0241e50e29fecaebf563cbf36a4dd78c4e055fe090c9a980ba71fff"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "coleam00/mcp-crawl4ai-rag"
+        },
+        "input_sha256": "d9d2db3d6fe255e5f4825eb7d24cf162e4f9995ed7ea3164aa5d7159fd89222a",
+        "output_sha256": "0c73acfe74e4c451fd8a5f72a301d2883320aa539e058995dc9f816845cabedc"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "coleam00/mcp-crawl4ai-rag"
+        },
+        "input_sha256": "d9d2db3d6fe255e5f4825eb7d24cf162e4f9995ed7ea3164aa5d7159fd89222a",
+        "output_sha256": "ab6dd64e15a22437664aa9a51e70735abba3bb5636ac4fcae645efe8b6f00cfa"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "PromtEngineer/localGPT",
+          "max_entries": 120
+        },
+        "input_sha256": "0e93af3a4ab97fea4841fc7b28c627fbc4625abc7c69d5d52814091bbfed4257",
+        "output_sha256": "d1ef30f203c0dbec30bc6e985b775938d4bd0987bc6f38dfec9ddba6cb30d377"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "PromtEngineer/localGPT"
+        },
+        "input_sha256": "238ad5c553a0324a28a2a18424e22b7f42cebfba82bf14728d5c62ec3740d035",
+        "output_sha256": "c002a1e33b56fa3ff72ed4c7db66828a11ee527c0beefea664cab1511419c776"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "PromtEngineer/localGPT"
+        },
+        "input_sha256": "238ad5c553a0324a28a2a18424e22b7f42cebfba82bf14728d5c62ec3740d035",
+        "output_sha256": "e5253d903d662e3ac0c63c274371b58c3a641a1f39aa32f69bcd5049ddde7be8"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "HKUDS/LightRAG",
+          "max_entries": 120
+        },
+        "input_sha256": "99366e239e310448606020c707513d963f6370b5024b8fda98fcb0fcdde279be",
+        "output_sha256": "9a50601950e3b3937e217817f816b7d1e7be0758e808e8dc48f63ecacf8c676c"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "HKUDS/LightRAG"
+        },
+        "input_sha256": "65cc53d611410af1dd9c2d05748f11a50cfbfbe540d8b7ef077339a68aa9f748",
+        "output_sha256": "685722cf5b811bc8dc5ced30938532e0e3988721779d15f2adeff2342b762dba"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "HKUDS/LightRAG"
+        },
+        "input_sha256": "65cc53d611410af1dd9c2d05748f11a50cfbfbe540d8b7ef077339a68aa9f748",
+        "output_sha256": "ef5398ec8697238903a1765c59b8c7746be0d590d256d30366e5247a9ff380cc"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "NVIDIA-AI-Blueprints/rag",
+          "max_entries": 120
+        },
+        "input_sha256": "309486d2a4db99c6045213572e42b7071fcb3e8dc6db3375b3a192647d3729bd",
+        "output_sha256": "0c5751a56b7ee5f424f181092505741825b48f695521403a9e0f9b8b5f514817"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "NVIDIA-AI-Blueprints/rag"
+        },
+        "input_sha256": "32af19efb7614dd577b24e6010cece3a12624373b78e7e5ef353f6a72d9eccc8",
+        "output_sha256": "e0a40311893f23b8b332d56feae8acde51394402178f9dd787f8a7acbbe5269a"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "NVIDIA-AI-Blueprints/rag"
+        },
+        "input_sha256": "32af19efb7614dd577b24e6010cece3a12624373b78e7e5ef353f6a72d9eccc8",
+        "output_sha256": "9859ba88db7b31df679158be960cf26a16d765e424a2ae5de70161bdf101487f"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "AsgarD-15/advanced-rag-chatbot-",
+          "max_entries": 120
+        },
+        "input_sha256": "0092a8569c7a04b80fcb200c5e503b3fdd616c8f565b4110d0449484d40342b0",
+        "output_sha256": "208c40e4bc1944add38b90c733650157a323b499a0d492c328a70f0b29cb486e"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "AsgarD-15/advanced-rag-chatbot-"
+        },
+        "input_sha256": "78f074e81378b0f67d5606fb84b4f7fa4ccc0645107097ac10a07ca6543ea445",
+        "output_sha256": "32db0ac25b7ee22d2b57514897033571614c7fbe5dd70f6bac6c2c787d744a50"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "AsgarD-15/advanced-rag-chatbot-"
+        },
+        "input_sha256": "78f074e81378b0f67d5606fb84b4f7fa4ccc0645107097ac10a07ca6543ea445",
+        "output_sha256": "91ccf5acb6038611b49d5532e90eb850859940e7e3cc7c6846a0a8b73d775a90"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "weiwill88/Local_Pdf_Chat_RAG",
+          "max_entries": 120
+        },
+        "input_sha256": "c7e6e3687e0bed24ce95542d6fef254f574be1592f51afc82a719dc1e52d242d",
+        "output_sha256": "0f603cd339aa2d69ab34e29d96bbe3a0122d8527b455a0b54e61c018e6d9129f"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "weiwill88/Local_Pdf_Chat_RAG"
+        },
+        "input_sha256": "b15cc2953b18b50d8426802ad293807cf0283d4cd3646f24f0d842c6cf251f9f",
+        "output_sha256": "5267f87a85428158ed90253c00b45b83dd56c4a02c0a58eef4f039647fac585c"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "weiwill88/Local_Pdf_Chat_RAG"
+        },
+        "input_sha256": "b15cc2953b18b50d8426802ad293807cf0283d4cd3646f24f0d842c6cf251f9f",
+        "output_sha256": "83ae1695d9c75440feaea73a9fd1023302b331d5562d82887db0a3532c748b5d"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "hybrid search BM25 dense retrieval reranker citations python RAG"
+        },
+        "input_sha256": "bfb0bd19d0ae71dbc0f4da729ba5736b38e449579a3790668d5ea87710a74554",
+        "output_sha256": "01c235716869e773dbf8070b38de859f4547f9b1d882d160e17178946264a4cc"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "RAG evaluation retrieval metrics BM25 vector search python"
+        },
+        "input_sha256": "83417feab72546897b4a8961faa62df8cf728976c6c3c22f7b0b673c6e493c9f",
+        "output_sha256": "5173808fe53d393930c2eb798798fc4caa476ab8d319fcd8d7f87f80c15d8fc1"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "hybrid retrieval reranking RAG python in:name,description,readme"
+        },
+        "input_sha256": "3be0b137c2a19623292ebaedcb8412fa53eaea4fc1f2c7e0daa419b5611760e2",
+        "output_sha256": "4d6c019ccb81b6f21bb71550fa81237d0b3a76a83dca1c9696bf6f10dbf46728"
+      }
+    ]
+  }
+}

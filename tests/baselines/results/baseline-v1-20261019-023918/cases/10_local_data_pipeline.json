@@ -1,0 +1,1723 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:54:07.141137+08:00",
+  "finished_at": "2026-10-19T02:56:07.875431+08:00",
+  "business_run_id": "305b217593174e3ab21e7e707587bb18",
+  "workflow_wall_time_s": 99.148,
+  "collection_wall_time_s": 120.733,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "Python 数据流水线项目（数据工程学习）",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "DuckDB",
+        "SQLite"
+      ],
+      "difficulty": "intermediate",
+      "must_have": [
+        "Python 数据流水线项目",
+        "从 CSV 或公开 API 读取数据",
+        "对数据进行清洗",
+        "将清洗后的数据写入 DuckDB 或 SQLite",
+        "提供可重复运行的流程",
+        "包含测试"
+      ],
+      "nice_to_have": [
+        "包含任务编排",
+        "包含失败处理"
+      ],
+      "exclusions": [
+        "运行前必须开通云账号",
+        "必须部署 Kubernetes",
+        "必须维护 Spark 集群"
+      ],
+      "learning_goal": "学习数据工程，并复现一个可重复运行的 Python 数据流水线项目",
+      "time_budget_in_hours": 6
+    },
+    "candidates": {
+      "search_queries": [
+        "duckdb data pipeline csv python tests in:readme language:Python archived:false",
+        "sqlite etl python csv data cleaning tests in:readme language:Python archived:false",
+        "\"data engineering\" python api pipeline orchestration duckdb sqlite in:readme language:Python archived:false"
+      ],
+      "candidates": [
+        {
+          "full_name": "dlt-hub/dlt",
+          "reason": "Python 数据加载工具，可能支持 DuckDB 等本地目标，并有测试与示例；值得进一步确认是否能用 CSV/API 数据构建可重复运行的本地管道。"
+        },
+        {
+          "full_name": "danielbeach/data-engineering-practice",
+          "reason": "数据工程练习题集合，可能包含从文件读取、清洗、写入数据库等完整练习；适合筛选出符合 DuckDB/SQLite 和测试要求的中等难度项目。"
+        },
+        {
+          "full_name": "duckdb/dbt-duckdb",
+          "reason": "DuckDB 的 dbt 适配器，涉及 SQL 转换与本地 DuckDB 工作流；值得检查其示例是否可作为数据管道中的转换层参考。"
+        },
+        {
+          "full_name": "TJaniF/airflow-elt-blueprint",
+          "reason": "自包含、可本地运行的 Airflow ELT 项目，可能覆盖任务编排和失败处理；适合评估是否能简化为不依赖云账号的 Python 数据流水线。"
+        },
+        {
+          "full_name": "edwinweber/dbt_duckdb_demo_public",
+          "reason": "使用 dbt、DuckDB、dlt、Dagster 的数据工程演示项目，技术栈与需求高度相关；值得进一步确认其本地模式是否包含 CSV/API 读取、清洗和可重复运行流程。"
+        },
+        {
+          "full_name": "sophie-nguyenthuthuy/data-engineering",
+          "reason": "包含大量数据工程项目和测试，可能覆盖 DuckDB/SQLite 等本地技术栈；适合从中寻找结构完整、带测试的中等难度管道示例。"
+        },
+        {
+          "full_name": "ceumicrodata/mETL",
+          "reason": "Python ETL 工具，可能提供数据抽取、清洗和加载的可复用流程；值得检查是否支持 CSV 输入以及 DuckDB/SQLite 输出。"
+        },
+        {
+          "full_name": "sanjeevai/disaster-response-pipeline",
+          "reason": "ETL 管道项目，涉及文本数据清洗和数据库写入，可能包含测试；适合评估其是否可改造成使用 CSV 输入并写入 SQLite 的学习项目。"
+        },
+        {
+          "full_name": "im-anishraj/arnio",
+          "reason": "面向 DataFrame 的校验、清洗和剖析工具，可能补充数据清洗环节；值得确认其是否能集成到可重复运行的 Python 管道并具备测试示例。"
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "dlt-hub/dlt",
+        "purpose_summary": "dlt (data load tool) is an open-source Python library that automates data loading: it extracts data from APIs, SQL databases, files (CSV/JSONL/Parquet), and DataFrames, normalizes/cleans it, and loads it into destinations such as DuckDB, BigQuery, Snowflake, etc. It is a library rather than a full end-to-end pipeline project.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "uncertain",
+            "evidence": "dlt is a Python library for building data pipelines, not a self-contained pipeline project. The README shows pipeline-building examples (dlt.pipeline(...).run(source)), but the repo itself is the tooling, not a concrete pipeline project to reproduce."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README shows rest_api_source for REST APIs and filesystem + read_csv_duckdb for reading CSV files from local disk or buckets."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "README describes schema inference, typing, normalization, and processing_steps with filter/map for transforming records at the source."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "satisfied",
+            "evidence": "README explicitly supports destination='duckdb' with pip install \"dlt[duckdb]\" and shows loading into DuckDB."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "dlt pipelines are designed to be re-run with write_disposition (e.g., merge) and pipeline state; README shows pipeline.run(source) as a repeatable operation."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "Repository structure includes extensive test workflows (.github/workflows/test_common.yml, test_destinations_local.yml, test_sources_local.yml, etc.) and .claude/rules/testing.md, indicating a substantial test suite."
+          }
+        ],
+        "requirement_match": 67,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 85,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 90,
+        "strengths": [
+          "Excellent, well-structured README with clear quick-start examples for API, CSV, SQL, and DataFrame sources",
+          "Native DuckDB destination support directly matching the user's stack",
+          "Strong documentation and active maintenance (recent pushes, many workflows)",
+          "Comprehensive test infrastructure and CI workflows",
+          "Covers extraction, normalization/cleaning, and loading concepts relevant to data engineering learning"
+        ],
+        "weaknesses": [
+          "It is a library/framework, not a concrete reproducible pipeline project — the user would need to build their own pipeline on top of it",
+          "Very large codebase (2607 entries, 121MB) making end-to-end architecture hard to grasp in a 6-hour budget",
+          "Heavy reliance on external docs (dlthub.com) rather than self-contained learning material",
+          "Reproducing the library itself is far beyond a 6-hour intermediate task"
+        ],
+        "uncertainties": [
+          "Whether the repo contains a self-contained example pipeline project that could be reproduced within the time budget",
+          "Whether SQLite destination is supported (README emphasizes DuckDB; SQLite not explicitly confirmed)",
+          "Actual depth of inline code comments and internal architecture documentation",
+          "Whether task orchestration and failure handling are demonstrated in-repo (nice-to-haves)"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "danielbeach/data-engineering-practice",
+        "purpose_summary": "A collection of data engineering practice exercises covering Python data processing, CSV/JSON/Parquet handling, SQL database design, PySpark, DuckDB, Polars, and data quality, each packaged as a self-contained Docker exercise.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "uncertain",
+            "evidence": "The repo is a set of practice exercises rather than a single cohesive pipeline project. Each exercise has a main.py, but they are isolated tasks (download, scrape, convert, model) rather than one end-to-end pipeline."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "Exercise-1 downloads files from HTTP, Exercise-2 does web scraping, Exercise-3 uses boto3/S3, and multiple exercises (5, 8, 9, 10) read CSV data files."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "README lists 'Data cleansing / dirty data' as a topic; Exercise-10 explicitly deals with data quality issues in CSV data."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "uncertain",
+            "evidence": "Exercise-8 uses DuckDB for analytics and transforms, but the README describes analytical/transformation tasks rather than explicitly writing cleaned data into DuckDB. Exercise-5 writes to Postgres, not DuckDB/SQLite. No SQLite usage is evident."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "Each exercise is packaged with a Dockerfile and docker-compose.yml, and README instructs to cd into the folder and run docker build, giving a repeatable containerized workflow."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "not_satisfied",
+            "evidence": "No test files, test directories, or testing frameworks appear in the repository structure or README."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 65,
+        "code_clarity": 55,
+        "documentation_quality": 60,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 70,
+        "strengths": [
+          "Covers a broad range of data engineering topics including DuckDB, PySpark, Polars, and data quality",
+          "Each exercise is self-contained with Dockerfile, docker-compose, requirements, and README",
+          "Includes real datasets and hands-on practice problems",
+          "Popular repository with substantial community interest"
+        ],
+        "weaknesses": [
+          "Not a single cohesive pipeline project; it is a collection of isolated exercises",
+          "No tests present in the repository",
+          "DuckDB usage is for analytics/transforms rather than clearly writing cleaned data to DuckDB/SQLite",
+          "No SQLite usage evident",
+          "Requires Docker/docker-compose for most exercises, adding setup overhead",
+          "Some exercises (PySpark) may exceed the 6-hour budget and involve heavier dependencies"
+        ],
+        "uncertainties": [
+          "Whether any exercise constitutes a full end-to-end pipeline with cleaning and DuckDB/SQLite output",
+          "Whether Exercise-8 writes transformed data into DuckDB or only queries it",
+          "Actual code quality and inline documentation within main.py files (not shown)",
+          "Whether hidden tests exist outside the listed structure"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "duckdb/dbt-duckdb",
+        "purpose_summary": "dbt adapter that connects dbt to DuckDB, enabling SQL/Python-based data transformations and a 'modern data stack in a box' for analytics pipelines.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "uncertain",
+            "evidence": "The repo is a dbt adapter (Python package) that enables data transformation pipelines via dbt, but it is an adapter/library rather than a standalone end-to-end data pipeline project. It provides the plumbing for pipelines rather than being a self-contained pipeline."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README states DuckDB 'allows you to read and write data stored in CSV, JSON, and Parquet files directly' and mentions reading/writing external files; plugins include gsheet, excel, etc."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "uncertain",
+            "evidence": "dbt transformations (SQL models) can perform cleaning, but the repo itself is the adapter; no explicit cleaning pipeline is provided in the evidence."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "satisfied",
+            "evidence": "The entire purpose is writing dbt-transformed data into DuckDB; README describes persisting relations to a DuckDB file via the path profile setting."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "dbt runs are repeatable by design; README describes running dbt-duckdb pipelines locally or in CI, with in-memory or file-based persistence."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "Repository contains a tests/ directory with pytest.ini, conftest.py, and many functional adapter tests (test_basic.py, test_attach.py, etc.)."
+          }
+        ],
+        "requirement_match": 60,
+        "learning_value": 55,
+        "code_clarity": 70,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 85,
+        "strengths": [
+          "Extensive README covering configuration, extensions, secrets, and external file handling",
+          "Well-organized Python package structure with clear module separation (adapters, plugins, environments, macros)",
+          "Comprehensive test suite with pytest and functional adapter tests",
+          "Actively maintained with recent pushes and CI workflows",
+          "Directly uses DuckDB, matching the required technology stack"
+        ],
+        "weaknesses": [
+          "It is a dbt adapter/library, not a standalone data pipeline project; learner would need to build the pipeline around it",
+          "Requires understanding dbt concepts (models, profiles, macros) which adds learning overhead beyond pure Python data engineering",
+          "No explicit CSV-to-clean-to-DuckDB pipeline example in the evidence",
+          "Large surface area (plugins, environments, macros) may be complex for a 6-hour reproduction"
+        ],
+        "uncertainties": [
+          "Whether the repo provides a ready-to-run example pipeline reading CSV and cleaning data",
+          "Whether data cleaning logic is demonstrated anywhere in the repo",
+          "Actual setup complexity for a beginner within 6 hours given dbt dependency"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "TJaniF/airflow-elt-blueprint",
+        "purpose_summary": "A self-contained Airflow ELT blueprint that ingests CSV and public API data into MinIO, loads it into DuckDB, transforms it with the Astro SDK, and displays results via Streamlit, orchestrated by 7 interdependent Airflow DAGs.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "satisfied",
+            "evidence": "Repository is Python-based (language: Python) with DAGs in dags/ and supporting modules in include/, forming an ELT pipeline."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README states it ingests data from local csv files (include/climate_data/temp_global.csv) and a public API; dags/ingestion/in_climate_data.py and in_local_weather.py exist."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "uncertain",
+            "evidence": "README mentions transform DAGs (dags/transform/create_reporting_table.py) and Astro SDK transforms, but explicit data cleaning steps are not clearly described in the provided evidence."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "satisfied",
+            "evidence": "README states data is loaded from MinIO to DuckDB and transformed within DuckDB; dags/load/load_data.py exists."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "Airflow DAGs with Datasets-based scheduling and a start DAG to trigger pipeline runs; README describes unpausing DAGs and re-running via play button."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "tests/dags/test_dag_integrity.py and .astro/test_dag_integrity_default.py exist, though these appear to be DAG integrity tests rather than data pipeline logic tests."
+          }
+        ],
+        "requirement_match": 83,
+        "learning_value": 82,
+        "code_clarity": 78,
+        "documentation_quality": 85,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 60,
+        "strengths": [
+          "Covers full ELT flow: CSV/API ingestion, DuckDB load, transform, and reporting",
+          "Uses Airflow Datasets for orchestration (nice-to-have satisfied)",
+          "Detailed README with step-by-step setup and screenshots",
+          "Includes custom operators and task groups as learning material",
+          "Self-contained with Codespaces and Astro CLI options"
+        ],
+        "weaknesses": [
+          "Requires Docker and Astro CLI plus 5 containers (Airflow scheduler, webserver, metastore, triggerer, MinIO), heavy for a 6-hour budget",
+          "Adds MinIO and Streamlit beyond the core DuckDB/SQLite requirement, increasing complexity",
+          "Tests are limited to DAG integrity, not pipeline data logic",
+          "Explicit data cleaning steps are not clearly evidenced",
+          "Last pushed in 2023; maintenance activity appears stale"
+        ],
+        "uncertainties": [
+          "Whether meaningful data cleaning is implemented versus simple transformation",
+          "Whether failure handling (nice-to-have) is implemented in DAGs",
+          "Actual setup time on a typical machine within the 6-hour budget"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "edwinweber/dbt_duckdb_demo_public",
+        "purpose_summary": "A single-server data engineering reference pipeline that extracts open data from the Danish Parliament OData API and the public Rfam MySQL database via dlt, transforms it in DuckDB through a Bronze/Silver/Gold medallion architecture using dbt (hash-based CDC, SCD Type 2, star schema), optionally exports Delta Lake tables, and orchestrates everything with Dagster.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "satisfied",
+            "evidence": "Python is the primary language; dlt extraction pipelines and Dagster asset factories live under ddd_python/ (e.g. ddd_python/ddd_dlt/dlt_pipeline_execution_functions.py, ddd_python/ddd_dagster/)."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README states it extracts from the Danish Parliament OData API and the public Rfam MySQL database via dlt; a committed 1.6 MB sample exists in tests/fixtures/bronze_sample."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "dbt models implement Bronze views, Silver hash-based CDC into SCD Type 2 tables, and Gold star-schema views (dbt/models/bronze, dbt/models/gold, dbt/macros)."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "satisfied",
+            "evidence": "README describes Silver tables stored in the .duckdb file or DuckLake, with dbt + DuckDB as the transformation engine."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "Docker Compose quick start with documented commands, Dagster daily schedule (06:00 Europe/Copenhagen), stateless incremental extraction with lookback windows, and CI running a real dbt build."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "README reports ~300 pytest tests with an 80% coverage floor, 263 dbt data tests, ruff, mypy, and CI workflow at .github/workflows/ci.yml."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 88,
+        "code_clarity": 78,
+        "documentation_quality": 90,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 85,
+        "strengths": [
+          "Covers the full data engineering stack (dlt, dbt, DuckDB, Dagster) with a clear Bronze/Silver/Gold medallion architecture",
+          "Extensive documentation: architecture overview, design decisions, storage combinations, dbt transformations docs",
+          "Strong testing story: ~300 pytest tests, 263 dbt data tests, CI with real dbt build on committed sample data",
+          "Includes task orchestration (Dagster) and failure handling (Metabase stop/restart on failure, stateless incremental extraction)",
+          "No cloud account required for local run; Docker Compose quick start provided"
+        ],
+        "weaknesses": [
+          "Large, complex project (378 entries, 122 dbt models, 18+7 entities) likely exceeding a 6-hour reproduction budget",
+          "Heavy dependency footprint (dbt, dlt, Dagster, Metabase, Docker, optional S3/Fabric OneLake)",
+          "Core transformation logic is in dbt SQL/macros rather than pure Python, which may not match a learner seeking a Python-centric pipeline",
+          "Optional Microsoft Fabric OneLake / S3 export paths add conceptual overhead"
+        ],
+        "uncertainties": [
+          "Exact setup time for Docker build and full pipeline run is not stated",
+          "Whether the pipeline can run end-to-end without external API/MySQL access (only a sample fixture is committed) is unclear",
+          "Repository structure was truncated, so full test and Python module layout could not be fully verified"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "sophie-nguyenthuthuy/data-engineering",
+        "purpose_summary": "A large monorepo of 100+ self-contained data-engineering projects (pipelines, storage engines, query engines, table formats, streaming, governance) implemented from scratch in Python, each with its own README, tests, Dockerfile, and CI workflow.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "satisfied",
+            "evidence": "The monorepo contains many pipeline projects, e.g. abandoned-cart-recovery-pipeline, air-quality-iot-pipeline, multi-source-collector, streaming-ingestion-replay-engine, all written in Python."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README lists multi-source-collector supporting HTTP/CSV/Excel/FTP/Google Sheets ingestion; air-quality-iot-pipeline and abandoned-cart-recovery-pipeline include io_jsonl/simulator modules. CSV/API ingestion is explicitly claimed."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "uncertain",
+            "evidence": "Projects include schema.py, attribute.py, sessionize.py, detect.py suggesting transformation/validation, but the README does not explicitly describe a data-cleaning stage, and file contents are not provided."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "uncertain",
+            "evidence": "DuckDB is only mentioned in the keyword list; no project structure shows a DuckDB or SQLite writer module. Output appears to be JSONL-based (io_jsonl.py). Cannot confirm a DuckDB/SQLite sink."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "README states 'One-command local runs — cd <project> && pip install -e \".[dev]\" && pytest works for every project', with Makefile targets install/dev/test/lint/type/docker and CI workflows per project."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "Each project has a tests/ directory with multiple test files (e.g. test_io.py, test_schema.py, test_property.py); README claims 2,500+ tests."
+          }
+        ],
+        "requirement_match": 67,
+        "learning_value": 70,
+        "code_clarity": 75,
+        "documentation_quality": 78,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 65,
+        "strengths": [
+          "Many self-contained Python pipeline projects with per-project README, tests, Makefile, and CI",
+          "Strong testing culture (2,500+ tests, mypy strict, ruff)",
+          "Zero/minimal runtime dependencies, no cloud or cluster required",
+          "One-command local run recipe documented for every project",
+          "Pedagogical docstrings explaining algorithms and trade-offs"
+        ],
+        "weaknesses": [
+          "Monorepo of 100+ projects is overwhelming for a 6-hour learning goal; no single guided end-to-end pipeline",
+          "DuckDB/SQLite as a data sink is not clearly evidenced; output appears JSONL-oriented",
+          "Explicit data-cleaning stage not documented",
+          "No clear task orchestration (Airflow/Dagster/Prefect) demonstrated in structure",
+          "Repository is very large (11MB, 6767 entries), hard to navigate for a beginner"
+        ],
+        "uncertainties": [
+          "Whether any project writes cleaned data into DuckDB or SQLite",
+          "Whether a dedicated data-cleaning step exists versus schema validation only",
+          "Whether failure handling / retries are implemented in the pipeline projects",
+          "Whether task orchestration is included beyond CI workflows"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "ceumicrodata/mETL",
+        "purpose_summary": "mETL is a Python ETL framework that reads data from various sources (CSV, JSON, XML, XLS, databases, etc.), applies transformations/filters/aggregations, and loads results into targets such as databases (PostgreSQL, SQLite via SQLAlchemy) or static output, driven by YAML configuration files.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "satisfied",
+            "evidence": "Repository is written in Python and is explicitly an ETL tool ('mito ETL tool', topics include etl, pipeline, etl-framework)."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "metl/source/csvsource.py exists and README's tutorial demonstrates loading authors.csv. Other sources (JSON, XML, XLS, Google Spreadsheets) also exist."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "Repository contains filter/, modifier/, aggregator/, condition/, and fieldtype/ modules (e.g., dropbyconditionfilter, transformfieldmodifier, isemptycondition) supporting cleaning/transformation."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "uncertain",
+            "evidence": "SQLite is referenced in README changelog ('url: sqlite:///database.db') and metl/database/alchemydatabase.py suggests SQLAlchemy-based DB targets. DuckDB is not mentioned anywhere. SQLite support appears plausible but not explicitly confirmed in the visible structure."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "YAML config-driven execution via 'metl config.yml' command provides a repeatable pipeline run."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "uncertain",
+            "evidence": "No test directory or test files are visible in the provided (truncated) structure; tests may exist but cannot be confirmed."
+          }
+        ],
+        "requirement_match": 67,
+        "learning_value": 70,
+        "code_clarity": 65,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 40,
+        "strengths": [
+          "Clear ETL architecture with modular source/filter/modifier/aggregator/target components",
+          "CSV reading and data transformation/cleaning are core, well-supported features",
+          "Extensive README with tutorial, presentations, and documentation PDF",
+          "Config-driven repeatable pipeline execution"
+        ],
+        "weaknesses": [
+          "DuckDB not supported; SQLite support only indirectly evidenced",
+          "No visible test suite in the provided structure",
+          "Last push in 2021, project appears stale",
+          "No license specified",
+          "Older framework may have dependency compatibility issues with modern Python"
+        ],
+        "uncertainties": [
+          "Whether SQLite target works out-of-the-box vs. only PostgreSQL",
+          "Whether any tests exist (structure truncated)",
+          "Actual setup complexity and dependency compatibility for a 6-hour reproduction",
+          "Whether task orchestration or failure handling (nice-to-have) are meaningfully provided"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "sanjeevai/disaster-response-pipeline",
+        "purpose_summary": "An ETL + ML pipeline that loads disaster message CSVs, cleans and merges them, stores results in SQLite, trains a text classification model with GridSearchCV, and serves predictions via a Flask web app.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "satisfied",
+            "evidence": "Python project with data/process_data.py ETL pipeline and models/train_classifier.py ML pipeline; language is Python."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "process_data.py loads data/disaster_messages.csv and data/disaster_categories.csv per README and file structure."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "README states ETL pipeline merges datasets and cleans the data; process_data.py is described as the data cleaning pipeline."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "satisfied",
+            "evidence": "Cleaned data is stored in a SQLite database (data/DisasterResponse.db); sqlite-database is a listed topic."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "satisfied",
+            "evidence": "README gives explicit commands to run process_data.py, train_classifier.py, and run.py; existing DB and pickle are replaced on rerun."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "not_satisfied",
+            "evidence": "No test files or test directories appear in the repository structure; README does not mention tests."
+          }
+        ],
+        "requirement_match": 83,
+        "learning_value": 70,
+        "code_clarity": 72,
+        "documentation_quality": 75,
+        "reproduction_feasibility": 78,
+        "maintenance_health": 35,
+        "strengths": [
+          "Clear end-to-end ETL -> SQLite -> ML -> Flask architecture",
+          "Explicit runnable commands for each pipeline stage",
+          "Includes real CSV datasets and a prebuilt SQLite DB",
+          "Covers data cleaning, storage, and downstream consumption"
+        ],
+        "weaknesses": [
+          "No tests present, failing a must-have requirement",
+          "No task orchestration or explicit failure handling (nice-to-haves missing)",
+          "Last pushed in 2019; dependencies may be outdated",
+          "Large binary artifacts (classifier.pkl ~78MB, DB ~6MB) committed to repo"
+        ],
+        "uncertainties": [
+          "Exact cleaning logic in process_data.py not visible from evidence",
+          "Whether requirements.txt pins compatible versions for current Python",
+          "Whether any inline comments or hidden test scripts exist"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "im-anishraj/arnio",
+        "purpose_summary": "Arnio is a compiled C++ data preparation library for Python that parses, cleans, validates, and profiles messy CSV and pandas data, with integrations for pandas, Polars, DuckDB, Arrow, and scikit-learn. It is a data-cleaning library rather than an end-to-end data pipeline project.",
+        "must_have_checks": [
+          {
+            "requirement": "Python 数据流水线项目",
+            "status": "uncertain",
+            "evidence": "The repo is a Python data-preparation library with a pipeline API (arnio/pipeline.py, ar.pipeline(...)), but it is a reusable library, not a complete pipeline project with ingestion-to-storage orchestration. It provides pipeline building blocks rather than a full pipeline application."
+          },
+          {
+            "requirement": "从 CSV 或公开 API 读取数据",
+            "status": "satisfied",
+            "evidence": "README shows ar.read_csv(\"messy_sales_data.csv\") and scan_csv; arnio/io.py is large and dedicated to CSV I/O. No public API ingestion is evident, but CSV reading satisfies the requirement."
+          },
+          {
+            "requirement": "对数据进行清洗",
+            "status": "satisfied",
+            "evidence": "README demonstrates strip_whitespace, normalize_case, fill_nulls, drop_nulls, drop_duplicates; arnio/cleaning.py (85KB) and quality.py implement cleaning."
+          },
+          {
+            "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+            "status": "uncertain",
+            "evidence": "There is arnio/integrations/duckdb.py (1.5KB) and README mentions DuckDB integration, but the README excerpt does not clearly show writing cleaned data into DuckDB or SQLite. SQLite is not mentioned at all. Writing capability to DuckDB is plausible but unverified."
+          },
+          {
+            "requirement": "提供可重复运行的流程",
+            "status": "uncertain",
+            "evidence": "The pipeline API is declarative and repeatable in principle, and examples/ folder is referenced, but no complete reproducible end-to-end pipeline script is shown in the evidence."
+          },
+          {
+            "requirement": "包含测试",
+            "status": "satisfied",
+            "evidence": "CI workflows (ci.yml, codecov, asan.yml, compat-matrix.yml), tests/images referenced, and extensive test-related workflows indicate a substantial test suite."
+          }
+        ],
+        "requirement_match": 50,
+        "learning_value": 55,
+        "code_clarity": 60,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 75,
+        "strengths": [
+          "Extensive documentation: README, API_REFERENCE.md, ARCHITECTURE.md, CLI_REFERENCE.md, CHANGELOG",
+          "Clear cleaning pipeline API with declarative steps",
+          "Strong CI/test infrastructure with coverage and multiple workflows",
+          "DuckDB and pandas integrations present",
+          "Active maintenance with recent pushes and many workflows"
+        ],
+        "weaknesses": [
+          "It is a data-cleaning library, not a full data pipeline project with ingestion-to-storage orchestration",
+          "Core engine is C++ compiled, adding build complexity beyond a pure-Python learning project",
+          "No clear evidence of writing cleaned data into DuckDB/SQLite as a pipeline output",
+          "SQLite support not evident",
+          "Large codebase (io.py 88KB, quality.py 140KB, schema.py 127KB) may overwhelm an intermediate learner in 6 hours",
+          "No task orchestration or explicit failure-handling pipeline demonstrated"
+        ],
+        "uncertainties": [
+          "Whether DuckDB integration supports writing cleaned data, not just reading",
+          "Whether a complete reproducible end-to-end pipeline example exists in examples/",
+          "Whether SQLite is supported at all",
+          "Actual test coverage and whether tests are runnable without C++ build toolchain",
+          "Whether the C++ build is required or prebuilt wheels suffice for reproduction"
+        ],
+        "suitable_for_next_stage": false
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "edwinweber/dbt_duckdb_demo_public",
+          "base_score": 83.55,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "Highest-scoring candidate and the strongest overall match for the user’s learning goal. It satisfies all stated must-haves: Python-based pipeline code, ingestion from public APIs/sample data, cleaning and transformation, DuckDB storage, a repeatable documented workflow, and substantial testing. It also covers the nice-to-haves with Dagster orchestration and failure handling. For someone learning data engineering, it exposes a realistic Bronze/Silver/Gold architecture and a full local stack without requiring a cloud account.",
+          "tradeoffs": [
+            "Large and complex project likely exceeding the 6-hour reproduction budget if attempted end-to-end.",
+            "Heavy dependency footprint including dbt, dlt, Dagster, Metabase, Docker, and optional S3/Fabric OneLake paths.",
+            "Core transformation logic is mainly dbt SQL/macros rather than pure Python, which may be less Python-centric than the user might expect.",
+            "Full end-to-end execution may depend on external API/MySQL access, while only a committed sample fixture is clearly available for local testing."
+          ],
+          "learning_path": [
+            "Start with the README architecture overview and design decisions to understand the intended Bronze/Silver/Gold flow before running anything.",
+            "Focus on the committed sample fixture and the test/CI path that runs a real dbt build, since this is the most practical way to get a repeatable local exercise within a limited time budget.",
+            "Trace one entity from dlt extraction into DuckDB, then through Bronze views, Silver hash-based CDC/SCD Type 2 logic, and Gold star-schema views.",
+            "Inspect the Dagster asset orchestration, daily schedule, and documented failure-handling behavior only after understanding the data flow.",
+            "Run a narrow subset of pytest and dbt data tests to learn how the project enforces correctness.",
+            "For a 6-hour session, deliberately skip optional Delta Lake, S3, Microsoft Fabric OneLake, and Metabase deep dives; treat them as later extensions rather than core learning requirements."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "TJaniF/airflow-elt-blueprint",
+          "base_score": 75.85,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "A strong but secondary choice. It demonstrates a complete ELT flow from CSV/public API ingestion through MinIO and DuckDB, transformations, and Streamlit reporting, with Airflow Datasets providing orchestration. It is useful for learning Airflow-based scheduling and containerized local data pipelines, but it scores below the top repository because data cleaning is not clearly evidenced, tests appear limited to DAG integrity, maintenance looks stale, and the setup is heavy for a 6-hour budget.",
+          "tradeoffs": [
+            "Requires Docker, Astro CLI, and multiple containers including Airflow components and MinIO, making setup heavier than necessary for the core DuckDB/SQLite requirement.",
+            "Adds MinIO and Streamlit, which increase conceptual and operational overhead beyond the user’s must-haves.",
+            "Tests appear to focus on DAG integrity rather than pipeline data logic.",
+            "Explicit data cleaning and failure handling are uncertain from the supplied evidence.",
+            "Last pushed in 2023, so maintenance activity appears stale."
+          ],
+          "learning_path": [
+            "Read the README setup instructions and DAG dependency overview first, then identify how Airflow Datasets connect the pipeline stages.",
+            "Understand the start DAG and Dataset-based scheduling before attempting to run the full environment.",
+            "Inspect the CSV and public API ingestion DAGs, then trace how data is loaded from MinIO into DuckDB.",
+            "Study the transform DAGs and Astro SDK usage to determine what transformation or cleaning is actually performed.",
+            "Review the DAG integrity tests and note the absence of data-logic tests; adding a small data test would be a useful learning exercise.",
+            "Defer custom operators, Streamlit reporting, and full multi-container setup until the core Airflow Dataset flow is understood."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "sanjeevai/disaster-response-pipeline",
+          "base_score": 75.1,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "The lowest-ranked candidate because it fails the explicit must-have of including tests and lacks orchestration or failure handling. It is still a clear, relatively reproducible ETL-to-SQLite example with explicit runnable commands, so it can be useful as a minimal reference for CSV ingestion, cleaning, SQLite storage, and downstream ML/Flask consumption. However, it is less suitable than the higher-ranked repositories for learning a modern, repeatable, tested Python data pipeline.",
+          "tradeoffs": [
+            "No tests are present, failing a stated must-have requirement.",
+            "No task orchestration or explicit failure handling.",
+            "Last pushed in 2019, so dependencies may be outdated.",
+            "Large binary artifacts such as the classifier pickle and SQLite database are committed to the repository.",
+            "Includes an ML training and Flask serving layer that goes beyond the core data engineering learning goal."
+          ],
+          "learning_path": [
+            "Read the README run commands to understand the ETL, model training, and Flask stages separately.",
+            "Inspect the ETL script first, focusing on how the CSV files are loaded, merged, cleaned, and written to SQLite.",
+            "Examine the resulting SQLite database schema and how cleaned data is structured for downstream use.",
+            "Only after understanding the ETL flow, inspect the ML training script and Flask app as optional downstream consumers.",
+            "Use the absence of tests as a learning opportunity by identifying where unit tests or data validation tests should be added.",
+            "Treat this repository as a simple SQLite ETL reference rather than a complete modern data engineering blueprint."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "edwinweber/dbt_duckdb_demo_public",
+      "final_reason": "The deterministic score ranking is respected: edwinweber/dbt_duckdb_demo_public leads with 83.55 and is the only candidate that clearly satisfies every must-have while also covering both nice-to-haves. It offers the richest data engineering learning material, strong testing, and orchestration without requiring a cloud account. Although it is likely too large to reproduce fully in 6 hours, a focused learning path using its sample fixture, dbt build/test flow, DuckDB medallion architecture, and Dagster orchestration makes it the best overall choice. The Airflow blueprint is a useful orchestration-focused alternative but is heavier, has uncertain cleaning evidence, and weaker tests. The disaster-response pipeline is simpler but fails the testing requirement and lacks orchestration."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "edwinweber/dbt_duckdb_demo_public",
+          "description": "The top-ranked repository is acknowledged as likely exceeding the user's 6-hour time budget and is heavy in dependencies (dbt, dlt, Dagster, Metabase, Docker). The ranker mitigates this with a focused learning path, but the user's explicit time constraint is only partially addressed; this is a warning rather than a critical violation since the ranker explicitly acknowledges and plans around it."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "edwinweber/dbt_duckdb_demo_public",
+          "description": "The recommendation states the pipeline 'satisfies all stated must-haves' including cleaning, but the evaluation notes core transformation logic is in dbt SQL/macros rather than pure Python. This is consistent with the evaluation (cleaning is satisfied via dbt models), but the user's Python-centric learning goal is only partially aligned; the ranker does flag this as a tradeoff."
+        },
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "edwinweber/dbt_duckdb_demo_public",
+          "description": "The ranker claims full end-to-end execution may depend on external API/MySQL access, which is consistent with the evaluation's uncertainty. No unsupported claim is made, but the reproducibility within 6 hours remains uncertain per the evaluation."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final ranking is consistent with the deterministic score ranking (no override). The best repository satisfies all must-haves per the evaluation, and the ranker explicitly acknowledges the main weaknesses (complexity, time budget, dbt-SQL-centric logic) as tradeoffs. No hard-requirement violation or unsupported claim is present. Warnings concern the tension between the top pick's complexity and the user's 6-hour budget and Python-centric goal, but the ranker provides a focused learning path to mitigate this. No retry needed."
+    },
+    "critic_feedback": "The final ranking is consistent with the deterministic score ranking (no override). The best repository satisfies all must-haves per the evaluation, and the ranker explicitly acknowledges the main weaknesses (complexity, time budget, dbt-SQL-centric logic) as tradeoffs. No hard-requirement violation or unsupported claim is present. Warnings concern the tension between the top pick's complexity and the user's 6-hour budget and Python-centric goal, but the ranker provides a focused learning path to mitigate this. No retry needed."
+  },
+  "quality_signals": {
+    "best_repository": "edwinweber/dbt_duckdb_demo_public",
+    "top_repositories": [
+      "edwinweber/dbt_duckdb_demo_public",
+      "TJaniF/airflow-elt-blueprint",
+      "sanjeevai/disaster-response-pipeline"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 9,
+    "evaluation_count": 9,
+    "best_must_have_checks": [
+      {
+        "requirement": "Python 数据流水线项目",
+        "status": "satisfied",
+        "evidence": "Python is the primary language; dlt extraction pipelines and Dagster asset factories live under ddd_python/ (e.g. ddd_python/ddd_dlt/dlt_pipeline_execution_functions.py, ddd_python/ddd_dagster/)."
+      },
+      {
+        "requirement": "从 CSV 或公开 API 读取数据",
+        "status": "satisfied",
+        "evidence": "README states it extracts from the Danish Parliament OData API and the public Rfam MySQL database via dlt; a committed 1.6 MB sample exists in tests/fixtures/bronze_sample."
+      },
+      {
+        "requirement": "对数据进行清洗",
+        "status": "satisfied",
+        "evidence": "dbt models implement Bronze views, Silver hash-based CDC into SCD Type 2 tables, and Gold star-schema views (dbt/models/bronze, dbt/models/gold, dbt/macros)."
+      },
+      {
+        "requirement": "将清洗后的数据写入 DuckDB 或 SQLite",
+        "status": "satisfied",
+        "evidence": "README describes Silver tables stored in the .duckdb file or DuckLake, with dbt + DuckDB as the transformation engine."
+      },
+      {
+        "requirement": "提供可重复运行的流程",
+        "status": "satisfied",
+        "evidence": "Docker Compose quick start with documented commands, Dagster daily schedule (06:00 Europe/Copenhagen), stateless incremental extraction with lookback windows, and CI running a real dbt build."
+      },
+      {
+        "requirement": "包含测试",
+        "status": "satisfied",
+        "evidence": "README reports ~300 pytest tests with an 80% coverage floor, 263 dbt data tests, ruff, mypy, and CI workflow at .github/workflows/ci.yml."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 3
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 99.143,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "edwinweber/dbt_duckdb_demo_public",
+            "description": "The top-ranked repository is acknowledged as likely exceeding the user's 6-hour time budget and is heavy in dependencies (dbt, dlt, Dagster, Metabase, Docker). The ranker mitigates this with a focused learning path, but the user's explicit time constraint is only partially addressed; this is a warning rather than a critical violation since the ranker explicitly acknowledges and plans around it."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "edwinweber/dbt_duckdb_demo_public",
+            "description": "The recommendation states the pipeline 'satisfies all stated must-haves' including cleaning, but the evaluation notes core transformation logic is in dbt SQL/macros rather than pure Python. This is consistent with the evaluation (cleaning is satisfied via dbt models), but the user's Python-centric learning goal is only partially aligned; the ranker does flag this as a tradeoff."
+          },
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "edwinweber/dbt_duckdb_demo_public",
+            "description": "The ranker claims full end-to-end execution may depend on external API/MySQL access, which is consistent with the evaluation's uncertainty. No unsupported claim is made, but the reproducibility within 6 hours remains uncertain per the evaluation."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final ranking is consistent with the deterministic score ranking (no override). The best repository satisfies all must-haves per the evaluation, and the ranker explicitly acknowledges the main weaknesses (complexity, time budget, dbt-SQL-centric logic) as tradeoffs. No hard-requirement violation or unsupported claim is present. Warnings concern the tension between the top pick's complexity and the user's 6-hour budget and Python-centric goal, but the ranker provides a focused learning path to mitigate this. No retry needed."
+      }
+    }
+  ],
+  "case_id": "10_local_data_pipeline",
+  "title": "本地数据处理流水线",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a1505d-3137-7b63-89bb-62798fd329fe",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a1505d-3137-7b63-89bb-62798fd329fe?poll=true",
+    "metrics": {
+      "span_count": 99,
+      "llm_calls": 15,
+      "github_tool_calls": 30,
+      "input_tokens": 81889,
+      "output_tokens": 15705,
+      "total_tokens": 97594,
+      "cost_usd": "0.019561326",
+      "llm_usage_coverage": {
+        "calls": 15,
+        "with_total_tokens": 15,
+        "with_cost": 15
+      },
+      "root_reported_tokens": 97594,
+      "root_reported_cost_usd": "0.019561326",
+      "root_latency_s": 99.122084
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "305b217593174e3ab21e7e707587bb18"
+    },
+    "nodes": [
+      {
+        "id": "01a1505d-3172-7a70-81c1-71be9f31288d",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:54:07.217869+00:00",
+        "end_time": "2026-10-18T18:54:10.764983+00:00",
+        "latency_s": 3.547114
+      },
+      {
+        "id": "01a1505d-3f4e-7333-ba5e-9c8d1cb45dad",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:54:10.765988+00:00",
+        "end_time": "2026-10-18T18:54:38.462047+00:00",
+        "latency_s": 27.696059
+      },
+      {
+        "id": "01a1505d-ab7f-73b1-9492-50e112d5332d",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:54:38.463551+00:00",
+        "end_time": "2026-10-18T18:55:30.350653+00:00",
+        "latency_s": 51.887102
+      },
+      {
+        "id": "01a1505e-7633-7821-8d56-696fc30c91f4",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:55:30.354658+00:00",
+        "end_time": "2026-10-18T18:55:43.792547+00:00",
+        "latency_s": 13.437889
+      },
+      {
+        "id": "01a1505e-aab4-7da0-b0e3-225aedde9f32",
+        "name": "critic",
+        "start_time": "2026-10-18T18:55:43.795543+00:00",
+        "end_time": "2026-10-18T18:55:46.278949+00:00",
+        "latency_s": 2.483406
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a1505e-aac2-7161-983c-0d16f094f38d",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.458831,
+        "input_tokens": 4994,
+        "output_tokens": 454,
+        "total_tokens": 5448,
+        "cost_usd": "0.00092742",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-7642-7963-98cd-7341c732463c",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 13.416824,
+        "input_tokens": 3493,
+        "output_tokens": 2497,
+        "total_tokens": 5990,
+        "cost_usd": "0.00192807",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-6747-7f10-8c91-72541da778f4",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.808752,
+        "input_tokens": 7619,
+        "output_tokens": 846,
+        "total_tokens": 8465,
+        "cost_usd": "0.001481106",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-6447-7a90-af66-f06a9f0f8e95",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.760691,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-61fb-7273-b746-1b75761c82e5",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.587615,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-5fb8-75a3-b5d5-dbf2ae1d5bea",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.579595,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-53e9-76d1-a8a2-a4a723c90f55",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.019192,
+        "input_tokens": 4346,
+        "output_tokens": 601,
+        "total_tokens": 4947,
+        "cost_usd": "0.000843156",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-51c9-7510-9361-d66c0fa995a6",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.539665,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-4f7e-76a3-9128-6aabd327116a",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.587128,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-4d26-7493-a0ff-96a311735983",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.599638,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-3f22-7250-8098-f92aabc3a9fd",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.583103,
+        "input_tokens": 7680,
+        "output_tokens": 700,
+        "total_tokens": 8380,
+        "cost_usd": "0.001402656",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-3ce5-7681-8f1a-202d3132b389",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.566287,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-38c3-7512-a2c0-6f11bfe010b6",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.057887,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-3678-7c40-836d-ca37456a8f5f",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.586863,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-2733-7a51-8d06-d4240592ee48",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.903753,
+        "input_tokens": 8057,
+        "output_tokens": 812,
+        "total_tokens": 8869,
+        "cost_usd": "0.001526406",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-2032-71d3-8a31-3d18e5fd1b72",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.785311,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-1e02-71a0-9d15-744df2e701f5",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.559701,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-1bb8-76d2-95b1-2720a8600855",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.585041,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-0b3e-79c1-a7e3-f20fdf8ac267",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 4.213155,
+        "input_tokens": 7940,
+        "output_tokens": 871,
+        "total_tokens": 8811,
+        "cost_usd": "0.001544256",
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-091c-7481-bf96-e0af6de28669",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.539644,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-06bd-7c21-891c-b5bc1beb69b4",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.606481,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505e-049d-73c1-8ef7-c4912bf01a0d",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.544291,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-f7e9-7531-89e6-b32dc1a79b68",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.247481,
+        "input_tokens": 5179,
+        "output_tokens": 734,
+        "total_tokens": 5913,
+        "cost_usd": "0.001047906",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-f5c6-7612-a117-728099f39346",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.541746,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-f3a5-75d3-b2cc-bca39df49a83",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.545563,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-f177-7253-a02b-af078cec14a8",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.558117,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-e32c-7892-90c8-da23fdcfdbc9",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.652826,
+        "input_tokens": 7711,
+        "output_tokens": 711,
+        "total_tokens": 8422,
+        "cost_usd": "0.001413906",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-e0dc-7352-9ca6-20e65443aa3e",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.585036,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-de5e-7870-9339-7a536c46df53",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.638475,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-dc26-7340-b773-c6588df539ad",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.567001,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-cdb0-7f20-89dc-e640839f1ad7",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.697993,
+        "input_tokens": 6020,
+        "output_tokens": 740,
+        "total_tokens": 6760,
+        "cost_usd": "0.001177656",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-cb8d-7182-81d3-08fc7b171a1d",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.541581,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-c987-7653-b329-6899d3adff78",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.517336,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-c765-7dd0-b9ea-ac0e8877b2aa",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.545003,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-b6ee-7971-91b6-07cdc46ca550",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 4.210497,
+        "input_tokens": 7986,
+        "output_tokens": 792,
+        "total_tokens": 8778,
+        "cost_usd": "0.001522572",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-affe-76d1-9606-6b59d142ab05",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.76764,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-add0-7bc2-a3f6-ca5dac7a7813",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.557658,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-ab81-7470-b578-5712a081d1ac",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.590896,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-7eeb-7ea0-a1f6-796aaf36bf30",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 11.407298,
+        "input_tokens": 4130,
+        "output_tokens": 2311,
+        "total_tokens": 6441,
+        "cost_usd": "0.001949652",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-4f48-7242-be9b-64f2438ebcaa",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 12.181611,
+        "input_tokens": 4697,
+        "output_tokens": 2390,
+        "total_tokens": 7087,
+        "cost_usd": "0.001931574",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-4bf7-7d31-a326-4a2199759c9f",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.788632,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-4bf4-7f31-8f05-4cb9067c2b0f",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.845774,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-4bf3-7b31-ae90-63edcdd47a16",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.849638,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-3f52-7d81-ba43-a1451751c363",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 3.226265,
+        "input_tokens": 827,
+        "output_tokens": 590,
+        "total_tokens": 1417,
+        "cost_usd": "0.000421602",
+        "has_error": false
+      },
+      {
+        "id": "01a1505d-3226-76a0-8773-de7d43397e76",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 3.363495,
+        "input_tokens": 1210,
+        "output_tokens": 656,
+        "total_tokens": 1866,
+        "cost_usd": "0.000443388",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "im-anishraj/arnio",
+          "max_entries": 120
+        },
+        "input_sha256": "eb25f55c4483c9f50c0b87c8fc29dd11c90a1330c490996817f49a5b889318a5",
+        "output_sha256": "cd3381be1271742ce209d71153085acffd29f69ef5ddb8eb8643966ca7f3a338"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "im-anishraj/arnio"
+        },
+        "input_sha256": "5ac4bf23f9f0dd879001c5450de881c1db9b6721e289c54d5250d3114b8c4aef",
+        "output_sha256": "87fa6465f38f3fd7f204ea14e45b9e9c3a2e3825bc6afffcdb9121ff3095e259"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "im-anishraj/arnio"
+        },
+        "input_sha256": "5ac4bf23f9f0dd879001c5450de881c1db9b6721e289c54d5250d3114b8c4aef",
+        "output_sha256": "0e559702b0c6100552566df31a408e3bac51ca7c8e04b1f97e4c2e1b444209ef"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "sanjeevai/disaster-response-pipeline",
+          "max_entries": 120
+        },
+        "input_sha256": "54bd23a72913c05e92e265bab9b35cbe5fa3977114afeb5f8379b38fc72bb287",
+        "output_sha256": "3a275f9c7ba851ce443f8a0550a8f10171df14344736ca9d83fc045bf1a16201"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "sanjeevai/disaster-response-pipeline"
+        },
+        "input_sha256": "a5f8c2271c22ef12a8a339a0e3eeb2077e08445ce7b6d941562dfa413806d71f",
+        "output_sha256": "a3229e1cff7e976ca6d05c8759efb0564bc12339c818533db775f84da128ec8f"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "sanjeevai/disaster-response-pipeline"
+        },
+        "input_sha256": "a5f8c2271c22ef12a8a339a0e3eeb2077e08445ce7b6d941562dfa413806d71f",
+        "output_sha256": "15cd701c9e4bb404a7534448d5ffe791c6b7dd639fb886530677df7241e6a1c3"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "ceumicrodata/mETL",
+          "max_entries": 120
+        },
+        "input_sha256": "6dd32936672651df71dbda26c93b8ac06c60234e0eff556ebbe76151fcb4f4bb",
+        "output_sha256": "b601b9af5d008783b446ddc622ef466f86b9deaec0233d63adcb61c2c4425c0f"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "ceumicrodata/mETL"
+        },
+        "input_sha256": "4eaae0e53158be6c3b3d49c135aa0d07222a8a841e55fbd829cea13bb57f9a9b",
+        "output_sha256": "07b4b122c38b9f9ed66dce1840e2a64522faa07889f6c98e1ff02857bd76c2f2"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "ceumicrodata/mETL"
+        },
+        "input_sha256": "4eaae0e53158be6c3b3d49c135aa0d07222a8a841e55fbd829cea13bb57f9a9b",
+        "output_sha256": "106743bf61c2a12198f65220cc848e49f81a8a907c64448a0eb22eaf3ab7dd20"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "sophie-nguyenthuthuy/data-engineering",
+          "max_entries": 120
+        },
+        "input_sha256": "5afac8c59865a2a6fea70fd86dae9232a16cae92e3da05635c632e5041b820d2",
+        "output_sha256": "127a8394de60a2461c9a27e5dafc1b5ed69d3e139233a9bc70f2713b0d721505"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "sophie-nguyenthuthuy/data-engineering"
+        },
+        "input_sha256": "f3c43396528816e2de3876f185f5c8efccdbaaf797441bf50e4c43a737bdc619",
+        "output_sha256": "d18b56ffdb03aab7ca94851a4fb2a36fafec20f8b2ab36e2961d90e904f9da5b"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "sophie-nguyenthuthuy/data-engineering"
+        },
+        "input_sha256": "f3c43396528816e2de3876f185f5c8efccdbaaf797441bf50e4c43a737bdc619",
+        "output_sha256": "8475ef4c888ba0e65148e91a7633d3c5c67dbc305672ad7426c7d4732f3f52e4"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "edwinweber/dbt_duckdb_demo_public",
+          "max_entries": 120
+        },
+        "input_sha256": "6988a306ad281a69a33c1ccc47beb43aae42d518201afeb8e9768b74ee966c0c",
+        "output_sha256": "c715228cf25213da27f1083a8fff4d02be9b8948d7d79fd66d1a6c46b535dabf"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "edwinweber/dbt_duckdb_demo_public"
+        },
+        "input_sha256": "7399398516a8b530224df10c0f777ecb254bce5ef298f6f999c2595f13abc0ec",
+        "output_sha256": "d64a918ea858f6fff64ff9fe8b900c503e4cedb943a77f8e383a1463342501ef"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "edwinweber/dbt_duckdb_demo_public"
+        },
+        "input_sha256": "7399398516a8b530224df10c0f777ecb254bce5ef298f6f999c2595f13abc0ec",
+        "output_sha256": "3e4353dd90c55552be5da883ac65ccf6af7f495a3cef2fb18329e6679710f2b6"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "TJaniF/airflow-elt-blueprint",
+          "max_entries": 120
+        },
+        "input_sha256": "1311080e73b3b4177fda01aa1c83d929114409aecd40dd486f81982425857064",
+        "output_sha256": "11dd06b89b9bdeba6432752b00ae612c5bf77971184e529edf1298ab0f6e687f"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "TJaniF/airflow-elt-blueprint"
+        },
+        "input_sha256": "8f0f54659b29476227ae5e73c5f68f615a1050c893e546471c0717b131b0ef67",
+        "output_sha256": "1bbc7c528c185c9cc89bb5f4055777f7b5a522ee9ed7f8a7070e0fce1edb5552"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "TJaniF/airflow-elt-blueprint"
+        },
+        "input_sha256": "8f0f54659b29476227ae5e73c5f68f615a1050c893e546471c0717b131b0ef67",
+        "output_sha256": "ea62eabac2a3af14f5f855d3c03121475bfcff01ae37653a5ef44f54452504bb"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "master",
+          "full_name": "duckdb/dbt-duckdb",
+          "max_entries": 120
+        },
+        "input_sha256": "d47ae15fab6ebbee354c727b08e7399cadf4aec10858df04d89d44ffa2a25e92",
+        "output_sha256": "0f94753e82fcee41978369a066aeac401b4517ba69cc94fe2db768aeb94114d7"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "duckdb/dbt-duckdb"
+        },
+        "input_sha256": "0d99d41a1a9c7f59578bce0291ed7834694a010f1f923186406f10e3f8bb061b",
+        "output_sha256": "5c616f9d9f076fc8d9b1950af8e042d8f758005384d7b591f63b50652fa98b5b"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "duckdb/dbt-duckdb"
+        },
+        "input_sha256": "0d99d41a1a9c7f59578bce0291ed7834694a010f1f923186406f10e3f8bb061b",
+        "output_sha256": "4a89e2725b57ff91af7eb0357f4df06f78c80930c3358ca8c276779f2e207e29"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "danielbeach/data-engineering-practice",
+          "max_entries": 120
+        },
+        "input_sha256": "99f7df6ef323342571c4c90ca45470d62defcbe084dbf327c58d71242e07b9ce",
+        "output_sha256": "f9f1898d3f38d6cc815df590c825d20f78e550263303bcb98c0accb237e5a896"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "danielbeach/data-engineering-practice"
+        },
+        "input_sha256": "753d1ca0d1091a1882df6a367141a4430020fbb243796ec37312afa771e35d48",
+        "output_sha256": "fd9bcd67ffd8dcfd2a32bc3573e7241b04b06fe1b6d52e0992164bd442a55164"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "danielbeach/data-engineering-practice"
+        },
+        "input_sha256": "753d1ca0d1091a1882df6a367141a4430020fbb243796ec37312afa771e35d48",
+        "output_sha256": "5e5bebb8bffa82cc5c7b28094bea631c50d1dab17b336005577b676588771f9f"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "devel",
+          "full_name": "dlt-hub/dlt",
+          "max_entries": 120
+        },
+        "input_sha256": "a61484c85a39be107313fa04e859af4a4cb1c9cb1b3cba886b76a1864ea28fce",
+        "output_sha256": "41527a4c2601d0c29c2160b5fba6d2e9f2028ef62f38027ca2b737cdb09edc51"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "dlt-hub/dlt"
+        },
+        "input_sha256": "c6626229b43bfb08899a5fa0e80eda545c5a0d9d412f6630615228bf63344765",
+        "output_sha256": "cfc1eeb9e333db2240c4a93099a0953a07ec363fc7b76f96824a42bb75a93f1d"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "dlt-hub/dlt"
+        },
+        "input_sha256": "c6626229b43bfb08899a5fa0e80eda545c5a0d9d412f6630615228bf63344765",
+        "output_sha256": "9dfb66312201779aed3405d9a1a0a9426aca30829eaa889db0efc283c8ea5cbc"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "\"data engineering\" python api pipeline orchestration duckdb sqlite in:readme language:Python archived:false"
+        },
+        "input_sha256": "1ff750470cb690ad101ac1f61fabf900b329d3aaaf8a2bf9f8059b4cca61fdd1",
+        "output_sha256": "6625f6e11489fbcd0e7073e504071f2301c4cdaa63a7c78ca05c6f2e6962c2bc"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "sqlite etl python csv data cleaning tests in:readme language:Python archived:false"
+        },
+        "input_sha256": "5789353c8c06700ed3c356e44f9ed56b6b17d7931e3b25884cb960f43eee5dab",
+        "output_sha256": "b6252cae05b2fe59c3a1fc498418ce117437d291f5eacdcf1e90e51d59744aae"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "duckdb data pipeline csv python tests in:readme language:Python archived:false"
+        },
+        "input_sha256": "1047624b2229b6925bcebc3b18c9868ccd3400a18e1ca649f1acfcb13a6b72f0",
+        "output_sha256": "24abc29202a4a5f68ec27515ee77308dafce8c92af5bf20a6cdc395c92a43d5f"
+      }
+    ]
+  }
+}

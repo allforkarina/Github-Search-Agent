@@ -22,7 +22,7 @@ def get_llm(thinking: bool = True) -> ChatDeepSeek:
 
     api_key = os.getenv("DEEPSEEK_API_KEY")
     # Default to deepseek-v4-flash if not set
-    model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")  
+    model = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")  
 
     if not api_key:
         raise ValueError(

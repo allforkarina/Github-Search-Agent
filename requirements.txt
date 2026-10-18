@@ -1,6 +1,7 @@
 langchain-deepseek
 langchain-core
 langgraph
+langsmith
 pydantic
 python-dotenv
 requests

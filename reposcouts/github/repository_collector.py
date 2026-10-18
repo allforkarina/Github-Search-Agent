@@ -40,7 +40,7 @@ def collect_repository_evidence(
             "max_entries": 120,
         }
     )
-
+    
     return RepositoryEvidence(
         full_name=full_name,
         metadata=repo_info,

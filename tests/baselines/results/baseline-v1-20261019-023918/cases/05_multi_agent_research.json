@@ -1,0 +1,955 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:46:05.429836+08:00",
+  "finished_at": "2026-10-19T02:47:23.599205+08:00",
+  "business_run_id": "cc61c1b45c1c49d8b203a4f28595e148",
+  "workflow_wall_time_s": 54.708,
+  "collection_wall_time_s": 78.168,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "多 Agent 分工协作完成资料研究并生成报告",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "CrewAI",
+        "AutoGen"
+      ],
+      "difficulty": "intermediate",
+      "must_have": [
+        "包含可运行的研究或报告生成任务",
+        "包含明确的 Agent 角色定义",
+        "包含任务交接或协作流程代码"
+      ],
+      "nice_to_have": [
+        "包含失败处理机制",
+        "包含反馈机制"
+      ],
+      "exclusions": [
+        "仅展示多个角色轮流聊天、没有具体产出的示例"
+      ],
+      "learning_goal": "理解多 Agent 如何分工协作完成资料研究并生成报告",
+      "time_budget_in_hours": 12
+    },
+    "candidates": {
+      "search_queries": [
+        "crewai multi agent research report generation python",
+        "autogen multi agent report writing python roles",
+        "autogen group chat agents report generation research python"
+      ],
+      "candidates": [
+        {
+          "full_name": "axon011/multi-agent-pipeline",
+          "reason": "Uses CrewAI and LangGraph for multi-agent research and report generation, matching the requested Python stack and report-generation workflow; worth inspecting for agent roles and collaboration flow."
+        },
+        {
+          "full_name": "Abhishek-at-git/Multi-agent-research-platform",
+          "reason": "Explicitly describes specialized CrewAI agents for web research, analysis, and professional report generation, aligning with the must-have research/report task and clear agent role definitions."
+        },
+        {
+          "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system",
+          "reason": "CrewAI-based multi-agent research platform focused on automated research, analysis, and report generation in Python; suitable for examining agent division of labor and workflow."
+        },
+        {
+          "full_name": "smenon2710/ai-investment-research-assistant",
+          "reason": "CrewAI multi-agent research assistant with domain-specific analysis agents and PDF report generation, providing a concrete end-to-end research/report use case to inspect."
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "axon011/multi-agent-pipeline",
+        "purpose_summary": "A 4-agent (Planner → Researcher → Writer → Critic) research and report generation pipeline built with LangGraph state machines and CrewAI, served via FastAPI with SSE streaming, structured Pydantic outputs, a self-correcting critic/repair loop, and an eval harness.",
+        "must_have_checks": [
+          {
+            "requirement": "包含可运行的研究或报告生成任务",
+            "status": "satisfied",
+            "evidence": "README describes producing 2,000+ word research reports with citations from arXiv/Wikipedia/GitHub/HN/DDG; app/agents/researcher.py, writer.py, app/routes/research.py, and eval/run.py exist. Runnable via FastAPI endpoint and eval harness."
+          },
+          {
+            "requirement": "包含明确的 Agent 角色定义",
+            "status": "satisfied",
+            "evidence": "Four distinct agents with dedicated files: app/agents/planner.py, researcher.py, writer.py, critic.py. README explicitly names Planner → Researcher → Writer → Critic roles with strict role boundaries."
+          },
+          {
+            "requirement": "包含任务交接或协作流程代码",
+            "status": "satisfied",
+            "evidence": "app/graph/pipeline.py implements a LangGraph typed-state machine with conditional critic→repair edge; app/crew/pipeline.py implements a CrewAI sequential crew. Both orchestrate handoffs between agents."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 88,
+        "code_clarity": 82,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 55,
+        "strengths": [
+          "Clear 4-agent role separation with dedicated modules per agent",
+          "Two interchangeable orchestration engines (LangGraph and CrewAI) directly matching the requested stack",
+          "Explicit task handoff/collaboration code in graph and crew pipelines",
+          "Self-correcting critic/repair loop demonstrates feedback mechanism (nice-to-have)",
+          "Structured Pydantic schemas enforce role boundaries and verifiable citations",
+          "Includes eval harness, tests, Docker, CI, and detailed README"
+        ],
+        "weaknesses": [
+          "Requires multiple external LLM API keys (Claude, OpenAI-compatible/GLM) and optional Langfuse, raising setup cost",
+          "Large surface area (FastAPI, SSE, LangGraph, CrewAI, eval, observability) may be heavy for a 12-hour budget",
+          "Zero stars/forks and very recent creation; limited community validation",
+          "README appears truncated in evidence, so full setup instructions are not fully verifiable"
+        ],
+        "uncertainties": [
+          "Actual runnability and dependency pinning not verifiable from evidence alone",
+          "Whether failure handling beyond the critic repair pass exists (e.g., retries, error recovery)",
+          "Exact setup time and API cost to reproduce end-to-end",
+          "Maintenance activity beyond a single recent push is unclear"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "Abhishek-at-git/Multi-agent-research-platform",
+        "purpose_summary": "A CrewAI-based multi-agent research platform where specialized agents (Manager, Search, Analysis, Writer) sequentially collaborate to research a topic via DuckDuckGo, synthesize findings, and produce Markdown/PDF reports with citations, exposed via Streamlit UI and CLI.",
+        "must_have_checks": [
+          {
+            "requirement": "包含可运行的研究或报告生成任务",
+            "status": "satisfied",
+            "evidence": "README describes a full research-to-report pipeline; repo contains main.py, app.py, tasks/ (manager_task, search_task, analysis_task, writing_task), and sample outputs in outputs/reports/ (both .md and .pdf), indicating a runnable report generation task."
+          },
+          {
+            "requirement": "包含明确的 Agent 角色定义",
+            "status": "satisfied",
+            "evidence": "Dedicated agents/ directory with manager.py, search_agent.py, analysis_agent.py, writer_agent.py; README explicitly names Manager Agent (Research Director), Search Agent (Lead Web Research Scout), Analysis Agent, Writer Agent with defined responsibilities."
+          },
+          {
+            "requirement": "包含任务交接或协作流程代码",
+            "status": "satisfied",
+            "evidence": "Separate tasks/ modules (manager_task, search_task, analysis_task, writing_task) plus README's sequential pipeline (Scope -> Discover -> Synthesize -> Deliver -> Audit) indicate CrewAI task chaining/handoff; main.py orchestrates the crew."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 80,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 72,
+        "maintenance_health": 30,
+        "strengths": [
+          "Clear separation of agents/, tasks/, tools/, utils/, config/ — easy to trace end-to-end architecture",
+          "Explicit role definitions for four specialized agents matching the learning goal",
+          "Sequential task handoff pipeline directly demonstrates multi-agent collaboration",
+          "Rich README with architecture diagram, step-by-step pipeline, and troubleshooting",
+          "Includes sample outputs (Markdown + PDF) proving concrete deliverables",
+          "Uses CrewAI (one of the requested stacks) with DuckDuckGo search tool and retry/backoff"
+        ],
+        "weaknesses": [
+          "No AutoGen usage — only CrewAI, so one of the two requested stacks is absent",
+          "Very new/low-engagement repo (0 stars, 0 forks, single push) — maintenance health unproven",
+          "Duplicated top-level and research-assistant/ directory structure may confuse learners",
+          "Failure handling and feedback mechanisms not clearly evidenced in README beyond search retry/backoff",
+          "Requires external API keys (Gemini/OpenAI) and network access, adding setup friction"
+        ],
+        "uncertainties": [
+          "Whether explicit feedback/reflection loop exists between agents (nice-to-have) is not confirmed from evidence",
+          "Actual code quality of agent/task modules cannot be fully verified from structure alone",
+          "Whether the pipeline runs reliably end-to-end within a 12-hour budget is unverified",
+          "AutoGen requirement satisfaction is uncertain — no AutoGen files present"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system",
+        "purpose_summary": "A CrewAI + Groq based multi-agent research platform with a Streamlit UI that orchestrates three specialized agents (Info Collector, Data Processor, Report Generator) to gather web data, analyze it, and produce professional Markdown reports.",
+        "must_have_checks": [
+          {
+            "requirement": "包含可运行的研究或报告生成任务",
+            "status": "satisfied",
+            "evidence": "README describes automated research and report generation; repository contains tasks/research_task.py, tasks/analysis_task.py, tasks/writing_task.py, plus sample outputs (final_report.md, research_findings.md, analysis_report.md, reports/ directory)."
+          },
+          {
+            "requirement": "包含明确的 Agent 角色定义",
+            "status": "satisfied",
+            "evidence": "Dedicated agent modules: agents/research_specialist.py, agents/data_analyst.py, agents/content_writer.py, matching the three roles described in README (Info Collector, Data Processor, Report Generator)."
+          },
+          {
+            "requirement": "包含任务交接或协作流程代码",
+            "status": "satisfied",
+            "evidence": "crew.py orchestrates the agents/tasks; README architecture diagram shows sequential handoff Agent1→Agent2→Agent3 with corresponding tasks. Exact handoff wiring not fully visible but crew.py plus task files strongly indicate a CrewAI sequential process."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 75,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 70,
+        "maintenance_health": 45,
+        "strengths": [
+          "Clear three-agent role separation with dedicated files per agent",
+          "End-to-end pipeline from research to analysis to report generation with concrete sample outputs",
+          "Well-structured README with architecture diagram, tech stack, and usage guidance",
+          "Uses CrewAI as requested and includes real tools (SerperDevTool, FileRead/Write)",
+          "Small, focused codebase (agents/, tasks/, crew.py, app.py) that is easy to navigate"
+        ],
+        "weaknesses": [
+          "No AutoGen usage despite it being in the requested stack",
+          "Very low community engagement (0 stars/forks/watchers) and no license",
+          "requirements.txt is large (8KB) suggesting heavy dependency surface",
+          "Requires external API keys (Groq, Serper) which adds setup friction",
+          "No visible failure handling or feedback mechanism code in the evidence"
+        ],
+        "uncertainties": [
+          "Exact task handoff/context passing implementation in crew.py not fully visible",
+          "Whether failure handling or retry logic exists in the code",
+          "Actual runnability given dependency versions and API key requirements",
+          "Whether the Streamlit UI adds significant setup complexity beyond the core pipeline"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "smenon2710/ai-investment-research-assistant",
+        "purpose_summary": "A Streamlit-based AI investment research assistant that uses CrewAI-style agents (market data, fundamentals, news sentiment, report writer) to analyze stocks and generate PDF/HTML reports.",
+        "must_have_checks": [
+          {
+            "requirement": "包含可运行的研究或报告生成任务",
+            "status": "satisfied",
+            "evidence": "README describes single stock analysis, comparison, and PDF report generation; agents/report_writer_agent.py exists and app.py is a runnable Streamlit entry point."
+          },
+          {
+            "requirement": "包含明确的 Agent 角色定义",
+            "status": "satisfied",
+            "evidence": "Four distinct agent files: fundamental_agent.py, market_data_agent.py, news_sentiment_agent.py, report_writer_agent.py, each with a named role."
+          },
+          {
+            "requirement": "包含任务交接或协作流程代码",
+            "status": "uncertain",
+            "evidence": "crews/investment_crew.py is described as a CrewAI-style orchestrator but README states it is 'not currently called by app.py and out of sync with the current agent method names'; the actual collaboration wiring is unclear from evidence."
+          }
+        ],
+        "requirement_match": 67,
+        "learning_value": 55,
+        "code_clarity": 55,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 60,
+        "maintenance_health": 25,
+        "strengths": [
+          "Clear separation into four named agent roles covering research subtasks",
+          "Concrete output artifact (PDF/HTML report) rather than pure chat",
+          "README documents setup, dependencies, and known limitations honestly",
+          "Graceful fallbacks documented (spaCy, tweepy, TextBlob)"
+        ],
+        "weaknesses": [
+          "Core CrewAI orchestrator (crews/investment_crew.py) is reportedly unwired and out of sync, undermining the multi-agent collaboration learning goal",
+          "No AutoGen usage despite technology stack preference",
+          "Unimplemented stubs (watchlist, historical trends) and an unwired src/ prototype add noise",
+          "Zero stars/forks and very recent single push suggest minimal community validation"
+        ],
+        "uncertainties": [
+          "Whether agents actually hand off tasks to each other at runtime or are invoked independently by app.py",
+          "Whether the CrewAI crew can be made functional with modest effort within the 12-hour budget",
+          "Actual code quality inside agent files (not shown in evidence)",
+          "No failure-handling or feedback-loop mechanisms confirmed"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "axon011/multi-agent-pipeline",
+          "base_score": 84.51,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "Best overall fit: it has the highest deterministic score and the strongest evidence for the learning goal. It defines four clear agent roles (Planner, Researcher, Writer, Critic), includes runnable research/report generation, shows explicit handoff/collaboration code through both LangGraph and CrewAI pipelines, and demonstrates a critic/repair feedback loop. Compared with the alternatives, it gives the richest view of how agents collaborate and self-correct, even though it is heavier to reproduce.",
+          "tradeoffs": [
+            "Requires multiple external LLM API keys and optional observability setup, raising setup cost within a 12-hour budget.",
+            "The repository covers a large surface area including FastAPI, SSE, LangGraph, CrewAI, evaluation, and observability, which may distract from the core multi-agent workflow.",
+            "No AutoGen usage is evidenced, so it only partially matches the requested CrewAI/AutoGen stack.",
+            "Low community validation: zero stars/forks and very recent creation.",
+            "Failure handling beyond the critic/repair pass and full setup reliability are not fully verifiable from the supplied evidence."
+          ],
+          "learning_path": [
+            "Read the README architecture and first map the intended Planner → Researcher → Writer → Critic responsibilities.",
+            "Inspect the dedicated agent modules for each role to understand prompts, role boundaries, and structured outputs.",
+            "Trace the orchestration in the LangGraph pipeline and the CrewAI pipeline, focusing on task handoff and the conditional critic-to-repair edge.",
+            "Run the smallest available research/report path after configuring required API keys, then inspect generated reports and citation handling.",
+            "Study the critic/repair loop and structured Pydantic outputs as the feedback mechanism, and only then explore FastAPI/SSE, evaluation harness, and observability if time allows."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "Abhishek-at-git/Multi-agent-research-platform",
+          "base_score": 83.96,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "A strong, more focused CrewAI alternative. It clearly defines Manager, Search, Analysis, and Writer agents and uses separate task modules to demonstrate sequential collaboration ending in Markdown/PDF reports. It is easier to trace and likely easier to reproduce than the top repository, but it lacks AutoGen, has weaker evidence of feedback/reflection loops, and has lower maintenance health.",
+          "tradeoffs": [
+            "Only uses CrewAI; no AutoGen usage is evidenced despite AutoGen being in the requested stack.",
+            "Very low community engagement and a single recent push make maintenance health unproven.",
+            "Duplicated top-level and research-assistant/ structure may confuse learners when tracing the active entry point.",
+            "Feedback and failure handling beyond search retry/backoff are not clearly evidenced.",
+            "Requires external API keys and network access for search and LLM calls."
+          ],
+          "learning_path": [
+            "Read the README architecture and pipeline sequence to understand Scope → Discover → Synthesize → Deliver → Audit.",
+            "Inspect the agent role modules for Manager, Search, Analysis, and Writer to compare responsibilities and boundaries.",
+            "Trace the task modules and main.py to see how CrewAI chains tasks and passes context between agents.",
+            "Run the CLI or Streamlit path after configuring API keys, then inspect sample Markdown/PDF outputs to connect code to concrete deliverables.",
+            "Examine the DuckDuckGo/search tool and retry/backoff behavior, then assess whether any additional feedback loop exists between agents."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system",
+          "base_score": 81.7,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "A compact CrewAI research-to-report pipeline with three clear agent roles and concrete sample outputs. It is easy to navigate and demonstrates sequential research, analysis, and report writing, but it is less compelling than the higher-ranked options because it lacks AutoGen, has very low community engagement, no visible feedback/failure-handling code, and a large dependency surface.",
+          "tradeoffs": [
+            "Only uses CrewAI; no AutoGen usage is evidenced despite AutoGen being in the requested stack.",
+            "Very low community engagement and no license reduce confidence in maintenance and reuse.",
+            "requirements.txt is large, suggesting a heavy dependency surface for a short learning budget.",
+            "Requires external Groq and Serper API keys, adding setup friction.",
+            "No visible failure handling or feedback mechanism code in the supplied evidence."
+          ],
+          "learning_path": [
+            "Read the README architecture diagram to understand the three-agent handoff from Info Collector to Data Processor to Report Generator.",
+            "Inspect the dedicated agent modules for the research specialist, data analyst, and content writer roles.",
+            "Trace the task modules and crew.py to understand how CrewAI tasks are sequenced and how context is passed.",
+            "Run the Streamlit or core crew path with the required API keys, then compare the generated report with sample Markdown outputs in the repository.",
+            "Review the tools and dependency file to understand external search/data access and setup complexity, then check whether any retry or feedback logic is present."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "axon011/multi-agent-pipeline",
+      "final_reason": "The deterministic scores are close (84.51, 83.96, 81.70), and no strong evidence justifies overriding that ordering. axon011/multi-agent-pipeline is the best choice because it has the highest score and the most direct evidence for the user's learning goal: explicit agent roles, runnable research/report generation, concrete handoff orchestration, structured outputs, and a critic/repair feedback loop. The alternatives are simpler CrewAI examples and may be easier to reproduce, but they lack AutoGen and provide weaker evidence of feedback mechanisms and richer collaboration behavior. Note that none of the supplied repositories evidence AutoGen usage, so the best pick is relative to the available candidates rather than a perfect stack match."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "hard_requirement",
+          "repository": "axon011/multi-agent-pipeline",
+          "description": "The user's technology_stack lists both CrewAI and AutoGen, but no candidate evidences AutoGen usage. The ranker explicitly acknowledges this. Since technology_stack is not in must_have and the best pick still satisfies all three explicit must-have requirements, this is a warning rather than a critical violation, but the user should be aware the stack match is partial."
+        },
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "axon011/multi-agent-pipeline",
+          "description": "The top pick has the lowest reproduction_feasibility (62) and maintenance_health (55) among candidates, and the user has a 12-hour budget. The ranker justifies this via highest deterministic score and strongest learning evidence, which is a defensible user-specific reason, but the reproduction risk within the time budget is a real concern worth flagging."
+        },
+        {
+          "severity": "warning",
+          "category": "unsupported_claim",
+          "repository": "axon011/multi-agent-pipeline",
+          "description": "The recommendation asserts a 'critic/repair feedback loop' and 'structured Pydantic outputs' as demonstrated features; these are supported by the evaluation (self-correcting critic/repair loop, structured Pydantic schemas), so this is acceptable, but the claim that failure handling 'beyond the critic/repair pass' is unverifiable is correctly hedged in tradeoffs."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final ranking is consistent with the deterministic score ordering (no override), and the best repository satisfies all three explicit must-have requirements with evidence-backed claims. Recommendation claims about agent roles, handoff code, and the critic/repair feedback loop are supported by the RepositoryEvaluation. The main caveats are warnings, not critical failures: (1) no candidate evidences AutoGen, so the requested CrewAI+AutoGen stack is only partially matched — this is transparently disclosed; (2) the top pick has the weakest reproduction feasibility and maintenance health, which conflicts somewhat with the 12-hour budget, though the ranker provides an explicit learning-value justification. No hard-requirement violation or logical contradiction exists, so no retry is needed. The user should treat the AutoGen gap and setup cost as known limitations."
+    },
+    "critic_feedback": "The final ranking is consistent with the deterministic score ordering (no override), and the best repository satisfies all three explicit must-have requirements with evidence-backed claims. Recommendation claims about agent roles, handoff code, and the critic/repair feedback loop are supported by the RepositoryEvaluation. The main caveats are warnings, not critical failures: (1) no candidate evidences AutoGen, so the requested CrewAI+AutoGen stack is only partially matched — this is transparently disclosed; (2) the top pick has the weakest reproduction feasibility and maintenance health, which conflicts somewhat with the 12-hour budget, though the ranker provides an explicit learning-value justification. No hard-requirement violation or logical contradiction exists, so no retry is needed. The user should treat the AutoGen gap and setup cost as known limitations."
+  },
+  "quality_signals": {
+    "best_repository": "axon011/multi-agent-pipeline",
+    "top_repositories": [
+      "axon011/multi-agent-pipeline",
+      "Abhishek-at-git/Multi-agent-research-platform",
+      "PasinduSuraweera/mairs-multi-agent-intelligent-research-system"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 4,
+    "evaluation_count": 4,
+    "best_must_have_checks": [
+      {
+        "requirement": "包含可运行的研究或报告生成任务",
+        "status": "satisfied",
+        "evidence": "README describes producing 2,000+ word research reports with citations from arXiv/Wikipedia/GitHub/HN/DDG; app/agents/researcher.py, writer.py, app/routes/research.py, and eval/run.py exist. Runnable via FastAPI endpoint and eval harness."
+      },
+      {
+        "requirement": "包含明确的 Agent 角色定义",
+        "status": "satisfied",
+        "evidence": "Four distinct agents with dedicated files: app/agents/planner.py, researcher.py, writer.py, critic.py. README explicitly names Planner → Researcher → Writer → Critic roles with strict role boundaries."
+      },
+      {
+        "requirement": "包含任务交接或协作流程代码",
+        "status": "satisfied",
+        "evidence": "app/graph/pipeline.py implements a LangGraph typed-state machine with conditional critic→repair edge; app/crew/pipeline.py implements a CrewAI sequential crew. Both orchestrate handoffs between agents."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 3
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 54.704,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "hard_requirement",
+            "repository": "axon011/multi-agent-pipeline",
+            "description": "The user's technology_stack lists both CrewAI and AutoGen, but no candidate evidences AutoGen usage. The ranker explicitly acknowledges this. Since technology_stack is not in must_have and the best pick still satisfies all three explicit must-have requirements, this is a warning rather than a critical violation, but the user should be aware the stack match is partial."
+          },
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "axon011/multi-agent-pipeline",
+            "description": "The top pick has the lowest reproduction_feasibility (62) and maintenance_health (55) among candidates, and the user has a 12-hour budget. The ranker justifies this via highest deterministic score and strongest learning evidence, which is a defensible user-specific reason, but the reproduction risk within the time budget is a real concern worth flagging."
+          },
+          {
+            "severity": "warning",
+            "category": "unsupported_claim",
+            "repository": "axon011/multi-agent-pipeline",
+            "description": "The recommendation asserts a 'critic/repair feedback loop' and 'structured Pydantic outputs' as demonstrated features; these are supported by the evaluation (self-correcting critic/repair loop, structured Pydantic schemas), so this is acceptable, but the claim that failure handling 'beyond the critic/repair pass' is unverifiable is correctly hedged in tradeoffs."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final ranking is consistent with the deterministic score ordering (no override), and the best repository satisfies all three explicit must-have requirements with evidence-backed claims. Recommendation claims about agent roles, handoff code, and the critic/repair feedback loop are supported by the RepositoryEvaluation. The main caveats are warnings, not critical failures: (1) no candidate evidences AutoGen, so the requested CrewAI+AutoGen stack is only partially matched — this is transparently disclosed; (2) the top pick has the weakest reproduction feasibility and maintenance health, which conflicts somewhat with the 12-hour budget, though the ranker provides an explicit learning-value justification. No hard-requirement violation or logical contradiction exists, so no retry is needed. The user should treat the AutoGen gap and setup cost as known limitations."
+      }
+    }
+  ],
+  "case_id": "05_multi_agent_research",
+  "title": "多 Agent 协作研究流程",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15055-d787-7350-9e6e-94d71b2c7e9d",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15055-d787-7350-9e6e-94d71b2c7e9d?poll=true",
+    "metrics": {
+      "span_count": 67,
+      "llm_calls": 11,
+      "github_tool_calls": 15,
+      "input_tokens": 31926,
+      "output_tokens": 8550,
+      "total_tokens": 40476,
+      "cost_usd": "0.008375988",
+      "llm_usage_coverage": {
+        "calls": 11,
+        "with_total_tokens": 11,
+        "with_cost": 11
+      },
+      "root_reported_tokens": 40476,
+      "root_reported_cost_usd": "0.008375988",
+      "root_latency_s": 54.687233
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "cc61c1b45c1c49d8b203a4f28595e148"
+    },
+    "nodes": [
+      {
+        "id": "01a15055-d7c0-7f61-9041-09c2e75bee96",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:46:05.504461+00:00",
+        "end_time": "2026-10-18T18:46:07.472007+00:00",
+        "latency_s": 1.967546
+      },
+      {
+        "id": "01a15055-df72-7a42-bf48-de0f70c626ad",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:46:07.473511+00:00",
+        "end_time": "2026-10-18T18:46:23.798520+00:00",
+        "latency_s": 16.325009
+      },
+      {
+        "id": "01a15056-1f37-7fb3-94bd-acd866b8598e",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:46:23.799521+00:00",
+        "end_time": "2026-10-18T18:46:43.869903+00:00",
+        "latency_s": 20.070382
+      },
+      {
+        "id": "01a15056-6da0-7032-91f7-0e1bba92041b",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:46:43.871903+00:00",
+        "end_time": "2026-10-18T18:46:57.306255+00:00",
+        "latency_s": 13.434352
+      },
+      {
+        "id": "01a15056-a21d-7971-bc67-072d930d7604",
+        "name": "critic",
+        "start_time": "2026-10-18T18:46:57.308763+00:00",
+        "end_time": "2026-10-18T18:47:00.131601+00:00",
+        "latency_s": 2.822838
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15056-a227-7492-9a14-a31afc960c60",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.805748,
+        "input_tokens": 4500,
+        "output_tokens": 515,
+        "total_tokens": 5015,
+        "cost_usd": "0.00088992",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-6da8-7ef3-873a-d199afc95d01",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 13.420321,
+        "input_tokens": 3135,
+        "output_tokens": 2729,
+        "total_tokens": 5864,
+        "cost_usd": "0.00201357",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-6297-7ab0-a746-58bc1292edee",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.819494,
+        "input_tokens": 2830,
+        "output_tokens": 553,
+        "total_tokens": 3383,
+        "cost_usd": "0.000586956",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-6097-79c1-a2da-c09b757416d5",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.509513,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-5e32-7661-b5c9-6a85a42a3a14",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.612673,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-5c20-7943-84cc-1618d4d0861c",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.530055,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-4ff5-7490-8832-ab065e8e945a",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.111328,
+        "input_tokens": 4310,
+        "output_tokens": 608,
+        "total_tokens": 4918,
+        "cost_usd": "0.000841956",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-4e03-7e90-aecd-c2fc24145b37",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.493863,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-4986-7923-9b8e-6f492fd3413f",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.147594,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-478d-7693-b727-069665a2200a",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.503831,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-38fe-7ad3-b8be-f2b56da7529f",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.723291,
+        "input_tokens": 4757,
+        "output_tokens": 683,
+        "total_tokens": 5440,
+        "cost_usd": "0.000954006",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-36b6-7a43-9a95-632686b97ae1",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.579345,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-346a-77e1-a473-12c17bbea195",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.587552,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-324b-70b2-94fa-a1a17e734bf3",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.542247,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-2648-7eb3-8f76-1bd431b48575",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.07089,
+        "input_tokens": 5170,
+        "output_tokens": 639,
+        "total_tokens": 5809,
+        "cost_usd": "0.001008372",
+        "has_error": false
+      },
+      {
+        "id": "01a15056-2444-7361-a93e-8c5a95dccbf3",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.511146,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-217d-7ae2-b353-c3420b48d663",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.710417,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-1f38-7110-8f37-104a7160a076",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.579538,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15056-10a7-7662-b163-319e4fd76620",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 3.723972,
+        "input_tokens": 1336,
+        "output_tokens": 634,
+        "total_tokens": 1970,
+        "cost_usd": "0.000524352",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-f9fe-7cd0-8b81-86e76213c915",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 5.790637,
+        "input_tokens": 2317,
+        "output_tokens": 955,
+        "total_tokens": 3272,
+        "cost_usd": "0.000600678",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-f7ca-70f3-94bb-48f8a03a5b73",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.560764,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-e723-76f0-b1fe-68f7a535b3b3",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 4.254431,
+        "input_tokens": 1568,
+        "output_tokens": 736,
+        "total_tokens": 2304,
+        "cost_usd": "0.000545088",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-e454-7670-b76a-33e8c1cf347c",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.567956,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-e451-73c3-a310-ae5f6802e8fe",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.7184,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-df75-7d53-a93e-255b2fb8c822",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 1.238686,
+        "input_tokens": 792,
+        "output_tokens": 227,
+        "total_tokens": 1019,
+        "cost_usd": "0.000198552",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-d873-7823-bed7-5ce22e83214a",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 1.78707,
+        "input_tokens": 1211,
+        "output_tokens": 271,
+        "total_tokens": 1482,
+        "cost_usd": "0.000212538",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "smenon2710/ai-investment-research-assistant",
+          "max_entries": 120
+        },
+        "input_sha256": "7d63b1cbd90d30ce5a6f16fb42a6e48f3830172d5094593d12065a5d34411fd3",
+        "output_sha256": "36077583afc84d28b1a01a8baf47fe5af69b649c27c07401ff735b87e6b3ec51"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "smenon2710/ai-investment-research-assistant"
+        },
+        "input_sha256": "60b77cbf6e6165a7e8185be4c80310d32b1c4a9f7d5a45b48604209af11d5398",
+        "output_sha256": "84c310af1d88f1ce9c413e08667439074073ca478050f26bc3b3d9dc4bbfb6b9"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "smenon2710/ai-investment-research-assistant"
+        },
+        "input_sha256": "60b77cbf6e6165a7e8185be4c80310d32b1c4a9f7d5a45b48604209af11d5398",
+        "output_sha256": "4135b11928aa28d6c434b051560d7c937276aae408bfc5ed90e07ac007b6b42a"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system",
+          "max_entries": 120
+        },
+        "input_sha256": "b2fb2e53fc7fc88ab26753849a8c294e662b5c799babc7a9b57adc83372ce61d",
+        "output_sha256": "c76a17f512acb20e24c0eb8573533059dec53701d6ebb08accd099a40b642fd1"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system"
+        },
+        "input_sha256": "8758a251ca90e1d7b7c602e13f6657a9b31cd881fdb165dda394cf4b1a4e6c49",
+        "output_sha256": "e7f50d3162ec5d6cfcdfeb986849ef697fdb80d898004c7d41c6c72936646b8e"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "PasinduSuraweera/mairs-multi-agent-intelligent-research-system"
+        },
+        "input_sha256": "8758a251ca90e1d7b7c602e13f6657a9b31cd881fdb165dda394cf4b1a4e6c49",
+        "output_sha256": "8e1631c4db851bd1e0c0336e33770ff0deb58e5c861372f0dda1f1427e3abf35"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "Abhishek-at-git/Multi-agent-research-platform",
+          "max_entries": 120
+        },
+        "input_sha256": "3b198131a5627c60b777749f334a87ff94a8fbe831065ba57b77db5e72cbaaf1",
+        "output_sha256": "f48767ddca520a0e08a4d92d849bcb2aafa790bccc9e11f0008f7581d3497f1d"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "Abhishek-at-git/Multi-agent-research-platform"
+        },
+        "input_sha256": "d619e01cc44e48591044d70cf1ddfa7abf5a04ba08732840804ccecea0e8f099",
+        "output_sha256": "5f1d9724fa75826297ebefe0f09ac35d307373e17ff390b07e82a25d15198ec1"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "Abhishek-at-git/Multi-agent-research-platform"
+        },
+        "input_sha256": "d619e01cc44e48591044d70cf1ddfa7abf5a04ba08732840804ccecea0e8f099",
+        "output_sha256": "a1390319523be814eda601f20853705edbe62a3bc499b8dcae26930b0e015e65"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "axon011/multi-agent-pipeline",
+          "max_entries": 120
+        },
+        "input_sha256": "81a9cbec66361a10b8a5b3d9bccf0c136fe3908fe79c10fa8784f3880991b376",
+        "output_sha256": "3b28055df3bf2c95a90a361a2fa5129e73dba12c2ae3e36999efc7dba514b0fc"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "axon011/multi-agent-pipeline"
+        },
+        "input_sha256": "d747f5bd404569851b3d3ef37c7d8c0ae11f955be14f80af82e4af8fc5eb4453",
+        "output_sha256": "b10d0242e8418785c9df4e32028be74992fbadd54a1184d38562912406f05bdc"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "axon011/multi-agent-pipeline"
+        },
+        "input_sha256": "d747f5bd404569851b3d3ef37c7d8c0ae11f955be14f80af82e4af8fc5eb4453",
+        "output_sha256": "0d2c80fd910809c016912f09c31a8930f5c259cde9a25b257d4bd838ba9093ed"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "autogen group chat agents report generation research python"
+        },
+        "input_sha256": "8c9417cb33abe65eb1875c411c9de89abcb5d282328fbe34010c91e49bf35bae",
+        "output_sha256": "6af633a34cb08c3ab9088724076625fb25585e09d3ea0307634ea6aaafefaedb"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "autogen multi agent report writing python roles"
+        },
+        "input_sha256": "1e3a3978ac8829c004c37eed39eb4dd99827953131f283a82bdf79ea645b399d",
+        "output_sha256": "16a1e35a0222717ea5c578bcb295ac163ad574dfd1ddc540fcde49b561478c00"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 8,
+          "query": "crewai multi agent research report generation python"
+        },
+        "input_sha256": "1395928952b6cb8de72cb1c8b45a85876c10b82836b02e116f061798eae3cdc3",
+        "output_sha256": "abad6f6432124c666fdedfda145af25a6cbaa75752bc567176e04fd927c8fb73"
+      }
+    ]
+  }
+}

@@ -106,7 +106,7 @@ structured_evaluator_llm = (
 
 repository_evaluator = evaluator_prompt | structured_evaluator_llm
 
-# define the evaluation interface
+# define the evaluation interface, Evidence-grounded Evaluation.
 def evaluate_repository(
     requirements: UserRequirements,
     evidence: RepositoryEvidence,

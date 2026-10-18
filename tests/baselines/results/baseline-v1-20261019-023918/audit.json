@@ -1,0 +1,33 @@
+{
+  "scope": "Audit of the original complete local baseline; code snapshots are omitted from this compact archive.",
+  "baseline_valid": true,
+  "original_checks": {
+    "batch_completed": true,
+    "ten_unique_cases": true,
+    "exactly_one_attempt_each": true,
+    "ten_unique_business_runs": true,
+    "source_unchanged": true,
+    "dependencies_unchanged": true,
+    "dataset_unchanged": true,
+    "snapshot_integrity": true,
+    "all_cloud_traces_verified": true,
+    "trace_versions_match_snapshot": true,
+    "leaf_totals_consistent": true,
+    "summary_totals_consistent": true,
+    "no_configured_secret_values_in_saved_files": true,
+    "no_env_file_saved": true
+  },
+  "total_llm_calls": 126,
+  "total_tool_calls": 213,
+  "total_retries": 0,
+  "failures": [
+    {
+      "id": "02_local_chinese_rag",
+      "error": {
+        "error_type": "ValueError",
+        "message": "evaluations must exist before ranking."
+      },
+      "candidate_count": 0
+    }
+  ]
+}

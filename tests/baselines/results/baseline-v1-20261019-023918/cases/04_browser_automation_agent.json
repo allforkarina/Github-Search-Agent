@@ -1,0 +1,1452 @@
+{
+  "attempts": 1,
+  "started_at": "2026-10-19T02:44:14.853233+08:00",
+  "finished_at": "2026-10-19T02:46:01.273297+08:00",
+  "business_run_id": "d45ab425a51644f2bc3df58e2776724e",
+  "workflow_wall_time_s": 83.394,
+  "collection_wall_time_s": 106.419,
+  "collection_status": "finished",
+  "summary": {
+    "execution_status": "completed",
+    "retry_count": 0,
+    "critic_passed": true,
+    "outcome": "passed"
+  },
+  "terminal_event": "run.completed",
+  "state": {
+    "requirements": {
+      "topic": "可通过浏览器完成实际任务的 AI Agent 项目",
+      "language": [
+        "Python"
+      ],
+      "technology_stack": [
+        "Playwright",
+        "浏览器自动化工具"
+      ],
+      "difficulty": "intermediate",
+      "must_have": [
+        "使用 Playwright 或同类浏览器自动化工具",
+        "提供端到端可运行示例",
+        "包含模型配置说明"
+      ],
+      "nice_to_have": [
+        "能够观察工具调用过程"
+      ],
+      "exclusions": [
+        "只有录屏、没有核心源码的仓库",
+        "必须购买商业 SaaS 才能使用的仓库"
+      ],
+      "learning_goal": "学习并复现能通过浏览器完成实际任务的 AI Agent",
+      "time_budget_in_hours": 8
+    },
+    "candidates": {
+      "search_queries": [
+        "playwright ai-agent language:Python",
+        "topic:browser-automation language:Python LLM",
+        "web agent browser automation playwright language:Python in:name,description,readme"
+      ],
+      "candidates": [
+        {
+          "full_name": "browser-use/browser-use",
+          "reason": "Python 生态中知名度很高的 AI 浏览器代理库，直接面向让 Agent 操作浏览器完成任务；值得进一步检查其 Playwright/浏览器驱动、端到端示例、模型配置方式以及工具调用可观测性。"
+        },
+        {
+          "full_name": "Skyvern-AI/skyvern",
+          "reason": "专注于用 AI 自动化浏览器工作流，和“通过浏览器完成实际任务”的目标高度相关；值得查看是否有可运行的端到端示例、模型配置说明以及动作执行过程展示。"
+        },
+        {
+          "full_name": "camel-ai/owl",
+          "reason": "面向真实世界任务自动化的多智能体项目，可能包含浏览器操作能力和完整任务示例；适合进一步分析其 Agent 编排、浏览器工具接入与模型配置。"
+        },
+        {
+          "full_name": "ServiceNow/BrowserGym",
+          "reason": "提供 Web 任务自动化的 Gym 环境，适合学习和复现可重复的浏览器任务；值得检查其与 Playwright/浏览器自动化的集成方式以及是否便于观察 Agent 动作。"
+        },
+        {
+          "full_name": "billy-enrizky/openbrowser-ai",
+          "reason": "结合 CDP 与 CodeAgent 架构，让 LLM 编写并执行 Python 代码来操作网页；值得深入查看其浏览器自动化实现、示例流程和工具调用过程是否可观察。"
+        },
+        {
+          "full_name": "suhaibbinyounis/llm-web-agent",
+          "reason": "小型但聚焦的 Web Agent 项目，使用可访问性树规划浏览器操作；值得检查其是否提供可运行示例、Playwright 类工具接入和模型配置说明。"
+        },
+        {
+          "full_name": "LvcidPsyche/auto-browser",
+          "reason": "开源的 MCP 原生浏览器 Agent，强调给 AI Agent 真实浏览器并保留人类介入；适合进一步分析其浏览器控制方式、端到端演示和模型/工具配置。"
+        },
+        {
+          "full_name": "CodingLucasLi/Clawome",
+          "reason": "定位为让 AI Agent 浏览、读取并交互网页的智能浏览器工具；值得检查其是否包含完整 Agent 循环、可运行示例以及浏览器自动化底层实现。"
+        }
+      ]
+    },
+    "evaluations": [
+      {
+        "full_name": "browser-use/browser-use",
+        "purpose_summary": "Open-source Python library for building AI browser agents that use LLMs to drive a real browser (Playwright/CDP-based) to complete web tasks, with an optional hosted cloud offering.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "Topics include 'playwright' and 'browser-automation'; README describes driving a local or cloud browser; structure contains browser_use/browser/session.py, watchdogs, and CDP-related files (cdp, chrome.py)."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README Path 3 gives a complete install + .env + agent.py quickstart using Agent, Browser, ChatOpenAI; also actor/playground examples (flights.py, mixed_automation.py, playground.py)."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "README instructs adding OPENAI_API_KEY to .env and shows ChatOpenAI/ChatBrowserUse imports; .env.example present; config.py exists."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 55,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 88,
+        "strengths": [
+          "Directly targets browser-based AI agents with Playwright/CDP automation",
+          "Clear quickstart with model configuration and runnable agent.py example",
+          "Rich component structure (agent, browser, dom, controller, watchdogs) exposing end-to-end architecture",
+          "Active maintenance with recent pushes and CI workflows",
+          "MIT licensed and usable locally without mandatory SaaS"
+        ],
+        "weaknesses": [
+          "Very large codebase (665 entries, service.py ~165KB, beta/service.py ~256KB) which is hard to fully comprehend in an 8-hour budget",
+          "Core agent logic is monolithic and complex, reducing code clarity for learners",
+          "README is heavily marketing/cloud-oriented, mixing hosted product paths with the open-source library",
+          "Requires an LLM API key (cost/dependency) to actually run end-to-end"
+        ],
+        "uncertainties": [
+          "Exact depth of inline comments and internal documentation not fully visible from evidence",
+          "Whether a minimal self-contained runnable example exists beyond the README snippet",
+          "Tool-call observability (nice-to-have) is implied by demo_mode/gif but not explicitly confirmed in README"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "Skyvern-AI/skyvern",
+        "purpose_summary": "Skyvern is a Python-based AI agent system that automates browser-based workflows using LLMs and computer vision, built on top of Playwright. It provides a Playwright-compatible SDK with AI capabilities plus a no-code workflow builder, allowing agents to navigate and complete tasks on websites without hardcoded XPaths.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "README explicitly states Skyvern provides a 'Playwright-compatible SDK that adds AI functionality on top of playwright' and gives agents 'the ability to interact with websites using browser automation libraries like Playwright'. Topics include 'playwright', 'puppeteer', 'selenium'."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README includes a Quickstart with pip install and Docker Compose options, a demo video, and a GIF showing an end-to-end workflow (geico_shu_recording). The quickstart commands (skyvern quickstart, docker compose up) provide runnable end-to-end setup."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "README instructs users to 'Configure your LLM provider in .env' and copy .env.example to .env, then add an LLM API key. A .env.example file (14826 bytes) exists in the repo structure."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 62,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 88,
+        "strengths": [
+          "Directly built on Playwright with AI agent layer, matching the core topic",
+          "Clear architecture description (swarm of agents: observer/planner/actor) with system diagram",
+          "Multiple setup paths (pip and Docker Compose) with troubleshooting notes",
+          "Active maintenance: recent pushes, many workflows, large community (23k+ stars)",
+          "Explicit LLM provider configuration via .env.example"
+        ],
+        "weaknesses": [
+          "Very large codebase (5946 entries, 656MB) with many components (DB, alembic migrations, UI, API, SDKs) — heavy for an 8-hour learning budget",
+          "Requires database (SQLite/Postgres), Docker, and multiple services, increasing setup complexity",
+          "AGPL-3.0 license may restrict some reuse",
+          "Core agent logic is buried in a large production system, harder to isolate for learning"
+        ],
+        "uncertainties": [
+          "README was truncated; full model configuration details and example task definitions not fully visible",
+          "Whether a minimal single-task end-to-end example exists without full server/UI stack is unclear",
+          "Tool-call observability (nice-to-have) is implied by observer thoughts/artifacts but not explicitly confirmed in visible evidence",
+          "Actual time to get a working end-to-end run within 8 hours is uncertain given multi-component setup"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "camel-ai/owl",
+        "purpose_summary": "OWL is a multi-agent task automation framework built on CAMEL-AI that uses browser automation (via Playwright MCP) and other toolkits to let AI agents complete real-world tasks, achieving top GAIA benchmark scores among open-source frameworks.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "README includes a dedicated 'Install Playwright MCP Service' section and lists Playwright MCP as a browser toolkit; community_usecase also contains a 'Puppeteer MCP' example (a comparable browser automation tool)."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README has a 'Quick Start' with Basic Usage and Example Tasks, plus a community_usecase directory with multiple runnable end-to-end examples (e.g., Airbnb-MCP, Puppeteer MCP demo.py, cooking-assistant run_gpt4o.py)."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "README has 'Setup Environment Variables' (direct env vars and .env file), a 'Running with Different Models' section with 'Model Requirements' and 'Supported Models', and a 'Customizing Your Configuration' section."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 72,
+        "documentation_quality": 88,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 85,
+        "strengths": [
+          "Explicit Playwright MCP integration for browser automation",
+          "Rich, well-structured README with installation options (uv, pip, conda, Docker), model config, and quick start",
+          "Multiple end-to-end community use cases demonstrating real browser/tool tasks",
+          "Active project with recent pushes, NeurIPS 2025 acceptance, and large community",
+          "Multi-agent architecture with observable toolkits and MCP support"
+        ],
+        "weaknesses": [
+          "Large, complex multi-agent framework may be heavy to fully understand within an 8-hour budget",
+          "Depends on external CAMEL-AI framework and MCP services (Node.js, Playwright MCP) adding setup complexity",
+          "No license declared in metadata, which is a concern for reuse",
+          "Core agent logic is partly abstracted into the CAMEL dependency, reducing transparency of internals"
+        ],
+        "uncertainties": [
+          "Full README was truncated; exact model configuration details and example task specifics not fully visible",
+          "Repository structure was truncated (192 entries, reposcout_truncated=true), so complete source layout is unknown",
+          "Whether a minimal single-file end-to-end browser example exists without heavy dependencies is unclear",
+          "Actual setup time and dependency friction for an intermediate learner within 8 hours is uncertain"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "ServiceNow/BrowserGym",
+        "purpose_summary": "BrowserGym is a Gymnasium-based framework/environment for web task automation, providing a unified interface for LLM web agents to interact with browsers across multiple benchmarks (MiniWoB, WebArena, WorkArena, etc.). It is a research framework rather than a ready-to-run end-user agent.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "README setup instructs `playwright install chromium`; core module contains browser env/action/observation code (env.py, action/functions.py, javascript/ frame scripts) consistent with Playwright-based automation."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "uncertain",
+            "evidence": "README provides a boilerplate env<>agent loop with `action = ...  # implement your agent here`, i.e. the agent itself is left to the user. No complete runnable agent example is shown in the README; the demo is a video. Full end-to-end agent examples may live in the separate AgentLab repo."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "uncertain",
+            "evidence": "README does not document LLM/model configuration (API keys, model selection). The framework is model-agnostic and the agent is user-implemented; model config likely resides in AgentLab, which is not part of this evidence."
+          }
+        ],
+        "requirement_match": 33,
+        "learning_value": 70,
+        "code_clarity": 72,
+        "documentation_quality": 65,
+        "reproduction_feasibility": 45,
+        "maintenance_health": 80,
+        "strengths": [
+          "Well-structured modular monorepo (core, experiments, per-benchmark packages) with clear separation of env, action, observation, task",
+          "Explicitly built on Playwright with browser automation primitives",
+          "Rich benchmark ecosystem and Gymnasium-compatible interface aids understanding of web-agent environments",
+          "Active maintenance: recent pushes, CI workflows, tests, PyPI packaging"
+        ],
+        "weaknesses": [
+          "Not a ready-to-run agent: README leaves the agent loop as `action = ...` placeholder, so end-to-end runnable example is not demonstrated",
+          "No model/LLM configuration guidance in README",
+          "Many benchmarks require heavy external setup (WebArena, WorkArena, Google Cloud for Knows), increasing reproduction cost",
+          "Framework/research orientation rather than a task-completing consumer agent"
+        ],
+        "uncertainties": [
+          "Whether a complete runnable agent example exists elsewhere in the repo (e.g., experiments/loop.py) is not confirmed by evidence",
+          "Model configuration may be documented in AgentLab or sub-READMEs not included in evidence",
+          "Actual setup complexity and time to reproduce within 8 hours is unclear given per-benchmark dependencies"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "billy-enrizky/openbrowser-ai",
+        "purpose_summary": "OpenBrowser is a Python framework for AI-driven browser automation that combines direct Chrome DevTools Protocol (CDP) communication with a CodeAgent architecture, where an LLM writes Python code executed in a persistent namespace to navigate, interact with, and extract information from web pages autonomously.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "README states the project uses 'Raw CDP Communication - Direct Chrome DevTools Protocol' and benchmarks include stats_playwright.json, indicating it is a browser automation tool of the same class as Playwright (CDP-based)."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README Quick Start shows a runnable Python example using CodeAgent with a task ('Go to google.com and search...'), and the repo contains benchmarks/e2e_codeagent_test.py, e2e_llm_benchmark.py, and e2e_published_test.py as end-to-end examples."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "README has a 'Configuration' section and 'Supported LLM Providers' listing 15 providers (OpenAI, Anthropic, Google, Groq, AWS Bedrock, Azure, Ollama, etc.), plus optional dependency installs per provider and backend/env.example."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 70,
+        "documentation_quality": 85,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 80,
+        "strengths": [
+          "Clear CodeAgent architecture where the LLM writes Python executed in a persistent namespace, exposing meaningful Agent concepts",
+          "Extensive documentation: full docs site, docs/customize sections for agent, browser, tools, hooks, and code-agent",
+          "Multiple end-to-end runnable examples and benchmarks in the repo",
+          "Broad LLM provider support with explicit configuration guidance",
+          "MIT licensed and actively maintained with CI workflows and tests"
+        ],
+        "weaknesses": [
+          "Uses raw CDP rather than Playwright directly, so learners expecting Playwright APIs may need to adapt",
+          "Large repository (~1032 entries) with a substantial backend (FastAPI, VNC, WebSocket, kiosk) that adds complexity beyond the core agent",
+          "Hosted cloud dashboard is promoted, though core functionality appears usable locally",
+          "README is long and mixes many integration modes (MCP, CLI daemon, plugins), which can obscure the core learning path"
+        ],
+        "uncertainties": [
+          "Whether the core agent can be fully reproduced within an 8-hour budget given the backend/VNC components",
+          "Exact setup friction for the persistent-namespace code execution environment is not fully detailed in the provided README excerpt",
+          "Whether tool-call observation is exposed in a simple local mode (nice-to-have) is not confirmed from evidence"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "suhaibbinyounis/llm-web-agent",
+        "purpose_summary": "An adaptive Python browser-automation framework that uses an LLM as a one-shot planner, resolves elements via accessibility trees, and caches successful selectors to speed up repeated web tasks.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "Repository contains src/llm_web_agent/browsers/playwright_browser.py (11.6KB) and selenium_browser.py; README describes PlaywrightContext listeners, page.context.pages tracking, and Playwright-native click strategies."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "examples/ contains basic_navigation.py, demo_mui.py, demo_overlay.py; scripts/test_adaptive_saucedemo.py; instructions/ has task files (google_search.txt, mui_demo.txt); my-reports/ contains a full run report with step screenshots and JSON/MD output."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "config.yaml (3.1KB) at repo root plus src/llm_web_agent/config/loader.py and settings.py; README references LLM planner calls and OpenAI topic tag, though the README excerpt does not show explicit API-key/model-name instructions."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 78,
+        "code_clarity": 62,
+        "documentation_quality": 72,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 60,
+        "strengths": [
+          "Clear architectural narrative: Plan (one-shot LLM) -> Execute (accessibility-first) -> Learn (selector caching), which is a valuable Agent design pattern to study",
+          "Real Playwright integration with context-aware navigation, multi-layer click strategies, and framework detection",
+          "Includes runnable examples, instruction files, and a complete sample run report with step screenshots for observing behavior",
+          "MIT licensed, Python 3.10+, with CI workflow, pre-commit config, and packaging via pyproject.toml"
+        ],
+        "weaknesses": [
+          "Large and complex codebase (~257 entries, many engine modules of 15-36KB each) that may exceed an 8-hour reproduction budget",
+          "README excerpt is marketing-heavy and does not clearly show setup steps, API key configuration, or a minimal quickstart",
+          "8 open issues and last push in early January 2026 suggest limited recent activity",
+          "Selector-learning and WebSocket realtime features add dependencies and moving parts beyond a minimal browser agent"
+        ],
+        "uncertainties": [
+          "Whether config.yaml fully documents model provider, API key, and model name settings",
+          "Whether the examples run end-to-end without additional undocumented services or credentials",
+          "Whether tool-call/step observation is exposed in a UI or only via generated reports",
+          "Actual test coverage and reliability of the adaptive engine"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "LvcidPsyche/auto-browser",
+        "purpose_summary": "An MCP-native browser control plane that gives AI agents a shared Playwright browser with human-in-the-loop takeover, auth profiles, approvals, audit trails, and local-first Docker deployment.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "README explicitly states 'Playwright-backed sessions' and topics include 'playwright'; controller/app/browser/services/actions.py and browser_manager.py implement browser automation."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README provides a Quickstart (docker compose up --build), a 'First Useful Demo' flow, curl examples for session creation/observation, and examples/login-and-save-profile.md."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "uncertain",
+            "evidence": "README references MCP clients (Claude, Codex, Cursor) and .env.example exists, but the provided README excerpt does not clearly document LLM/model configuration steps; evidence is insufficient to confirm."
+          }
+        ],
+        "requirement_match": 67,
+        "learning_value": 72,
+        "code_clarity": 60,
+        "documentation_quality": 78,
+        "reproduction_feasibility": 55,
+        "maintenance_health": 85,
+        "strengths": [
+          "Clear Playwright-backed browser automation core",
+          "Docker Compose quickstart and Codespaces option lower setup friction",
+          "Rich documentation: README, examples, CHANGELOG, ROADMAP, SECURITY, audits",
+          "Active maintenance with CI, releases, and recent pushes",
+          "Human-in-the-loop and approval concepts are valuable Agent learning material"
+        ],
+        "weaknesses": [
+          "Large, complex codebase (487 entries, many large modules) may overwhelm an intermediate learner within 8 hours",
+          "Model/LLM configuration instructions are not clearly evidenced in the README excerpt",
+          "Heavy multi-component architecture (controller, browser-node, client, noVNC) increases reproduction complexity",
+          "Focus is on MCP control plane rather than a self-contained end-to-end agent task demo"
+        ],
+        "uncertainties": [
+          "Whether model configuration is documented elsewhere (e.g., .env.example or docs not shown)",
+          "Whether a complete end-to-end agent task example (not just session/profile flow) is provided",
+          "Actual setup time and dependency weight for full stack"
+        ],
+        "suitable_for_next_stage": true
+      },
+      {
+        "full_name": "CodingLucasLi/Clawome",
+        "purpose_summary": "An open-source AI browser agent (Python) that lets users describe tasks in natural language; a chat agent (Beanie) delegates complex multi-step browsing to a LangGraph-based Runner that uses Playwright to perceive, plan, act, and extract information from web pages.",
+        "must_have_checks": [
+          {
+            "requirement": "使用 Playwright 或同类浏览器自动化工具",
+            "status": "satisfied",
+            "evidence": "Topics include 'playwright'; README install instructions run 'playwright install chromium'; backend/browser_manager.py and backend/task_agent/browser/api.py implement browser control."
+          },
+          {
+            "requirement": "提供端到端可运行示例",
+            "status": "satisfied",
+            "evidence": "README shows concrete CLI examples (e.g. 'clawome \"Find the top 3 AI stories on Hacker News today\"') with expected output, plus a Chat API curl example and web dashboard flow."
+          },
+          {
+            "requirement": "包含模型配置说明",
+            "status": "satisfied",
+            "evidence": "README states 'clawome start' walks through LLM setup (pick provider, enter API key); .env.example exists; backend/task_agent/llm/provider.py and config.py handle providers; README mentions 12+ LLM providers."
+          }
+        ],
+        "requirement_match": 100,
+        "learning_value": 82,
+        "code_clarity": 68,
+        "documentation_quality": 80,
+        "reproduction_feasibility": 62,
+        "maintenance_health": 60,
+        "strengths": [
+          "Clear two-layer agent architecture (chat agent + LangGraph task engine) documented in README",
+          "Explicit Playwright-based browser automation with modular nodes (perceive, plan, act, sense, guards)",
+          "Multiple runnable end-to-end examples and a documented Chat API",
+          "Model configuration is guided via CLI wizard and .env.example",
+          "Dedicated docs directory with API reference pages"
+        ],
+        "weaknesses": [
+          "Large, complex codebase (browser_manager.py ~58KB, many components) may be hard to fully grasp within an 8-hour budget",
+          "Requires LLM API keys and Chromium install, adding setup friction",
+          "Frontend dev server (npm) adds extra dependency for full dashboard experience",
+          "No explicit evidence of a minimal standalone example script isolating the agent loop"
+        ],
+        "uncertainties": [
+          "Actual quality of inline code comments and readability of large files not verifiable from structure alone",
+          "Whether tool-call observation is exposed in UI (nice-to-have) is not confirmed",
+          "Recent commit activity (pushed_at 2026-03-14) suggests limited ongoing maintenance",
+          "Whether the repo runs cleanly out-of-the-box without undocumented fixes"
+        ],
+        "suitable_for_next_stage": true
+      }
+    ],
+    "ranking": {
+      "top_repositories": [
+        {
+          "full_name": "camel-ai/owl",
+          "base_score": 82.41,
+          "score_rank": 1,
+          "final_rank": 1,
+          "recommendation_reason": "OWL is the strongest match for learning browser-based AI agents because it explicitly integrates Playwright MCP, documents model configuration, and provides Quick Start plus multiple end-to-end community examples. Its documentation quality, maintenance health, and direct Playwright evidence outweigh its heavier framework complexity for an intermediate learner.",
+          "tradeoffs": [
+            "The multi-agent framework is large and partly depends on external CAMEL-AI abstractions, which may reduce transparency when tracing core agent logic.",
+            "Setup involves Playwright MCP and Node.js-related dependencies, adding friction within an 8-hour learning budget.",
+            "No license is declared in the supplied metadata, which is a reuse concern.",
+            "The repository structure was truncated in the evaluation data, so the full source layout and presence of a minimal single-file browser-agent example are uncertain."
+          ],
+          "learning_path": [
+            "Start with the README overview and Quick Start to understand the multi-agent architecture and the role of browser toolkits.",
+            "Follow the environment variable and model configuration sections to connect a supported model before attempting browser tasks.",
+            "Install and configure the Playwright MCP service as documented, then run the simplest provided example task.",
+            "Observe the tool-call process during the example run and identify where browser actions are delegated to Playwright MCP.",
+            "Inspect one community end-to-end use case to see how task instructions, toolkits, and agent orchestration fit together.",
+            "Trace how the CAMEL-AI dependency supplies agent behavior, focusing on inputs, tool selection, and browser action outputs rather than every framework detail.",
+            "Adapt a small real browser task using the documented configuration pattern, keeping the scope narrow enough to finish within the time budget.",
+            "Review the tradeoffs between multi-agent orchestration and simpler single-agent browser loops, and note what would be needed for a minimal reproduction."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "billy-enrizky/openbrowser-ai",
+          "base_score": 81.75,
+          "score_rank": 2,
+          "final_rank": 2,
+          "recommendation_reason": "OpenBrowser is a close second: it offers a clear CodeAgent architecture, broad model-provider configuration, and runnable end-to-end examples. However, it uses raw CDP rather than Playwright directly and includes a substantial backend, making it slightly less aligned with the user's explicit Playwright-oriented learning goal.",
+          "tradeoffs": [
+            "Browser automation is based on raw Chrome DevTools Protocol rather than Playwright APIs, so learners expecting Playwright patterns must translate concepts.",
+            "The repository includes a large backend with FastAPI, VNC, WebSocket, and kiosk-related components that add complexity beyond the core agent loop.",
+            "The hosted cloud dashboard is promoted, although core functionality appears locally usable.",
+            "The README mixes multiple integration modes, which can obscure the shortest path to understanding the core CodeAgent."
+          ],
+          "learning_path": [
+            "Read the Quick Start and Configuration sections first to understand setup and supported LLM providers.",
+            "Run the provided end-to-end CodeAgent example and note how the task instruction becomes Python code executed in a persistent namespace.",
+            "Study the CodeAgent concept: identify how the model writes code, how that code is executed, and how browser state is preserved across steps.",
+            "Inspect the provided end-to-end benchmark and test examples to see repeatable browser-task patterns.",
+            "Trace one browser action from generated code to CDP communication and back to the agent observation.",
+            "Ignore or defer the larger backend, VNC, and dashboard components until the core agent loop is understood.",
+            "Create a minimal local browser task using the documented configuration style.",
+            "Compare raw CDP control with Playwright-style automation and record what abstractions Playwright would provide."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        },
+        {
+          "full_name": "CodingLucasLi/Clawome",
+          "base_score": 80.5,
+          "score_rank": 3,
+          "final_rank": 3,
+          "recommendation_reason": "Clawome directly uses Playwright and documents a clear chat-agent plus LangGraph runner architecture, making it relevant. It ranks third because maintenance health is lower, the codebase contains large complex browser components, and there is no clear evidence of a minimal standalone agent-loop example.",
+          "tradeoffs": [
+            "The browser manager and task agent components are large, which may make the full flow difficult to understand within 8 hours.",
+            "A complete dashboard experience adds an npm frontend dependency, although CLI and API examples exist.",
+            "Maintenance health is lower than the other candidates based on the supplied evaluation.",
+            "There is no explicit evidence of a small standalone example isolating the perceive-plan-act agent loop."
+          ],
+          "learning_path": [
+            "Begin with the documented CLI example to see the expected end-to-end behavior before reading the architecture.",
+            "Use the start wizard and environment example to configure an LLM provider and install Chromium via Playwright.",
+            "Study the README architecture description of the chat agent and LangGraph-based Runner.",
+            "Inspect how the browser manager and task-agent browser API implement Playwright control and page interaction.",
+            "Follow one task through the perceive, plan, act, sense, and guard stages described in the documentation.",
+            "Use the Chat API example to understand how natural-language requests are delegated to the task runner.",
+            "Defer the web dashboard and frontend unless needed, focusing first on CLI and backend agent behavior.",
+            "Adapt a small natural-language browser task and note where the LangGraph nodes make decisions."
+          ],
+          "ranking_override": false,
+          "override_reason": null
+        }
+      ],
+      "best_repository": "camel-ai/owl",
+      "final_reason": "All three repositories satisfy the must-have requirements, but OWL remains the best choice because it has the highest deterministic score and the clearest explicit Playwright MCP integration, strong documentation for model setup, multiple end-to-end examples, and better maintenance health than the alternatives. OpenBrowser is technically close but relies on raw CDP and a larger backend, while Clawome uses Playwright directly but has lower maintenance health and a more complex browser-agent implementation. OWL provides the best balance for an intermediate learner who wants to study and reproduce a browser-capable AI agent within an 8-hour budget."
+    },
+    "critic_result": {
+      "passed": true,
+      "confidence": 82,
+      "issues": [
+        {
+          "severity": "warning",
+          "category": "evidence",
+          "repository": "camel-ai/owl",
+          "description": "The recommendation asserts OWL provides the 'clearest explicit Playwright MCP integration' and 'better maintenance health than the alternatives', which is supported by the evaluation. However, the evaluation itself flags that the README was truncated and the repository structure was truncated, so claims about the presence of a minimal single-file example remain uncertain. The ranker appropriately acknowledges this in tradeoffs."
+        },
+        {
+          "severity": "warning",
+          "category": "ranking",
+          "repository": "camel-ai/owl",
+          "description": "The final ranking matches the deterministic score ranking (82.41 > 81.75 > 80.5), so no override is needed. The ranker's justification for OWL over OpenBrowser (explicit Playwright vs raw CDP) is a legitimate user-specific reason aligned with the must-have requirement."
+        },
+        {
+          "severity": "warning",
+          "category": "unsupported_claim",
+          "repository": "camel-ai/owl",
+          "description": "The learning_path suggests 'Observe the tool-call process during the example run', which aligns with the nice-to-have '能够观察工具调用过程'. The evaluation lists 'observable toolkits' as a strength, so this is supported. No critical unsupported claims detected."
+        },
+        {
+          "severity": "warning",
+          "category": "hard_requirement",
+          "repository": "camel-ai/owl",
+          "description": "All three must-have requirements are marked satisfied with evidence. The exclusion criteria (no screen-recording-only repos, no mandatory commercial SaaS) are not violated by OWL based on the evaluation. No critical hard-requirement violation."
+        }
+      ],
+      "retry_target": "none",
+      "feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All must-have requirements are satisfied with evidence for the selected repository. The ranking matches the deterministic score order, and the ranker provides explicit user-specific reasoning (Playwright MCP integration vs raw CDP) for the ordering. No critical contradictions or hard-requirement violations were found. Minor uncertainties (truncated README/structure, license absence) are appropriately disclosed as tradeoffs rather than hidden. The recommendation aligns with the user's learning goal of studying a browser-capable AI agent within an 8-hour budget, while acknowledging complexity tradeoffs."
+    },
+    "critic_feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All must-have requirements are satisfied with evidence for the selected repository. The ranking matches the deterministic score order, and the ranker provides explicit user-specific reasoning (Playwright MCP integration vs raw CDP) for the ordering. No critical contradictions or hard-requirement violations were found. Minor uncertainties (truncated README/structure, license absence) are appropriately disclosed as tradeoffs rather than hidden. The recommendation aligns with the user's learning goal of studying a browser-capable AI agent within an 8-hour budget, while acknowledging complexity tradeoffs."
+  },
+  "quality_signals": {
+    "best_repository": "camel-ai/owl",
+    "top_repositories": [
+      "camel-ai/owl",
+      "billy-enrizky/openbrowser-ai",
+      "CodingLucasLi/Clawome"
+    ],
+    "best_in_top": true,
+    "unique_top_repositories": true,
+    "candidate_count": 8,
+    "evaluation_count": 8,
+    "best_must_have_checks": [
+      {
+        "requirement": "使用 Playwright 或同类浏览器自动化工具",
+        "status": "satisfied",
+        "evidence": "README includes a dedicated 'Install Playwright MCP Service' section and lists Playwright MCP as a browser toolkit; community_usecase also contains a 'Puppeteer MCP' example (a comparable browser automation tool)."
+      },
+      {
+        "requirement": "提供端到端可运行示例",
+        "status": "satisfied",
+        "evidence": "README has a 'Quick Start' with Basic Usage and Example Tasks, plus a community_usecase directory with multiple runnable end-to-end examples (e.g., Airbnb-MCP, Puppeteer MCP demo.py, cooking-assistant run_gpt4o.py)."
+      },
+      {
+        "requirement": "包含模型配置说明",
+        "status": "satisfied",
+        "evidence": "README has 'Setup Environment Variables' (direct env vars and .env file), a 'Running with Different Models' section with 'Model Requirements' and 'Supported Models', and a 'Customizing Your Configuration' section."
+      }
+    ],
+    "critic_issue_counts": {
+      "warning": 4
+    },
+    "independent_quality_review": "pending"
+  },
+  "retry_trajectory": [
+    {
+      "kind": "critic",
+      "elapsed_s": 83.387,
+      "result": {
+        "passed": true,
+        "confidence": 82,
+        "issues": [
+          {
+            "severity": "warning",
+            "category": "evidence",
+            "repository": "camel-ai/owl",
+            "description": "The recommendation asserts OWL provides the 'clearest explicit Playwright MCP integration' and 'better maintenance health than the alternatives', which is supported by the evaluation. However, the evaluation itself flags that the README was truncated and the repository structure was truncated, so claims about the presence of a minimal single-file example remain uncertain. The ranker appropriately acknowledges this in tradeoffs."
+          },
+          {
+            "severity": "warning",
+            "category": "ranking",
+            "repository": "camel-ai/owl",
+            "description": "The final ranking matches the deterministic score ranking (82.41 > 81.75 > 80.5), so no override is needed. The ranker's justification for OWL over OpenBrowser (explicit Playwright vs raw CDP) is a legitimate user-specific reason aligned with the must-have requirement."
+          },
+          {
+            "severity": "warning",
+            "category": "unsupported_claim",
+            "repository": "camel-ai/owl",
+            "description": "The learning_path suggests 'Observe the tool-call process during the example run', which aligns with the nice-to-have '能够观察工具调用过程'. The evaluation lists 'observable toolkits' as a strength, so this is supported. No critical unsupported claims detected."
+          },
+          {
+            "severity": "warning",
+            "category": "hard_requirement",
+            "repository": "camel-ai/owl",
+            "description": "All three must-have requirements are marked satisfied with evidence. The exclusion criteria (no screen-recording-only repos, no mandatory commercial SaaS) are not violated by OWL based on the evaluation. No critical hard-requirement violation."
+          }
+        ],
+        "retry_target": "none",
+        "feedback": "The final recommendation is logically consistent with the supplied RepositoryEvaluation. All must-have requirements are satisfied with evidence for the selected repository. The ranking matches the deterministic score order, and the ranker provides explicit user-specific reasoning (Playwright MCP integration vs raw CDP) for the ordering. No critical contradictions or hard-requirement violations were found. Minor uncertainties (truncated README/structure, license absence) are appropriately disclosed as tradeoffs rather than hidden. The recommendation aligns with the user's learning goal of studying a browser-capable AI agent within an 8-hour budget, while acknowledging complexity tradeoffs."
+      }
+    }
+  ],
+  "case_id": "04_browser_automation_agent",
+  "title": "浏览器自动化 Agent",
+  "trace": {
+    "verified": true,
+    "checks": {
+      "one_root": true,
+      "stable_readback": true,
+      "all_spans_ended": true,
+      "summary_in_outputs": true,
+      "summary_in_metadata": true,
+      "no_configured_secrets": true
+    },
+    "trace_id": "01a15054-2796-7693-94da-d621d5520313",
+    "trace_url": "https://smith.langchain.com/o/e050f023-2439-4a82-b806-2ae3633fb031/projects/p/e310a231-2e14-4aa2-a592-a5c147883f55/r/01a15054-2796-7693-94da-d621d5520313?poll=true",
+    "metrics": {
+      "span_count": 92,
+      "llm_calls": 14,
+      "github_tool_calls": 27,
+      "input_tokens": 82893,
+      "output_tokens": 12704,
+      "total_tokens": 95597,
+      "cost_usd": "0.018043038",
+      "llm_usage_coverage": {
+        "calls": 14,
+        "with_total_tokens": 14,
+        "with_cost": 14
+      },
+      "root_reported_tokens": 95597,
+      "root_reported_cost_usd": "0.018043038",
+      "root_latency_s": 83.367408
+    },
+    "metadata": {
+      "agent_version": "2eea8808947806e78ce40459b9b7085d5fc49f72-snapshot-0cdd0f55d6fc",
+      "critic_passed": true,
+      "environment": "baseline",
+      "execution_status": "completed",
+      "model_name": "deepseek-flash",
+      "outcome": "passed",
+      "prompt_version": "v1",
+      "retry_count": 0,
+      "run_id": "d45ab425a51644f2bc3df58e2776724e"
+    },
+    "nodes": [
+      {
+        "id": "01a15054-27ca-74d2-9b85-b1d57efdc61d",
+        "name": "parse_requirements",
+        "start_time": "2026-10-18T18:44:14.921802+00:00",
+        "end_time": "2026-10-18T18:44:19.004521+00:00",
+        "latency_s": 4.082719
+      },
+      {
+        "id": "01a15054-37be-75f1-8fac-c87bdb18d61e",
+        "name": "search_candidates",
+        "start_time": "2026-10-18T18:44:19.005523+00:00",
+        "end_time": "2026-10-18T18:44:41.141046+00:00",
+        "latency_s": 22.135523
+      },
+      {
+        "id": "01a15054-8e36-7b02-aae7-085080dc1912",
+        "name": "evaluate_repositories",
+        "start_time": "2026-10-18T18:44:41.142045+00:00",
+        "end_time": "2026-10-18T18:45:23.901719+00:00",
+        "latency_s": 42.759674
+      },
+      {
+        "id": "01a15055-3540-7902-92da-b401367802b1",
+        "name": "rank_repositories",
+        "start_time": "2026-10-18T18:45:23.903224+00:00",
+        "end_time": "2026-10-18T18:45:35.465505+00:00",
+        "latency_s": 11.562281
+      },
+      {
+        "id": "01a15055-626c-72f2-9242-95405ddc6ae9",
+        "name": "critic",
+        "start_time": "2026-10-18T18:45:35.468011+00:00",
+        "end_time": "2026-10-18T18:45:38.235289+00:00",
+        "latency_s": 2.767278
+      }
+    ],
+    "calls": [
+      {
+        "id": "01a15055-6278-7603-9201-10cfbfa79227",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "critic",
+        "latency_s": 2.744226,
+        "input_tokens": 4467,
+        "output_tokens": 516,
+        "total_tokens": 4983,
+        "cost_usd": "0.00088557",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-3549-7cc0-a4a1-9db1c9112eef",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "rank_repositories",
+        "latency_s": 11.546743,
+        "input_tokens": 3083,
+        "output_tokens": 2311,
+        "total_tokens": 5394,
+        "cost_usd": "0.00175497",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-29a5-7912-a4b0-fa481a4b0913",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 2.963411,
+        "input_tokens": 7692,
+        "output_tokens": 602,
+        "total_tokens": 8294,
+        "cost_usd": "0.001345656",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-278b-7513-9a56-9ca5119fc4ac",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.531523,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-2563-79d3-9f78-d901bc1ed573",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.551674,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-2357-7550-9630-190c63df09ec",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.522999,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-172c-7611-9b89-210c75734fa5",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.110945,
+        "input_tokens": 7351,
+        "output_tokens": 538,
+        "total_tokens": 7889,
+        "cost_usd": "0.001256106",
+        "has_error": false
+      },
+      {
+        "id": "01a15055-1423-75a0-ba5c-d73651a2875e",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.770602,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-115d-7fc2-b46b-254b73a3786f",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.709427,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-0f55-7fb0-be41-a5342aa1d80f",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.520278,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15055-008a-7770-bb61-f4655091b5bd",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.782071,
+        "input_tokens": 7724,
+        "output_tokens": 654,
+        "total_tokens": 8378,
+        "cost_usd": "0.001381656",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-fe64-7ba2-80e1-3ebdd002b7e0",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.542499,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-fb56-7193-881f-bc037155bbca",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.780647,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-f944-78c1-aa9e-d4b36ba6d19b",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.529955,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-eccf-7c82-940c-615ac4c0a164",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.183477,
+        "input_tokens": 7475,
+        "output_tokens": 658,
+        "total_tokens": 8133,
+        "cost_usd": "0.001346706",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-e8ee-7f61-b4b5-d768261c8492",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.985061,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-e6b2-7102-a1b8-4b2a84c79551",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.571959,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-e4af-7221-ab2a-4f875511a99f",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.51384,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-d597-7e32-a437-19e9b68bce3c",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.860068,
+        "input_tokens": 8405,
+        "output_tokens": 630,
+        "total_tokens": 9035,
+        "cost_usd": "0.001469406",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-d36c-7c41-bfad-065a6bf85a8a",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.548203,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-d15c-7891-b227-1a12acd1b5fb",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.527627,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-cf29-7f82-92e0-81e2e2a87b92",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.562702,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-c180-7b81-a94a-f979a16789d5",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.492784,
+        "input_tokens": 8418,
+        "output_tokens": 623,
+        "total_tokens": 9041,
+        "cost_usd": "0.001467156",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-be7a-7173-956c-525160044bcd",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.766475,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-bc52-7f11-a337-8b6f3d4302fa",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.551087,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-ba3f-7bf2-88c7-465d7493606d",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.530869,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-ac4f-71e1-9084-3b7dcc1fd6be",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.558935,
+        "input_tokens": 9146,
+        "output_tokens": 671,
+        "total_tokens": 9817,
+        "cost_usd": "0.001605156",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-a511-7dc3-9963-fdccf33ab17c",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 1.844653,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-a30e-75a1-b788-84c0e30f843d",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.515015,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-a0e0-7a80-9875-10ccfd773ee8",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.55701,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-94e5-7ee1-a730-d8cfaa98cec5",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 3.061851,
+        "input_tokens": 8005,
+        "output_tokens": 563,
+        "total_tokens": 8568,
+        "cost_usd": "0.001388022",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-92b1-7c82-9f75-d8549822e008",
+        "type": "tool",
+        "name": "get_repository_structure",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.556644,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-90a3-7221-a17a-2c1824238151",
+        "type": "tool",
+        "name": "get_repository_readme",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.526949,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-8e38-72c0-a3bc-5b38d95725ab",
+        "type": "tool",
+        "name": "get_repository_info",
+        "workflow_node": "evaluate_repositories",
+        "latency_s": 0.618375,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-6e4c-7d21-aa48-fc93fb028c81",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 8.164403,
+        "input_tokens": 4103,
+        "output_tokens": 1590,
+        "total_tokens": 5693,
+        "cost_usd": "0.001513002",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-4e94-7132-8895-9f592a61cc71",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 8.108019,
+        "input_tokens": 5029,
+        "output_tokens": 1640,
+        "total_tokens": 6669,
+        "cost_usd": "0.001493742",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-4b27-73e3-85b7-161434c8318b",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.873538,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-4b22-7d52-af9f-9428fd65a731",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.773906,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-4b1f-7633-bb64-8c3b7cc51392",
+        "type": "tool",
+        "name": "search_github_repositories",
+        "workflow_node": "search_candidates",
+        "latency_s": 0.803317,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": null,
+        "has_error": false
+      },
+      {
+        "id": "01a15054-37c2-75b1-be5b-ec31a75c7537",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "search_candidates",
+        "latency_s": 4.950858,
+        "input_tokens": 791,
+        "output_tokens": 923,
+        "total_tokens": 1714,
+        "cost_usd": "0.000616002",
+        "has_error": false
+      },
+      {
+        "id": "01a15054-285a-79b1-97ae-d70f86d07448",
+        "type": "llm",
+        "name": "ChatDeepSeek",
+        "workflow_node": "parse_requirements",
+        "latency_s": 3.934417,
+        "input_tokens": 1204,
+        "output_tokens": 785,
+        "total_tokens": 1989,
+        "cost_usd": "0.000519888",
+        "has_error": false
+      }
+    ],
+    "github_evidence": [
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "CodingLucasLi/Clawome",
+          "max_entries": 120
+        },
+        "input_sha256": "5536ad1b4d0030a1ce090ac8ef3982d382beec7f968dba2a3dc6d2b79d408e06",
+        "output_sha256": "1ef17a96cc56d92cf391f0fa2322e306ee8f400c29ca7afb92e27bce24cf999d"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "CodingLucasLi/Clawome"
+        },
+        "input_sha256": "4cf272cacc7741714137f343d12a9d7841d7b4d135df6761d4c051a9b2b29779",
+        "output_sha256": "3100cab6b035847b17236f92eaef4547d15d5b0c596422f5952167e5d3f0682c"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "CodingLucasLi/Clawome"
+        },
+        "input_sha256": "4cf272cacc7741714137f343d12a9d7841d7b4d135df6761d4c051a9b2b29779",
+        "output_sha256": "3e05aade28bb23be4d23f8a547f9e27ddb62c6241f67ef33311034b7c2bcd71c"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "LvcidPsyche/auto-browser",
+          "max_entries": 120
+        },
+        "input_sha256": "6e583b61658f0731e210475773f8bf261b6886f10163bd98f5bd9109d9d12b8b",
+        "output_sha256": "9ef5dd246d45ec575c058348868c50e95aad3a9209bc46e5e3420f7746386c52"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "LvcidPsyche/auto-browser"
+        },
+        "input_sha256": "e738c619a2abab0720034982a2fdeee7b20b071a27a45836e003956d238a3847",
+        "output_sha256": "8ca14a33f31b74d7c0f3403b7b49601ea553709c4fa0578658c4e23205571abe"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "LvcidPsyche/auto-browser"
+        },
+        "input_sha256": "e738c619a2abab0720034982a2fdeee7b20b071a27a45836e003956d238a3847",
+        "output_sha256": "efbf4b9f0ad29110c812675a8267e54d0337e69a31d79b14e6d095bbbf73ce31"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "suhaibbinyounis/llm-web-agent",
+          "max_entries": 120
+        },
+        "input_sha256": "e0313d571bb4bb8794a5ef63cb260dbcac72e39d009c88997f2017258e88f0b5",
+        "output_sha256": "e64875089a1a2537639fc1d42705d2a173c7aa52ba6490c2730637b95c4b09ad"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "suhaibbinyounis/llm-web-agent"
+        },
+        "input_sha256": "4c2fbcb14383d17fdef05f08720b0b23046c999249bd94bc61f339baf1fadd19",
+        "output_sha256": "9cc20c0c5659e76ddc875952344b98ef5c224a2593d38afadccc5d32d90d772e"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "suhaibbinyounis/llm-web-agent"
+        },
+        "input_sha256": "4c2fbcb14383d17fdef05f08720b0b23046c999249bd94bc61f339baf1fadd19",
+        "output_sha256": "1878496e3d0063da80bd6e6f1703b0be4b5abc7b48dfa3acdc39e9a3a69f17f0"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "billy-enrizky/openbrowser-ai",
+          "max_entries": 120
+        },
+        "input_sha256": "a89c89540e6309de2f9095ed82e93c99bca7b4e367c6a39726b910dd8766b35a",
+        "output_sha256": "a8c0b9626ece6ef12db77ed4f9d31f24326c962b5179fa5a7486ac31595e6474"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "billy-enrizky/openbrowser-ai"
+        },
+        "input_sha256": "73f351c15f7442c7cc740d64402b562bcbf61abadae8af4810189d07a09c081d",
+        "output_sha256": "10a71b1b1e783240e41afb79f98204fb9283a598a99f8a0aa1e1a09e041494d3"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "billy-enrizky/openbrowser-ai"
+        },
+        "input_sha256": "73f351c15f7442c7cc740d64402b562bcbf61abadae8af4810189d07a09c081d",
+        "output_sha256": "45c34217f01511c65ce68ec02cf99f4dfa59ed3c50ed9b512a4e7d9db1e7b102"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "ServiceNow/BrowserGym",
+          "max_entries": 120
+        },
+        "input_sha256": "6a19afbffcf8d4213f143e2ae341af40be5aae0d57518a5384815c3f32a269e9",
+        "output_sha256": "b9ba83d0b93c72571f5a5b507fe58b1f8c1f70258c2abd084e9a443b9add00de"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "ServiceNow/BrowserGym"
+        },
+        "input_sha256": "de897c1cb80354b05e9806a7c7a3846714dce0eee82c9edcfd6cace970ee9bf5",
+        "output_sha256": "084b1ba1050e2579dbe0354d6350ab97d50b866b4c0763b993f17f9786849274"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "ServiceNow/BrowserGym"
+        },
+        "input_sha256": "de897c1cb80354b05e9806a7c7a3846714dce0eee82c9edcfd6cace970ee9bf5",
+        "output_sha256": "f0bc75234643c6d870f9d46b2e83006bfc8519eb564a2cbab26634f9427452e3"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "camel-ai/owl",
+          "max_entries": 120
+        },
+        "input_sha256": "6dbfd9b9a47c5b70140aee1439817095f576b2a0f5905e5f3887a29439bb2fa9",
+        "output_sha256": "8ef01944afc1f8aa99a41d2e86e82294b8f880d39ad3b3ed81acee16b78aeeeb"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "camel-ai/owl"
+        },
+        "input_sha256": "04ac170b68f324f94dba0665481ebf725979de1e23e26437a5cdf0ccc8865bfc",
+        "output_sha256": "1251ccff5797262987f51788227dfd112b85f2381f70c5d0c78b5e92f9cf82a4"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "camel-ai/owl"
+        },
+        "input_sha256": "04ac170b68f324f94dba0665481ebf725979de1e23e26437a5cdf0ccc8865bfc",
+        "output_sha256": "bb9865b6b1483071d3080313d81c48669471a9f945d07e05330340b3da4f0f29"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "Skyvern-AI/skyvern",
+          "max_entries": 120
+        },
+        "input_sha256": "ff24becd421feccd606199551c561250dff5c077fbae57246d3f103e68738ddb",
+        "output_sha256": "46aee4816a25683f7d7705b600c2b7278ed341ceab49003f424ee2968b80891d"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "Skyvern-AI/skyvern"
+        },
+        "input_sha256": "23d2fc90dcdcc0109c110496e0da1cddd872a4bd3158187305eb970fdc067ce4",
+        "output_sha256": "08549b2ae6f0dbcfe47191675fee8a71c57c052a8645836bc06c6ab05820f295"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "Skyvern-AI/skyvern"
+        },
+        "input_sha256": "23d2fc90dcdcc0109c110496e0da1cddd872a4bd3158187305eb970fdc067ce4",
+        "output_sha256": "ebc97b368d196331a7392eb203171e5315e1874fe863e8ff2014f0170440237c"
+      },
+      {
+        "name": "get_repository_structure",
+        "inputs": {
+          "branch": "main",
+          "full_name": "browser-use/browser-use",
+          "max_entries": 120
+        },
+        "input_sha256": "6d3acc31ccf58c796d06447df698d4366d10345dad0dc94958524fd5bc75e51b",
+        "output_sha256": "2671a95befcf5de0132873ba3f1a03efdc3c2996d362f1eefc99b7fa7457f7e7"
+      },
+      {
+        "name": "get_repository_readme",
+        "inputs": {
+          "full_name": "browser-use/browser-use"
+        },
+        "input_sha256": "31fc47183d7ad5dee5b8af5096d9cb33698a886611aa99923b17e5b32d1d2f61",
+        "output_sha256": "eb013b1fa529447008e523ce7ec0b1f497922e7fda10f186ee79398e01f77367"
+      },
+      {
+        "name": "get_repository_info",
+        "inputs": {
+          "full_name": "browser-use/browser-use"
+        },
+        "input_sha256": "31fc47183d7ad5dee5b8af5096d9cb33698a886611aa99923b17e5b32d1d2f61",
+        "output_sha256": "9c1719d17d8273c1f0f9f84600e6fc6f762aa556458a9c311790efe59f084c48"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "web agent browser automation playwright language:Python in:name,description,readme"
+        },
+        "input_sha256": "1095a0aec21209b38310d09203c5c8e7b0157811571bc42c08dc567f437657af",
+        "output_sha256": "4975fa7fe8c6ff2d81b84da7775a10c10a4f1aa2964f641e45dd72940b17f06c"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "topic:browser-automation language:Python LLM"
+        },
+        "input_sha256": "de56f8fd63fea8e702eddb27848e59f7bea3d1a5e40371e31758bece87ee3a79",
+        "output_sha256": "3d51873815d0db38920c4c60bc8816f450ec2209b605498c788dab1ce033ee0c"
+      },
+      {
+        "name": "search_github_repositories",
+        "inputs": {
+          "limit": 10,
+          "query": "playwright ai-agent language:Python"
+        },
+        "input_sha256": "7c002e5bbd9e8386de9b7a147ebe5533c13cf35d35382a8fe092d49f158d6b01",
+        "output_sha256": "401890a0bbef64fd44f618cffcb2f9c6a8cdfeffe243d004d08d7f7153a94640"
+      }
+    ]
+  }
+}
