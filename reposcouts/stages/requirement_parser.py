@@ -37,6 +37,9 @@ Rules:
     - "within one day" / "in a day" -> 8 hours
     - "half a day" -> 4 hours
     Only use 24 hours if the user explicitly means a full 24-hour period.
+12. Keep independent mandatory capabilities as separate must_have entries.
+    Preserve alternatives (A or B), negations, versions and qualifiers together.
+    Explicitly mandatory frameworks belong in must_have as well as technology_stack.
 
 Return the result as one valid JSON object.
 Do not include Markdown code fences or any text outside the JSON object.

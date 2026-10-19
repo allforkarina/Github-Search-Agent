@@ -219,6 +219,12 @@ def rank_repositories(
         scored_repositories[:top_k]
     )
 
+    if not top_candidates:
+        return RankingResult(
+            top_repositories=[], best_repository="",
+            final_reason="证据不足：没有已核实满足硬性要求的候选仓库，当前不作推荐。",
+        )
+
     ranking_context = (
         build_ranking_context(
             top_candidates
@@ -240,6 +246,14 @@ def rank_repositories(
         }
     )
 
+    allowed = {evaluation.full_name for evaluation, _ in top_candidates}
+    names = [repository.full_name for repository in result.top_repositories]
+    if (not names or result.best_repository not in names or len(names) != len(set(names))
+            or not set(names) <= allowed):
+        return RankingResult(
+            top_repositories=[], best_repository="",
+            final_reason="推荐结果未通过候选来源校验，当前不作推荐。",
+        )
     return result
 
 

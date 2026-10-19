@@ -1,16 +1,9 @@
-from reposcouts.core.schemas import (
-    CandidateRepository,
-    RepositoryEvidence,
-)
-
-from reposcouts.github.tools import (
-    get_repository_info,
-    get_repository_readme,
-    get_repository_structure,
-)
+from reposcouts.core.schemas import CandidateRepository, RepositoryEvidence, UserRequirements
+from reposcouts.rag.service import research_scope
 
 def collect_repository_evidence(
     candidate: CandidateRepository,
+    requirements: UserRequirements,
 ) -> RepositoryEvidence:
     """
     Collect factual evidence about one candidate repository.
@@ -19,32 +12,21 @@ def collect_repository_evidence(
         candidate (CandidateRepository): contains the full_name of the repo.
     """
 
-    full_name = candidate.full_name
-
-    repo_info = get_repository_info.invoke(
-        {
-            "full_name": full_name,
-        }
-    )
-
-    readme = get_repository_readme.invoke(
-        {
-            "full_name": full_name,
-        }
-    )
-
-    structure = get_repository_structure.invoke(
-        {
-            "full_name": full_name,
-            "branch": repo_info["default_branch"],
-            "max_entries": 120,
-        }
-    )
-    
-    return RepositoryEvidence(
-        full_name=full_name,
-        metadata=repo_info,
-        readme=readme,
-        structure=structure,
-    )
+    with research_scope() as session:
+        research = session.research(candidate.full_name, requirements)
+        metadata = session.metadata(candidate.full_name)
+        if not metadata:
+            research.warnings.append("metadata_unavailable")
+        snapshot = session.snapshot(candidate.full_name)
+        return RepositoryEvidence(
+            full_name=candidate.full_name, metadata=metadata,
+            # README is retrieved and bounded in research.snippets, just like code.
+            readme="",
+            structure={
+                "commit_sha": snapshot.commit_sha, "selection_only": True,
+                "entries": [{"path": file.path, "type": "blob"} for file in snapshot.files],
+                "github_truncated": snapshot.report.tree_truncated,
+            },
+            research=research,
+        )
 

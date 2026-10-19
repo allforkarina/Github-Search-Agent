@@ -5,6 +5,7 @@
 from typing import Literal
 
 from pydantic import BaseModel, Field
+from reposcouts.rag.schemas import EvidenceCitation, RepositoryResearch
 
 class UserRequirements(BaseModel): 
     """
@@ -148,6 +149,8 @@ class RepositoryEvidence(BaseModel):
 
     structure: dict
 
+    research: RepositoryResearch | None = None
+
 
 class RequirementCheck(BaseModel):
     """
@@ -164,6 +167,9 @@ class RequirementCheck(BaseModel):
 
     evidence: str
 
+    evidence_ids: list[str] = Field(default_factory=list)
+    citations: list[EvidenceCitation] = Field(default_factory=list)
+
 
 # ========================================
 
@@ -173,6 +179,8 @@ class RepositoryEvaluation(BaseModel):
     """
 
     full_name: str
+
+    research_summary: dict = Field(default_factory=dict)
 
     purpose_summary: str
 

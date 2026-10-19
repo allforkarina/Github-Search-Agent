@@ -7,6 +7,7 @@ def build_run_summary(
     retry_count: int, 
     max_retries: int, 
     critic_passed: bool | None,
+    recommendation_available: bool | None = None,
 ) -> dict[str, str | int | bool | None]: 
     """
     Returns a summary of this run, which may retry called by critic.
@@ -22,6 +23,7 @@ def build_run_summary(
         "outcome": (
             "failed" if execution_status == "failed" else
             "cancelled" if execution_status == "cancelled" else
+            "insufficient_evidence" if recommendation_available is False else
             "unreviewed" if execution_status == "completed" and critic_passed is None else
             "passed" if execution_status == "completed" and critic_passed else
             "retry_exhausted" if execution_status == "completed" and not critic_passed and retry_count >= max_retries else

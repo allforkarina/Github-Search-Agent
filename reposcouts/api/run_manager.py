@@ -19,6 +19,7 @@ from reposcouts.workflow.state import RepoScoutState
 from reposcouts.observability.metadata import build_run_metadata
 from reposcouts.observability.tracing import build_trace_client, build_run_tracer
 from reposcouts.observability.metrics import build_run_summary
+from reposcouts.rag.service import research_scope
 
 
 logger = logging.getLogger(__name__)
@@ -223,6 +224,9 @@ class RunManager:
                         critic_passed=(
                             critic.passed if critic is not None else None
                         ), 
+                        recommendation_available=(
+                            bool(state["ranking"].top_repositories) if state["ranking"] is not None else None
+                        ),
                     )
 
                 # build a tracer for the current run.
@@ -232,7 +236,7 @@ class RunManager:
                     summary_provider=provide_trace_summary,
                 )
 
-            with tracing_context(
+            with research_scope(), tracing_context(
                 enabled=enabled, 
                 client=client, 
                 project_name=project_name, 
@@ -273,6 +277,9 @@ class RunManager:
                                     retry_count=state["retry_count"],
                                     max_retries=state["max_retries"],
                                     critic_passed=critic.passed if critic is not None else None, 
+                                    recommendation_available=(
+                                        bool(state["ranking"].top_repositories) if state["ranking"] is not None else None
+                                    ),
                                 )
                                 self._emit(
                                     record,
@@ -310,6 +317,9 @@ class RunManager:
                 retry_count=state["retry_count"],
                 max_retries=state["max_retries"],
                 critic_passed=critic.passed if critic is not None else None,
+                recommendation_available=(
+                    bool(state["ranking"].top_repositories) if state["ranking"] is not None else None
+                ),
             )
             self._emit(
                 record,
@@ -321,6 +331,10 @@ class RunManager:
                     "ranking": state.get("ranking"),
                     "critic_result": state.get("critic_result"),
                     "retry_count": state.get("retry_count", 0),
+                    "recommendation_status": (
+                        "available" if state.get("ranking") and state["ranking"].top_repositories
+                        else "insufficient_evidence"
+                    ),
                 },
             )
         except Exception as exc:
@@ -332,6 +346,9 @@ class RunManager:
                 retry_count=state["retry_count"],
                 max_retries=state["max_retries"],
                 critic_passed=critic.passed if critic is not None else None,
+                recommendation_available=(
+                    bool(state["ranking"].top_repositories) if state["ranking"] is not None else None
+                ),
             )
             self._emit(
                 record,

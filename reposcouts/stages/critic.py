@@ -164,6 +164,9 @@ def validate_ranking_structure(
         for repo in ranking.top_repositories
     ]
 
+    if not names and not ranking.best_repository:
+        return errors
+
     if ranking.best_repository not in names:
         errors.append(
             "best_repository is not contained "

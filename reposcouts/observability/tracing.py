@@ -16,6 +16,20 @@ _GITHUB_TOKEN_RE = re.compile(
     r"\b(?:gh[pousr]_|github_pat_)[A-Za-z0-9_.-]+"  # (?:A|B) 不是A就是B, + means 1 or more times.
 )
 
+_API_TOKEN_RE = re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{12,}\b")
+_SECRET_NAME = r"(?:api[_-]?key|access[_-]?token|github[_-]?token|token|secret|authorization|password|client[_-]?secret)"
+_QUOTED_SECRET_RE = re.compile(r'''(?i)(\b''' + _SECRET_NAME + r'''\b["']?[ \t]*[:=][ \t]*)(["'])([^"'\r\n]*)(\2)''')
+_ENV_SECRET_RE = re.compile(r"(?im)^([ \t]*[A-Z0-9_]*(?:TOKEN|API_KEY|PASSWORD|SECRET)[ \t]*=[ \t]*)([^\r\n]+)")
+_PRIVATE_KEY_RE = re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?(?:-----END [A-Z ]*PRIVATE KEY-----|\Z)")
+
+
+def _mask_secret_lines(value: str) -> str:
+    """Keep source line locations valid even when a secret spans multiple lines."""
+    return "".join(
+        "[REDACTED]" + line[len(line.rstrip("\r\n")):]
+        for line in value.splitlines(keepends=True)
+    )
+
 # 统一小写、无连字符 只在dict中起作用
 _SANITIZE_KEYS = (
     "authorization", "proxyauthorization", "auth", # authentication keywords
@@ -62,11 +76,15 @@ def sanitize_trace_payload(
         """
         # sanitize
         for secret in sorted_secrets:
-            text = text.replace(secret, "[REDACTED]")
+            text = text.replace(secret, _mask_secret_lines(secret))
 
         # find unknown github token, and replace with [REDACTED]
         text = _BEARER_RE.sub("Bearer [REDACTED]", text)
         text = _GITHUB_TOKEN_RE.sub("[REDACTED]", text)
+        text = _API_TOKEN_RE.sub("[REDACTED]", text)
+        text = _QUOTED_SECRET_RE.sub(lambda match: match[1] + match[2] + "[REDACTED]" + match[2], text)
+        text = _ENV_SECRET_RE.sub(lambda match: match[1] + "[REDACTED]", text)
+        text = _PRIVATE_KEY_RE.sub(lambda match: _mask_secret_lines(match[0]), text)
 
         if truncate and len(text) > max_string_chars:
             return text[:max_string_chars] + "[TRUNCATED]"

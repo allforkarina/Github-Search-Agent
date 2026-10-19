@@ -12,6 +12,7 @@ from reposcouts.stages.search_agent import (
 from reposcouts.stages.repository_evaluator import (
     analyze_candidate_repositories,
 )
+from reposcouts.core.schemas import CriticResult
 
 from reposcouts.stages.ranker import (
     rank_repositories,
@@ -91,6 +92,7 @@ def evaluate_repositories_node(
     evaluations = analyze_candidate_repositories(
         requirements,
         candidates,
+        critic_feedback=state.get("critic_feedback", ""),
     )
 
     return {
@@ -113,11 +115,6 @@ def rank_repositories_node(
     if requirements is None:
         raise ValueError(
             "requirements must exist before ranking."
-        )
-
-    if not evaluations:
-        raise ValueError(
-            "evaluations must exist before ranking."
         )
 
     ranking = rank_repositories(
@@ -156,6 +153,15 @@ def critic_node(
         raise ValueError(
             "ranking must exist before critique."
         )
+
+    if not ranking.top_repositories and not ranking.best_repository:
+        return {
+            "critic_result": CriticResult(
+                passed=True, confidence=100, issues=[], retry_target="none",
+                feedback="No recommendation: available evidence is insufficient. No unsupported recommendation was made.",
+            ),
+            "critic_feedback": "insufficient_evidence",
+        }
 
     critic_result = critique_recommendation(
         requirements=requirements,

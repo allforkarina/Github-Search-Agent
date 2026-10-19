@@ -1,0 +1,21 @@
+{
+  "version": "synthetic-sanity-v1",
+  "label_status": "assistant-authored; human review pending",
+  "unit": "file",
+  "full_name": "fixtures/repository-research",
+  "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "files": [
+    {"path": "src/memory.py", "content": "from langgraph.checkpoint.sqlite import SqliteSaver\n\ndef persistent_memory(path):\n    return SqliteSaver.from_conn_string(path)\n"},
+    {"path": "src/api.py", "content": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get('/health')\ndef health():\n    return {'status': 'ok'}\n"},
+    {"path": "src/retrieval.py", "content": "from rank_bm25 import BM25L\n\ndef keyword_search(documents, query):\n    index = BM25L(documents)\n    return index.get_scores(query)\n"},
+    {"path": "src/graph.py", "content": "from langgraph.graph import StateGraph\n\ndef build_workflow(state):\n    graph = StateGraph(state)\n    return graph.compile()\n"},
+    {"path": "README.md", "content": "# Setup\nInstall Python dependencies with pip install -r requirements.txt.\n## Tests\nRun python -m unittest discover -s tests.\n"}
+  ],
+  "queries": [
+    {"id": "memory", "query": "SqliteSaver persistent_memory 持久化记忆", "relevance": {"src/memory.py": 2}},
+    {"id": "api", "query": "FastAPI health HTTP endpoint", "relevance": {"src/api.py": 2}},
+    {"id": "sparse", "query": "BM25L get_scores keyword_search", "relevance": {"src/retrieval.py": 2}},
+    {"id": "graph", "query": "StateGraph build_workflow compile", "relevance": {"src/graph.py": 2}},
+    {"id": "setup", "query": "pip install requirements unittest", "relevance": {"README.md": 2}}
+  ]
+}
