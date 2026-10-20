@@ -45,6 +45,7 @@ class RagConfig:
     max_evidence_chunks: int = 20
     max_evaluator_input_chars: int = 48000
 
+    # 后配置函数
     def __post_init__(self) -> None:
         positive = (
             self.max_files, self.max_file_bytes, self.max_repository_bytes,

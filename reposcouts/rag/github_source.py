@@ -17,6 +17,7 @@ from .tracing import StageError, run_stage
 from .security import sanitize_content
 
 
+# 特殊字段匹配
 _SHA = re.compile(r"^[0-9a-f]{40}$")
 _REPO = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 _EXCLUDED_DIRS = {
@@ -61,20 +62,24 @@ def _request_json(session, path, config, deadline, *, params=None, max_bytes=102
     if remaining <= 0:
         raise SourceError("repository_deadline")
     try:
-        # github repo info fetch.
+        # 发送 session 请求
         with session.get(
             GITHUB_API_BASE_URL + path,
             headers=_get_headers(), params=params, stream=True,
             allow_redirects=False,
             timeout=(min(5.0, remaining), min(config.http_timeout_s, remaining)),
         ) as response:
+            
+            # 检查响应状态
             if response.status_code != 200:
                 code = response.status_code
                 raise SourceError(
                     "access_or_rate_limit" if code in (403, 429) else f"http_{code}"
                 )
 
-            body = bytearray() # contains.
+            # 创建容器
+            body = bytearray() 
+            # 按照块读取响应内容，直到达到最大字节数或超时
             for part in response.iter_content(chunk_size=16384): # 16 KiB per block; max_bytes caps the response.
                 if time.monotonic() >= deadline:
                     raise SourceError("repository_deadline")
@@ -92,19 +97,19 @@ def _request_json(session, path, config, deadline, *, params=None, max_bytes=102
 
 def _eligible(entry):
     path = entry.get("path", "")
-    # validation str and relative path.
     if not isinstance(path, str) or not path or "\\" in path or "\x00" in path:
         return False
 
+    # 对路径 path 中的每一部分进行校验，判断是否是相对路径
     parts = PurePosixPath(path).parts
     if not parts or PurePosixPath(path).is_absolute() or ".." in parts:
         return False
 
-    # lowercase
+    # 路径小写，[-1] 取最后一部分即文件名
     lower_parts = [part.lower() for part in parts]
     name = lower_parts[-1]
 
-    # exclude dirs and files.
+    # 判断路径DIR、文件名、后缀
     if any(part in _EXCLUDED_DIRS for part in lower_parts[:-1]):
         return False
     if name.startswith(".env") or name in _EXCLUDED_NAMES:
@@ -140,6 +145,7 @@ def _priority(entry):
 
 
 def _read_blob(session, base, entry, config, deadline):
+    # 从 Github 中读取 blob 内容
     data = _get_json(
         session, f"{base}/git/blobs/{entry['sha']}", config, deadline,
         max_bytes=2 * config.max_file_bytes + 8192,
@@ -149,32 +155,35 @@ def _read_blob(session, base, entry, config, deadline):
         if data.get("encoding") != "base64":
             raise SourceError("unsupported_encoding")
 
-        # extract and decode the base64 content of the blob.
+        # base64 解码 blob 内容
         encoded = "".join(data["content"].split())
         raw = base64.b64decode(encoded, validate=True)
     except (KeyError, TypeError, AttributeError, ValueError, binascii.Error):
         raise SourceError("invalid_blob") from None
 
+    # 比较解码后的内容长度 与 文件数 entry 中记录的长度
     if len(raw) != entry["size"] or len(raw) > config.max_file_bytes:
         raise SourceError("blob_size_mismatch")
 
-    # verify blob hash.
+    # 计算解码后文件的 SHA，与 Github 中记录的 SHA 进行比较，确保文件内容未被篡改
     digest = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
     if digest != entry["sha"]:
         raise SourceError("blob_hash_mismatch")
 
     return raw
 
-
+# 采集某个特点版本 repo 的文件和 metadata
 def collect_repository_snapshot(full_name, config=None, *, session=None, queries=None, commit_sha=None):
     config = config or RagConfig()
+    # 检查 repo full_name 格式
     if not _REPO.fullmatch(full_name) or any(p in (".", "..") for p in full_name.split("/")):
         raise ValueError("full_name must be owner/repository")
 
-    # collect the repo file and get the report.
+    # 定义 snapshot 和 report 的实例
     snapshot = RepositorySnapshot(full_name=full_name)
     report = snapshot.report
 
+    # session 是 HTTP 请求，owned_session 表示当前这个 session 是传入的还是当前内部创建的
     owned_session = session is None
     session = session if session is not None else requests.Session()
 
@@ -182,6 +191,7 @@ def collect_repository_snapshot(full_name, config=None, *, session=None, queries
     deadline = time.monotonic() + config.repository_timeout_s
     snapshot._deadline = deadline
 
+    # 定义跳过函数 记录跳过文件的个数以及原因
     def skip(reason):
         report.skipped_counts[reason] = report.skipped_counts.get(reason, 0) + 1
 
@@ -201,8 +211,10 @@ def collect_repository_snapshot(full_name, config=None, *, session=None, queries
         tree_sha = commit["commit"]["tree"]["sha"]
         if not _SHA.fullmatch(sha) or not _SHA.fullmatch(tree_sha):
             raise SourceError("invalid_commit")
-
+        # 记录 RepoSnapshot 的 commit_sha
         snapshot.commit_sha = sha
+        
+        # 文件树读取，获取文件列表，限制了最大文件读取量
         tree = _get_json(
             session, f"{base}/git/trees/{tree_sha}", config, deadline,
             params={"recursive": "1"}, max_bytes=8 * 1024 * 1024,
@@ -212,34 +224,44 @@ def collect_repository_snapshot(full_name, config=None, *, session=None, queries
             raise SourceError("invalid_tree")
 
         report.tree_truncated = bool(tree.get("truncated"))
-        # dicovered total files count.
         report.discovered_files = sum(entry.get("type") == "blob" for entry in entries)
         # check whether fit the criteria and count.
-        eligible = sorted((entry for entry in entries if _eligible(entry)), key=_priority)
+        eligible = sorted(
+            (entry for entry in entries if _eligible(entry)), 
+            key=_priority
+        )
         snapshot.available_files = eligible
         if queries:
             from .retrieval import lexical_tokens
             terms = set(lexical_tokens(" ".join(queries)))
-            eligible = sorted(eligible, key=lambda e: (
-                _priority(e)[0] > 1, -len(set(lexical_tokens(e["path"])) & terms), _priority(e),
-            ))
+            eligible = sorted(
+                eligible, 
+                key=lambda e: (
+                    _priority(e)[0] > 1, 
+                    -len(set(lexical_tokens(e["path"])) & terms), 
+                    _priority(e),
+                )
+            )
         # total eligible files count.
         report.eligible_files = len(eligible)
-        # total skipped files count.(Total - fit_criteria)
         report.skipped_counts["filtered"] = report.discovered_files - len(eligible)
 
-        # count total bytes.
+        # 计算总采集文件大小
         reserved_bytes = 0
         for entry in eligible:
             if time.monotonic() >= deadline:
                 report.warnings.append("repository_deadline")
                 break
+            
+            # 单文件大小
             if entry["size"] > config.max_file_bytes:
                 skip("file_size_budget")
                 continue
             if report.selected_files >= min(config.max_files, config.initial_files):
                 skip("file_count_budget")
                 continue
+            
+            # 敏感信息
             if sanitize_content(entry["path"]) != entry["path"]:
                 skip("sensitive_path")
                 continue
@@ -247,24 +269,25 @@ def collect_repository_snapshot(full_name, config=None, *, session=None, queries
                 skip("repository_size_budget")
                 continue
 
-            # Reserve before fetching: failed attempts also consume the request budget.
             report.selected_files += 1
             reserved_bytes += entry["size"]
             report.reserved_bytes = reserved_bytes
             report.attempted_paths.append(entry["path"])
             try:
+                # 读取文件并解码
                 raw = _read_blob(session, base, entry, config, deadline)
                 report.fetched_bytes += len(raw)
-                # Check for null bytes.
                 if b"\0" in raw:
                     skip("binary")
                     continue
+                
                 try:
                     text = raw.decode("utf-8")
                 except UnicodeError:
                     skip("non_utf8")
                     continue
 
+                # 保存为 RepositoryFile 对象并存入 snapshot 中
                 snapshot.files.append(RepositoryFile(
                     path=entry["path"], blob_sha=entry["sha"], content=text,
                 ))
@@ -279,6 +302,7 @@ def collect_repository_snapshot(full_name, config=None, *, session=None, queries
     except (KeyError, IndexError, TypeError, AttributeError, ValueError):
         report.warnings.append("invalid_repository_response")
     finally:
+        # 如果 session 请求是内部创建则关闭
         if owned_session:
             session.close()
 

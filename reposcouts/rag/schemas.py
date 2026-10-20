@@ -11,7 +11,7 @@ from pydantic import (
 
 class EvidenceChunk(BaseModel):
     """
-    Evidence chunk for RAG (Retrieval-Augmented Generation) model.
+    Evidence chunk from a repo files with its source path.
     """
     chunk_id: str = Field(min_length=1)     # unique chunk id for each chunk block.
 
@@ -32,13 +32,14 @@ class EvidenceChunk(BaseModel):
         """
         Validate that the path is a relative repository path.
         """
-        path = PurePosixPath(value) #
+        path = PurePosixPath(value)
 
         if (
             path.is_absolute()
             or ".." in path.parts
             or "\\" in value
         ):
+            # path should be a relative path format.
             raise ValueError(
                 "path must be a relative repository path"
             )
@@ -49,10 +50,12 @@ class EvidenceChunk(BaseModel):
     @model_validator(mode="after")
     def validate_line_range(self) -> Self:
         if self.end_line < self.start_line:
+            # start line should be less than or equal to end line.
             raise ValueError(
                 "end_line must be greater than or equal to start_line"
             )
 
+        # evidence chunk text lines.
         expected_lines = self.end_line - self.start_line + 1
         if len(self.text.splitlines()) != expected_lines:
             raise ValueError(
@@ -64,6 +67,9 @@ class EvidenceChunk(BaseModel):
 
 
 class RepositoryFile(BaseModel):
+    """
+    Collected file from a repo with its content and content's blob SHA.
+    """
     path: str # relative path of the file in the repository
     blob_sha: str = Field(pattern=r"^[0-9a-f]{40}$") # Git ID of the file content
     content: str # content of the file
@@ -93,7 +99,11 @@ class IngestionReport(BaseModel):
     reserved_bytes: int = 0
 
 
+
 class RepositorySnapshot(BaseModel):
+    """
+    Collected repo(certain commit snapshot) with its files.
+    """
     _deadline: float | None = PrivateAttr(default=None)
     # repo full name, e.g., "owner/repo"
     full_name: str
@@ -127,6 +137,9 @@ class RetrievalHit(BaseModel):
 
 
 class RetrievalResult(BaseModel):
+    """
+    Retrieval result for one requirement.
+    """
     query: str
     mode: Literal["hybrid", "bm25", "unavailable"]
     hits: list[RetrievalHit] = Field(default_factory=list)
@@ -135,6 +148,9 @@ class RetrievalResult(BaseModel):
 
 
 class RequirementTask(BaseModel):
+    """
+    Retrieval task for a specific requirement.
+    """
     task_id: str
     requirement: str
     query: str
@@ -171,6 +187,9 @@ class EvidenceCitation(BaseModel):
 
 
 class EvidenceSnippet(BaseModel):
+    """
+    Evidence snippet and could be traced back to its source file and lines.
+    """
     citation: EvidenceCitation
     text: str
     redacted: bool = False
