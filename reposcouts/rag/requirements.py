@@ -5,6 +5,7 @@ import re
 from reposcouts.core.schemas import UserRequirements
 from .schemas import RequirementTask
 from .tracing import run_stage
+from .planning import task_identity
 
 
 def _tasks(requirements: UserRequirements) -> list[RequirementTask]:
@@ -33,6 +34,33 @@ def _tasks(requirements: UserRequirements) -> list[RequirementTask]:
                     task_id=task_id, requirement=piece, parent_requirement=original,
                     kind=kind, query=piece,
                 ))
+    if len(result) > 32:
+        # Preserve whole parent conditions instead of dropping hard requirements.
+        result = [RequirementTask(task_id=task_identity(kind, parent, parent),
+                  requirement=parent, parent_requirement=parent, kind=kind, query=parent)
+                  for kind, values in groups for parent in dict.fromkeys(values) if parent.strip()]
+        if len(result) > 32:
+            raise ValueError("requirement_task_budget")
+    if requirements.retrieval_plan:
+        grouped = {}
+        for item in requirements.retrieval_plan:
+            grouped.setdefault((item.kind, item.parent_requirement), []).append(item)
+        planned = []
+        for kind, values in groups:
+            for original in dict.fromkeys(values):
+                items = grouped.get((kind, original))
+                if not items:
+                    planned.extend(task for task in result if task.kind == kind and task.parent_requirement == original)
+                    continue
+                for item in items:
+                    planned.append(RequirementTask(
+                        task_id=task_identity(kind, original, item.atomic_requirement),
+                        requirement=item.atomic_requirement, parent_requirement=original, kind=kind,
+                        query=original,
+                        queries=list(dict.fromkeys([original, *item.queries]))[:4],
+                    ))
+        planned = list({task.task_id: task for task in planned}.values())
+        return planned if len(planned) <= 32 else result
     return result
 
 

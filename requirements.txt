@@ -12,7 +12,7 @@ numpy
 torch==2.9.1
 sentence-transformers>=5,<6
 rank-bm25==0.2.2
-python -m pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cu128
-python -m pip install "sentence-transformers>=5,<6" "rank-bm25==0.2.2"
-python -m pip check
-python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
+tree-sitter>=0.25,<0.27
+tree-sitter-java>=0.23,<0.24
+tree-sitter-javascript>=0.25,<0.26
+tree-sitter-typescript>=0.23,<0.24

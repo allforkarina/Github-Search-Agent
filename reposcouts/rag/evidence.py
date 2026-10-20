@@ -7,6 +7,16 @@ from .schemas import (
     RepositorySnapshot, RequirementEvidence, RequirementTask, RetrievalResult,
 )
 from .security import sanitize_content
+from .context import source_kind
+
+
+def citation_for_chunk(chunk):
+    return EvidenceCitation(
+        evidence_id="E" + chunk.chunk_id, full_name=chunk.full_name, commit_sha=chunk.commit_sha,
+        path=chunk.path, symbol=chunk.symbol, start_line=chunk.start_line, end_line=chunk.end_line,
+        url=(f"https://github.com/{quote(chunk.full_name, safe='/')}/blob/"
+             f"{chunk.commit_sha}/{quote(chunk.path, safe='/')}#L{chunk.start_line}-L{chunk.end_line}"),
+    )
 
 
 def build_evidence(
@@ -39,13 +49,9 @@ def build_evidence(
                 pack.warnings.append("chunk_source_mismatch")
                 continue
             safe = "".join(safe_lines[chunk.path][chunk.start_line - 1:chunk.end_line])
-            citation = EvidenceCitation(
-                evidence_id=evidence_id, full_name=chunk.full_name, commit_sha=chunk.commit_sha,
-                path=chunk.path, symbol=chunk.symbol, start_line=chunk.start_line, end_line=chunk.end_line,
-                url=(f"https://github.com/{quote(chunk.full_name, safe='/')}/blob/"
-                     f"{chunk.commit_sha}/{quote(chunk.path, safe='/')}#L{chunk.start_line}-L{chunk.end_line}"),
-            )
-            snippet = EvidenceSnippet(citation=citation, text=safe, redacted=safe != chunk.text)
+            citation = citation_for_chunk(chunk)
+            redacted = safe != chunk.text or any(f.redacted for f in snapshot.files if f.path == chunk.path)
+            snippet = EvidenceSnippet(citation=citation, text=safe, redacted=redacted, source_kind=source_kind(chunk.path))
             size = len(snippet.model_dump_json())
             if len(snippets) >= config.max_evidence_chunks or chars + size > config.max_evidence_chars:
                 pack.warnings.append("evidence_budget")
@@ -60,7 +66,7 @@ def build_evidence(
             task=task, mode=result.mode, evidence_ids=list(dict.fromkeys(ids)), warnings=result.warnings,
         ))
     if chunked.fallback_files:
-        pack.warnings.append("python_parser_fallback")
+        pack.warnings.append("semantic_parser_fallback")
     if chunked.oversized_lines:
         pack.warnings.append("oversized_source_lines_skipped")
     pack.warnings = sorted(set(pack.warnings + snapshot.report.warnings))

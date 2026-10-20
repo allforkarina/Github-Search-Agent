@@ -86,6 +86,18 @@ Rules:
     Composite requirements must be supported across all their retrieval tasks.
     Do not infer absence from files omitted by filtering or budgets.
 
+15. For functional requirements, satisfied requires BOTH implementation and
+    actual call/registration/configuration-wiring evidence. Fill
+    implementation_evidence_ids and integration_evidence_ids with subsets of
+    evidence_ids for EACH independent task. A class existing in isolation is
+    implemented but uncertain, not satisfied. Distinguish declared, dependency,
+    implemented and integrated; none proves runtime success or tests passing.
+    Example-only code is acceptable only when the user requests examples/tutorials.
+    Documentary/legal/language requirements use their appropriate artifacts.
+    not_satisfied requires explicit contradicting evidence; put its IDs in
+    contradiction_evidence_ids. Missing files, hits or wiring are not contradictions.
+    Retrieval queries are search hints, NEVER additional user requirements.
+
 Return exactly one valid JSON object matching the required schema.
 Follow these JSON schema instructions exactly:
 

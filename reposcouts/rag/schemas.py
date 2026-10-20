@@ -6,6 +6,7 @@ from pydantic import (
     Field,
     field_validator,
     model_validator,
+    ConfigDict, PrivateAttr,
 )
 
 class EvidenceChunk(BaseModel):
@@ -66,6 +67,7 @@ class RepositoryFile(BaseModel):
     path: str # relative path of the file in the repository
     blob_sha: str = Field(pattern=r"^[0-9a-f]{40}$") # Git ID of the file content
     content: str # content of the file
+    redacted: bool = False
 
 
 class IngestionReport(BaseModel):
@@ -85,9 +87,14 @@ class IngestionReport(BaseModel):
     skipped_counts: dict[str, int] = Field(default_factory=dict)    # skipped files count by reason.
     failed_paths: list[str] = Field(default_factory=list)           # failed files paths that could not be processed.
     warnings: list[str] = Field(default_factory=list)
+    expansion_rounds: int = 0
+    expansion_reasons: list[str] = Field(default_factory=list)
+    attempted_paths: list[str] = Field(default_factory=list)
+    reserved_bytes: int = 0
 
 
 class RepositorySnapshot(BaseModel):
+    _deadline: float | None = PrivateAttr(default=None)
     # repo full name, e.g., "owner/repo"
     full_name: str
     # commit SHA of the repo snapshot.
@@ -99,6 +106,8 @@ class RepositorySnapshot(BaseModel):
     # file ingestion, path and content with specific blob_sha
     files: list[RepositoryFile] = Field(default_factory=list)
     report: IngestionReport = Field(default_factory=IngestionReport)
+    # Immutable tree metadata only, never file bodies. Used for bounded expansion.
+    available_files: list[dict] = Field(default_factory=list, exclude=True)
 
 
 class ChunkingResult(BaseModel):
@@ -114,6 +123,7 @@ class RetrievalHit(BaseModel):
     bm25_rank: int | None = None
     dense_score: float | None = None
     bm25_score: float | None = None
+    rerank_score: float | None = None
 
 
 class RetrievalResult(BaseModel):
@@ -121,6 +131,7 @@ class RetrievalResult(BaseModel):
     mode: Literal["hybrid", "bm25", "unavailable"]
     hits: list[RetrievalHit] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
+    reranked: bool = False
 
 
 class RequirementTask(BaseModel):
@@ -129,6 +140,23 @@ class RequirementTask(BaseModel):
     query: str
     kind: Literal["must_have", "technology", "language", "exclusion", "context"]
     parent_requirement: str
+    queries: list[str] = Field(default_factory=list)
+
+
+class RetrievalPlanItem(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    kind: Literal["must_have", "technology", "language", "exclusion", "context"]
+    parent_requirement: str = Field(min_length=1, max_length=1000)
+    source_quote: str = Field(min_length=1, max_length=2000)
+    atomic_requirement: str = Field(min_length=1, max_length=1000)
+    queries: list[str] = Field(min_length=1, max_length=3)
+
+    @field_validator("queries")
+    @classmethod
+    def bounded_queries(cls, values):
+        if any(not value.strip() or len(value) > 512 for value in values):
+            raise ValueError("invalid retrieval expression")
+        return list(dict.fromkeys(values))
 
 
 class EvidenceCitation(BaseModel):
@@ -146,6 +174,7 @@ class EvidenceSnippet(BaseModel):
     citation: EvidenceCitation
     text: str
     redacted: bool = False
+    source_kind: Literal["source", "example", "test", "document", "config"] = "source"
 
 
 class RequirementEvidence(BaseModel):
@@ -156,6 +185,7 @@ class RequirementEvidence(BaseModel):
 
 
 class RepositoryResearch(BaseModel):
+    rag_version: str = "repository-research-v2"
     full_name: str
     commit_sha: str | None = None
     ingestion: IngestionReport = Field(default_factory=IngestionReport)
@@ -165,3 +195,5 @@ class RepositoryResearch(BaseModel):
     embedding_model: str | None = None
     embedding_revision: str | None = None
     index_reused: bool = False
+    cache_stats: dict[str, int] = Field(default_factory=dict)
+    reranker_model: str | None = None

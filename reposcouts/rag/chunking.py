@@ -7,6 +7,12 @@ from pathlib import PurePosixPath
 
 from .config import RagConfig
 from .schemas import ChunkingResult, EvidenceChunk, RepositorySnapshot
+from .semantic import semantic_sections
+
+
+def chunk_identity(full_name, commit_sha, path, start, end, text):
+    identity = "\0".join((full_name, commit_sha, path, str(start), str(end), text))
+    return hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24]
 
 
 def format_passage(path: str, symbol: str | None, text: str) -> str:
@@ -54,16 +60,26 @@ def _markdown_sections(lines):
             fence = (marker[0], len(marker))
             continue
         match = re.match(r"^ {0,3}(#{1,6})[ \t]+(.+?)\s*$", line)
+        heading_start = number
         if match:
             level = len(match.group(1))
             title = re.sub(r"[ \t]+#+$", "", match.group(2))
+        elif (number > 1 and re.fullmatch(r" {0,3}(?:=+|-+)[ \t]*\r?\n?", line)
+              and lines[number - 2].strip()
+              and not re.match(r"\s*(?:[#>`~]|[-*+]\s)", lines[number - 2])):
+            heading_start = number - 1
+            level = 1 if line.lstrip().startswith("=") else 2
+            title = lines[number - 2].strip()
+        else:
+            continue
+        if title:
             headings = [(depth, title_) for depth, title_ in headings if depth < level]
             headings.append((level, title))
             symbol = " > ".join(title_ for _, title_ in headings)
-            if number == 1:
+            if heading_start == 1:
                 starts[0] = (1, symbol)
             else:
-                starts.append((number, symbol))
+                starts.append((heading_start, symbol))
     return [
         (start, starts[index + 1][0] - 1 if index + 1 < len(starts) else len(lines), symbol)
         for index, (start, symbol) in enumerate(starts)
@@ -100,6 +116,13 @@ def chunk_snapshot(
         elif suffix in (".md", ".mdx"):
             sections = _markdown_sections(lines)
 
+        elif suffix in (".js", ".jsx", ".ts", ".tsx", ".java"):
+            try:
+                sections = semantic_sections(file.content, suffix, len(lines))
+            except (ImportError, ValueError, TypeError, RecursionError):
+                result.fallback_files.append(file.path)
+                sections = [(1, len(lines), None)]
+
         else:
             sections = [(1, len(lines), None)]
 
@@ -123,12 +146,9 @@ def chunk_snapshot(
                 text = "".join(lines[start:end])
                 if text.strip():
                     # text identity with name and sha.
-                    identity = "\0".join((
-                        snapshot.full_name, snapshot.commit_sha, file.path,
-                        str(start + 1), str(end), text,
-                    ))
                     result.chunks.append(EvidenceChunk(
-                        chunk_id=hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24],
+                        chunk_id=chunk_identity(snapshot.full_name, snapshot.commit_sha, file.path,
+                                                start + 1, end, text),
                         full_name=snapshot.full_name, commit_sha=snapshot.commit_sha,
                         path=file.path, symbol=symbol,
                         start_line=start + 1, end_line=end, text=text,

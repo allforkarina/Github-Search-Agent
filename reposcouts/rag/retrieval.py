@@ -91,7 +91,7 @@ class HybridIndex:
             {self.chunks[index].chunk_id: float(scores[index]) for index in indices},
         )
 
-    def search(self, query: str) -> RetrievalResult:
+    def search(self, query: str, *, top_k: int | None = None) -> RetrievalResult:
         if not isinstance(query, str) or not query.strip():
             raise ValueError("query must not be blank")
         if not self.chunks:
@@ -116,7 +116,7 @@ class HybridIndex:
         sparse_ranks = {chunk_id: rank for rank, chunk_id in enumerate(sparse_ids, 1)}
         fused = run_stage(
             "rag.rrf", {"dense_count": len(dense_ids), "bm25_count": len(sparse_ids)},
-            lambda: rrf_fuse(dense_ids, sparse_ids, k=self.config.rrf_k)[:self.config.evidence_top_k],
+            lambda: rrf_fuse(dense_ids, sparse_ids, k=self.config.rrf_k)[:top_k or self.config.evidence_top_k],
             lambda value: {"hit_count": len(value), "chunk_ids": [item[0] for item in value]},
         )
         hits = [
@@ -131,6 +131,27 @@ class HybridIndex:
             query=query, mode="hybrid" if dense_available else "bm25",
             hits=hits, warnings=warnings,
         )
+
+    def search_many(self, queries, *, reranker=None):
+        from .reranking import rerank
+        queries = list(dict.fromkeys(queries))
+        if not queries or len(queries) > 4:
+            raise ValueError("one_to_four_queries_required")
+        branches = [self.search(query, top_k=self.config.rerank_candidates) for query in queries]
+        scores, catalog = {}, {}
+        for branch in branches:
+            for rank, hit in enumerate(branch.hits, 1):
+                key = hit.chunk.chunk_id
+                scores[key] = scores.get(key, 0.0) + 1 / (self.config.rrf_k + rank)
+                catalog.setdefault(key, hit)
+        ordered = sorted(scores, key=lambda key: (-scores[key], key))[:self.config.rerank_candidates]
+        hits = [catalog[key].model_copy(update={"rrf_score": scores[key]}) for key in ordered]
+        hits, warnings, reranked = rerank(queries[0], hits, reranker, self.config)
+        mode = "hybrid" if all(b.mode == "hybrid" for b in branches) else "bm25"
+        if not self.chunks:
+            mode = "unavailable"
+        return RetrievalResult(query=queries[0], mode=mode, hits=hits, reranked=reranked,
+                               warnings=sorted(set(warnings + [w for b in branches for w in b.warnings])))
 
     def _dense_search(self, query):
         vector = _unit_matrix(self._embedder.embed_query(query), 1)

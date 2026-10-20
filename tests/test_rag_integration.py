@@ -53,6 +53,7 @@ class Embedder:
 
 
 def make_session(config=None):
+    config = replace(config or RagConfig(), cache_enabled=False, reranker_enabled=False)
     embedder = Embedder()
     loader = Mock(return_value=fixture())
     factory = Mock(return_value=embedder)
@@ -86,7 +87,8 @@ class ResearchTests(unittest.TestCase):
 
     def test_missing_model_degrades_without_downloading(self):
         factory = Mock(side_effect=RuntimeError("weights absent"))
-        session = ResearchSession(snapshot_loader=Mock(return_value=fixture()), embedder_factory=factory)
+        session = ResearchSession(replace(RagConfig(), cache_enabled=False, reranker_enabled=False),
+                                  snapshot_loader=Mock(return_value=fixture()), embedder_factory=factory)
         pack = session.research("example/agent", sample_requirements())
         self.assertTrue(pack.snippets)
         self.assertEqual({task.mode for task in pack.requirements}, {"bm25"})
@@ -96,7 +98,8 @@ class ResearchTests(unittest.TestCase):
 
     def test_failed_repository_does_not_attempt_model_loading(self):
         factory = Mock()
-        session = ResearchSession(snapshot_loader=Mock(side_effect=RuntimeError("network failure")), embedder_factory=factory)
+        session = ResearchSession(replace(RagConfig(), cache_enabled=False, reranker_enabled=False),
+                                  snapshot_loader=Mock(side_effect=RuntimeError("network failure")), embedder_factory=factory)
         pack = session.research("example/agent", sample_requirements())
         factory.assert_not_called()
         self.assertEqual(pack.snippets, [])
@@ -211,7 +214,8 @@ class GroundingTests(unittest.TestCase):
     def test_llm_receives_redacted_bounded_source_evidence(self):
         snapshot = fixture()
         snapshot.files[0].content += 'api_key = "unlisted-sensitive-value"\n'
-        session = ResearchSession(snapshot_loader=Mock(return_value=snapshot), embedder_factory=lambda _: Embedder())
+        session = ResearchSession(replace(RagConfig(), cache_enabled=False, reranker_enabled=False),
+                                  snapshot_loader=Mock(return_value=snapshot), embedder_factory=lambda _: Embedder())
         evidence = make_evidence(session)
         with patch.object(repository_evaluator, "repository_evaluator") as runnable:
             runnable.invoke.return_value = cited_evaluation(evidence)
@@ -258,8 +262,10 @@ class ObservabilityTests(unittest.TestCase):
         transport = session_for([file_entry("README.md", content)])
         from reposcouts.rag.github_source import collect_repository_snapshot
         session = ResearchSession(
+            replace(RagConfig(), cache_enabled=False, reranker_enabled=True),
             snapshot_loader=lambda name, config: collect_repository_snapshot(name, config, session=transport),
             embedder_factory=lambda _: Embedder(),
+            reranker_factory=lambda _: type("Reranker", (), {"score": lambda self, query, hits: np.arange(len(hits))})(),
         )
         client = Client(api_key="offline", api_url="http://127.0.0.1:1", auto_batch_tracing=False)
         self.addCleanup(client.close, timeout=0)
@@ -276,7 +282,8 @@ class ObservabilityTests(unittest.TestCase):
         starts = [call.kwargs for call in create.call_args_list]
         names = {item["name"] for item in starts}
         self.assertTrue({"rag.ingestion", "github.repository_read", "rag.chunking", "rag.index",
-                         "rag.retrieve", "rag.dense", "rag.bm25", "rag.rrf", "rag.evidence"} <= names)
+                         "rag.retrieve", "rag.dense", "rag.bm25", "rag.rrf", "rag.evidence",
+                         "rag.rerank", "rag.query_rewrite", "rag.context", "rag.index.publish"} <= names)
         github = next(item for item in starts if item["name"] == "github.repository_read")
         self.assertEqual(github["run_type"], "tool")
         ingestion = next(item for item in starts if item["name"] == "rag.ingestion")

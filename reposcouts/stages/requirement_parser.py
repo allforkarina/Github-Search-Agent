@@ -3,6 +3,8 @@ from langchain_core.output_parsers import PydanticOutputParser
 
 from reposcouts.core.config import get_llm
 from reposcouts.core.schemas import UserRequirements
+from reposcouts.rag.planning import validate_parsed_payload, RequirementValidationError
+import json
 
 requirements_format_parser = PydanticOutputParser(
     pydantic_object=UserRequirements
@@ -41,12 +43,22 @@ Rules:
     Preserve alternatives (A or B), negations, versions and qualifiers together.
     Explicitly mandatory frameworks belong in must_have as well as technology_stack.
 
-Return the result as one valid JSON object.
-Do not include Markdown code fences or any text outside the JSON object.
+13. Generate retrieval_plan in this SAME response (no repository-specific facts).
+    Each entry has kind (must_have/technology/language/exclusion/context),
+    parent_requirement copied EXACTLY from its corresponding field,
+    source_quote copied EXACTLY from the user's text (not a translation),
+    atomic_requirement, and 1-3 short retrieval queries (original identifiers
+    plus useful Chinese/English expressions). Cover every must_have, framework,
+    language and exclusion. Do not infer hard constraints from preferences.
+    Preserve OR, negation and version-qualified requirements as one unchanged
+    atomic_requirement. Synonyms are search hints, never additional requirements.
+    Do not add Redis/FAISS/etc. as requirements unless explicitly requested.
+    Leave plan_warnings empty; the application owns validation warnings.
 
 The JSON object must contain exactly these fields:
 topic, language, technology_stack, difficulty, must_have,
-nice_to_have, exclusions, learning_goal, time_budget_in_hours.
+nice_to_have, exclusions, learning_goal, time_budget_in_hours,
+retrieval_plan, plan_warnings.
 
 Return the result as one valid JSON object.
 Do not include Markdown or additional text.
@@ -75,7 +87,8 @@ llm = get_llm()
 
 structured_llm = llm.with_structured_output(
     UserRequirements, 
-    method = "json_mode",   # deepseek-v4-flash does not support "function_calling"
+    method = "json_mode",   # Schema and provenance checks are enforced below.
+    include_raw=True,
 )
 
 requirement_parser = prompt | structured_llm
@@ -85,11 +98,18 @@ def parse_user_requirements(user_query: str) -> UserRequirements:
     """
     Parse a natural-language user query about repo into a structured UserRequirements object.
     """
-    return requirement_parser.invoke(
+    response = requirement_parser.invoke(
         {
             "user_request": user_query
         }
     )
+    # Read raw JSON too: a malformed retrieval plan can fall back without losing
+    # independently validated base requirements and their verbatim anchors.
+    try:
+        payload = json.loads(response["raw"].content)
+    except (KeyError, TypeError, ValueError, AttributeError):
+        raise RequirementValidationError("requirements_invalid_json") from None
+    return validate_parsed_payload(payload, user_query)
 
 if __name__ == "__main__": 
 

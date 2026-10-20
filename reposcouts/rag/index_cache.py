@@ -19,7 +19,7 @@ class RequestIndexCache:
         config = config or RagConfig()
         chunks = tuple(chunks)
         payload = {
-            "index_version": "rag-v1-bm25l-lexical-v1-rrf-v1",
+            "index_version": "rag-v2-bm25l-lexical-v1-multiquery-rrf-v1",
             "config": asdict(config),
             "embedding": embedder.fingerprint if embedder is not None else "bm25-only",
             "chunks": [chunk.model_dump(mode="json") for chunk in chunks],

@@ -4,8 +4,8 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
-from reposcouts.rag.schemas import EvidenceCitation, RepositoryResearch
+from pydantic import BaseModel, Field, ConfigDict
+from reposcouts.rag.schemas import EvidenceCitation, RepositoryResearch, RetrievalPlanItem
 
 class UserRequirements(BaseModel): 
     """
@@ -17,6 +17,8 @@ class UserRequirements(BaseModel):
         - must_have, nice_to_have: the features that the repos must have or nice to have.
         - etc...
     """
+
+    model_config = ConfigDict(extra="forbid", strict=True)
 
     topic: str = Field(
         description = (
@@ -90,6 +92,8 @@ class UserRequirements(BaseModel):
             "Use null if no time constraint is given."
         )
     )
+    retrieval_plan: list[RetrievalPlanItem] = Field(default_factory=list, max_length=32)
+    plan_warnings: list[str] = Field(default_factory=list, max_length=8)
 
 
 # ========================================
@@ -169,6 +173,10 @@ class RequirementCheck(BaseModel):
 
     evidence_ids: list[str] = Field(default_factory=list)
     citations: list[EvidenceCitation] = Field(default_factory=list)
+    implementation_evidence_ids: list[str] = Field(default_factory=list)
+    integration_evidence_ids: list[str] = Field(default_factory=list)
+    contradiction_evidence_ids: list[str] = Field(default_factory=list)
+    implementation_level: Literal["unknown", "declared", "dependency", "implemented", "integrated"] = "unknown"
 
 
 # ========================================

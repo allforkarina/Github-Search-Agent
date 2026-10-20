@@ -1,0 +1,327 @@
+{
+  "version": "repository-research-v2-draft",
+  "created_at": "2026-10-19T17:41:04.323386+00:00",
+  "label_status": "human_review_pending",
+  "frozen_at": null,
+  "annotation_unit": "frozen corpus chunk_id; relevance 0=irrelevant, 1=context, 2=direct support or counterevidence",
+  "annotation_pool_depth": 20,
+  "repositories": [
+    {
+      "full_name": "langchain-ai/langgraph",
+      "commit_sha": "1400d25b7b88cfa055c55b8a82bd95b7c25caef1",
+      "split": "development",
+      "corpus_digest": null,
+      "source_url": "https://github.com/langchain-ai/langgraph/tree/1400d25b7b88cfa055c55b8a82bd95b7c25caef1"
+    },
+    {
+      "full_name": "fastapi/fastapi",
+      "commit_sha": "4001c90dad1924b6d10624c7523d7264f4bf9f97",
+      "split": "development",
+      "corpus_digest": null,
+      "source_url": "https://github.com/fastapi/fastapi/tree/4001c90dad1924b6d10624c7523d7264f4bf9f97"
+    },
+    {
+      "full_name": "langchain-ai/langchainjs",
+      "commit_sha": "11bd1939f1b162b95524b7f44d2d05d9ab7ce9be",
+      "split": "development",
+      "corpus_digest": null,
+      "source_url": "https://github.com/langchain-ai/langchainjs/tree/11bd1939f1b162b95524b7f44d2d05d9ab7ce9be"
+    },
+    {
+      "full_name": "langchain4j/langchain4j",
+      "commit_sha": "7fcb12d4cf1f23a8445850aedc7f3deb1cfc0a79",
+      "split": "test",
+      "corpus_digest": null,
+      "source_url": "https://github.com/langchain4j/langchain4j/tree/7fcb12d4cf1f23a8445850aedc7f3deb1cfc0a79"
+    },
+    {
+      "full_name": "huggingface/sentence-transformers",
+      "commit_sha": "86783c87a5f669eaebc96352a77856d41ec7787f",
+      "split": "test",
+      "corpus_digest": null,
+      "source_url": "https://github.com/huggingface/sentence-transformers/tree/86783c87a5f669eaebc96352a77856d41ec7787f"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "R01",
+      "repository": "langchain-ai/langgraph",
+      "query": "StateGraph 编译为可执行图，并在测试或示例中调用。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R02",
+      "repository": "langchain-ai/langgraph",
+      "query": "通过 SQLite checkpoint 保存和恢复图状态。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R03",
+      "repository": "langchain-ai/langgraph",
+      "query": "中断图执行后通过 resume 继续处理。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R04",
+      "repository": "langchain-ai/langgraph",
+      "query": "Python 3.7 是否处于仓库声明的可安装、受支持版本范围内？",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "explicit_version_constraint_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R05",
+      "repository": "fastapi/fastapi",
+      "query": "通过 APIRouter 注册并执行 HTTP 路由。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R06",
+      "repository": "fastapi/fastapi",
+      "query": "依赖注入支持 yield 后执行资源清理。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R07",
+      "repository": "fastapi/fastapi",
+      "query": "通过 WebSocket 接收并回复客户端消息。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R08",
+      "repository": "fastapi/fastapi",
+      "query": "仓库是否兼容 Python 3.7？请检查 requires-python 等明确版本约束。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "explicit_version_constraint_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R09",
+      "repository": "langchain-ai/langchainjs",
+      "query": "使用 TypeScript 实现向量检索并接入检索问答调用。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R10",
+      "repository": "langchain-ai/langchainjs",
+      "query": "按文本边界切分文档并保留 chunk overlap。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R11",
+      "repository": "langchain-ai/langchainjs",
+      "query": "将 BM25 与向量召回通过 RRF 融合后交给 Cross-Encoder 精排。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "potentially_uncertain; label remains unreviewed"
+    },
+    {
+      "id": "R12",
+      "repository": "langchain-ai/langchainjs",
+      "query": "Node.js 14 是否处于 package engines 声明的支持范围内？",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "explicit_version_constraint_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R13",
+      "repository": "langchain4j/langchain4j",
+      "query": "Java AiServices 接口绑定模型并被实际调用。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R14",
+      "repository": "langchain4j/langchain4j",
+      "query": "ContentRetriever 检索文档并接入 RetrievalAugmentor。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R15",
+      "repository": "langchain4j/langchain4j",
+      "query": "ChatMemoryStore 保存并重新加载会话历史。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R16",
+      "repository": "langchain4j/langchain4j",
+      "query": "Java 8 是否处于项目声明的构建和运行支持范围内？",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "explicit_version_constraint_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R17",
+      "repository": "huggingface/sentence-transformers",
+      "query": "CrossEncoder 对 query-document pair 评分并用于 rerank。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R18",
+      "repository": "huggingface/sentence-transformers",
+      "query": "SentenceTransformer 批量编码支持归一化向量输出。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R19",
+      "repository": "huggingface/sentence-transformers",
+      "query": "从本地模型目录加载并限制访问网络。",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "implementation_candidate; label remains unreviewed"
+    },
+    {
+      "id": "R20",
+      "repository": "huggingface/sentence-transformers",
+      "query": "是否实现了具有权限隔离的多用户 GitHub 仓库增量索引服务？",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "gold": {
+        "status": null,
+        "relevance": {},
+        "contradiction_ids": [],
+        "rationale": ""
+      },
+      "sampling_intent": "potentially_uncertain; label remains unreviewed"
+    }
+  ]
+}
